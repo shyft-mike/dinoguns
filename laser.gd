@@ -21,6 +21,7 @@ func _physics_process(delta):
 func set_is_casting(value):
 	is_casting = value
 	
+	$CPUParticles2D.emitting = is_casting
 	if is_casting:
 		appear()
 	else:
