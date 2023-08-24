@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds700fb06lab8"]
+
+[ext_resource type="Texture2D" uid="uid://dyskxrgjilpxg" path="res://art/raptorguns.png" id="1_6j3ri"]
+[ext_resource type="Script" path="res://screens/start/start.gd" id="1_6wo8f"]
+[ext_resource type="PackedScene" uid="uid://b8yem4h5cly3q" path="res://background.tscn" id="2_jjc0o"]
+
+[node name="Start" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6wo8f")
+
+[node name="Background" parent="." instance=ExtResource("2_jjc0o")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1600, 1152)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6j3ri")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -200.0
+offset_right = 100.0
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.807843, 0.72549, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "START"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
