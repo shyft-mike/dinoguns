@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://6l4usgd8cr0c"]
+[gd_scene load_steps=2 format=3 uid="uid://2q1777mommlq"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_0cyyu"]
+[ext_resource type="Script" path="res://laser.gd" id="1_kmb20"]
 
-[node name="Laser" type="StaticBody2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_0cyyu")
-one_way_collision = true
+[node name="Laser" type="RayCast2D"]
+target_position = Vector2(320, 0)
+script = ExtResource("1_kmb20")
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 10)
+points = PackedVector2Array(0, 0, 160, 0)
+width = 0.0
+default_color = Color(0.439216, 0.631373, 0.976471, 1)

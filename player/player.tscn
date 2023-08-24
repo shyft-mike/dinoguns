@@ -15,3 +15,4 @@ move_speed = 200
 shape = SubResource("CircleShape2D_qd245")
 
 [node name="Gun" parent="." instance=ExtResource("2_jo27o")]
+position = Vector2(12, 0)
