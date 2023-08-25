@@ -14,6 +14,7 @@ func _ready():
 		var button = preload("res://screens/character_select/character_select_button.tscn").instantiate()
 		button.init(character)
 		button.character_selected.connect(_on_character_selected)
+		button.character_hovered.connect(_on_character_hovered)
 		$GridContainer.add_child(button)
 		
 
@@ -38,3 +39,8 @@ func _on_character_selected(character):
 	print_debug("Character selected: " + character.name)
 	Global.selected_character = character
 	Global.change_scene("res://story_mode.tscn")
+
+
+func _on_character_hovered(character):
+	print_debug("Character hovered: " + character.name)
+	$StatsPanel.load_character(character)

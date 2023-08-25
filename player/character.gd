@@ -8,6 +8,5 @@ var icon: Texture2D = CanvasTexture.new()
 var is_visible: bool = false
 var is_selectable: bool = false
 var stats: CharacterStats = CharacterStats.new()
+var inventory: CharacterInventory = CharacterInventory.new()
 var powerups
-var equipment
-var inventory

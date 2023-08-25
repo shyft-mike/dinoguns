@@ -21,13 +21,14 @@ width = 0.0
 default_color = Color(0.439216, 0.631373, 0.976471, 1)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-modulate = Color(0.439216, 0.631373, 0.976471, 1)
+modulate = Color(0.639216, 0.768627, 0.988235, 1)
+scale = Vector2(0.5, 0.5)
 amount = 4
-lifetime = 0.3
+lifetime = 0.5
 texture = ExtResource("2_jmib6")
 gravity = Vector2(0, 0)
 initial_velocity_min = 70.0
 initial_velocity_max = 120.0
-orbit_velocity_max = 57.14
+scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_5b1fl")
 color_ramp = SubResource("Gradient_4q0hf")

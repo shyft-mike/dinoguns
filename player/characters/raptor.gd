@@ -13,3 +13,12 @@ func _init():
 	stats.health.set_base_value(90)
 	stats.speed.set_base_value(15)
 	stats.special.set_base_value(7)
+	
+	_init_inventory()
+	
+
+func _init_inventory():
+	inventory.add_slot(Slot.SlotType.ARM, Slot.SlotSize.MEDIUM)
+	inventory.add_slot(Slot.SlotType.ARM, Slot.SlotSize.MEDIUM)
+	inventory.add_slot(Slot.SlotType.NECK)
+	inventory.add_slot(Slot.SlotType.BACK)

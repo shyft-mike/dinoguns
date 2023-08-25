@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://qivp4ib2wtuf"]
+
+[node name="StatLabel" type="Label" groups=["stat_label"]]
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Stat : Value"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://rpbfbkfxswgn"]
+[gd_scene load_steps=4 format=3 uid="uid://rpbfbkfxswgn"]
 
 [ext_resource type="Script" path="res://screens/character_select/character_select.gd" id="1_q1kc2"]
 [ext_resource type="PackedScene" uid="uid://b8yem4h5cly3q" path="res://background.tscn" id="2_0as4w"]
+[ext_resource type="PackedScene" uid="uid://e0iembd1f2h5" path="res://screens/stats_panel.tscn" id="3_gp27w"]
 
 [node name="CharacterSelect" type="Panel"]
 anchors_preset = 15
@@ -26,12 +27,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -200.0
-offset_right = 300.0
-offset_bottom = 200.0
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 3
+
+[node name="StatsPanel" parent="." instance=ExtResource("3_gp27w")]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 498.0
+offset_right = 562.0
+offset_bottom = 698.0

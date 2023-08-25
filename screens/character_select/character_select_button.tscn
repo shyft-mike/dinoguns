@@ -3,11 +3,13 @@
 [ext_resource type="Script" path="res://screens/character_select/character_select_button.gd" id="1_bbmwp"]
 
 [node name="CharacterSelectButton" type="Button"]
+offset_top = 64.0
 offset_right = 64.0
-offset_bottom = 16.0
+offset_bottom = 95.0
 theme_override_colors/font_color = Color(0.952941, 0.8, 0.231373, 1)
 text = "SELECT"
 script = ExtResource("1_bbmwp")
+metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -23,4 +25,5 @@ offset_bottom = -38.0
 theme_override_font_sizes/font_size = 8
 text = "placeholder"
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]
