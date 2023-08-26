@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3hvaxrk45hpa"]
+
+[ext_resource type="Script" path="res://inventory/weapons/gun.gd" id="1_pu70v"]
+[ext_resource type="PackedScene" uid="uid://2q1777mommlq" path="res://inventory/weapons/laser.tscn" id="2_p2quj"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_pu70v")
+projectile_scene = ExtResource("2_p2quj")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

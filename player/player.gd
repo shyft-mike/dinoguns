@@ -25,7 +25,7 @@ func _process(delta):
 	
 	# normalize the direction vector so you can't move faster in the diagonal
 	# than you can in just the horizontal/vertical
-	position += direction.normalized() * move_speed * Global.speed_multiplier * delta
+	position += direction.normalized() * move_speed * State.speed_multiplier * delta
 
 
 func _draw():

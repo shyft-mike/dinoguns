@@ -1,25 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkrrgndccew62"]
+[gd_scene load_steps=5 format=3 uid="uid://bkrrgndccew62"]
 
 [ext_resource type="PackedScene" uid="uid://b8yem4h5cly3q" path="res://background.tscn" id="1_ae0bi"]
 [ext_resource type="Script" path="res://story_mode.gd" id="1_lp0gp"]
+[ext_resource type="PackedScene" uid="uid://bx7nhabnsal8q" path="res://world/tile_map.tscn" id="3_7u2lx"]
 [ext_resource type="PackedScene" uid="uid://b40pet0h07syn" path="res://player/player.tscn" id="3_ipj7e"]
 
 [node name="StoryMode" type="Node"]
 script = ExtResource("1_lp0gp")
 
+[node name="Background" parent="." instance=ExtResource("1_ae0bi")]
+
+[node name="TileMap" parent="." instance=ExtResource("3_7u2lx")]
+
 [node name="Panel" type="Panel" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Background" parent="Panel" instance=ExtResource("1_ae0bi")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="Player" parent="Panel" instance=ExtResource("3_ipj7e")]

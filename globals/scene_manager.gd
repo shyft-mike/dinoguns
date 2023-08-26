@@ -1,10 +1,6 @@
 extends Node
 
-enum GameMode {STORY}
-
-var selected_character: Character = null
 var current_scene: Node = null
-var speed_multiplier: int = 10
 
 func _ready():
 	var root = get_tree().root

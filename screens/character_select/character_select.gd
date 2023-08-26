@@ -37,8 +37,8 @@ func _get_selectable_characters():
 
 func _on_character_selected(character):
 	print_debug("Character selected: " + character.name)
-	Global.selected_character = character
-	Global.change_scene("res://story_mode.tscn")
+	State.selected_character = character
+	SceneManager.change_scene("res://story_mode.tscn")
 
 
 func _on_character_hovered(character):

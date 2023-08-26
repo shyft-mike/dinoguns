@@ -1,5 +1,6 @@
 extends RayCast2D
 
+
 var is_casting := false:
 	set = set_is_casting
 	
@@ -7,6 +8,10 @@ var is_casting := false:
 func _ready():
 	$Line2D.points[1] = Vector2.ZERO
 
+
+func _draw():
+	draw_circle(Vector2(0, 0), 4, Color.RED)
+	
 	
 func _physics_process(delta):
 	var cast_point := target_position
@@ -51,3 +56,7 @@ func disappear():
 	var tween = get_tree().create_tween()
 	tween.tween_property($Line2D, "width", 0.0, 0.1)
 	tween.play()
+
+
+func _on_timer_timeout():
+	fire()

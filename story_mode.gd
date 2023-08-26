@@ -2,4 +2,4 @@ extends Node
 
 
 func _ready():
-	$Panel/Player.init(Global.selected_character)
+	$Panel/Player.init(State.selected_character)

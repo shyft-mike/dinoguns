@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjp33jjtrooqb"]
+
+[ext_resource type="Script" path="res://inventory/projectiles/bullet.gd" id="1_udif5"]
+[ext_resource type="Texture2D" uid="uid://dbxqjrykaek7q" path="res://art/projectiles/brass_bullet.png" id="2_bvkbb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4uq6"]
+size = Vector2(13, 5)
+
+[node name="Bullet" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_udif5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_f4uq6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+texture = ExtResource("2_bvkbb")
+flip_h = true
