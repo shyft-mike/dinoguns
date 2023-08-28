@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://globals/scene_manager.gd"
 State="*res://globals/state.gd"
+Events="*res://globals/events.gd"
+GameManager="*res://globals/game_manager.gd"
 
 [display]
 

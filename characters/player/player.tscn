@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://b40pet0h07syn"]
+
+[ext_resource type="Script" path="res://characters/player/player.gd" id="1_m8ln3"]
+[ext_resource type="PackedScene" uid="uid://2q1777mommlq" path="res://inventory/weapons/laser.tscn" id="2_7frw4"]
+[ext_resource type="PackedScene" uid="uid://c3hvaxrk45hpa" path="res://inventory/weapons/gun.tscn" id="3_p61gb"]
+[ext_resource type="PackedScene" uid="uid://bjp33jjtrooqb" path="res://inventory/projectiles/bullet.tscn" id="4_kme6s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qd245"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_chgv8"]
+radius = 200.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_m8ln3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qd245")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="LeftArm" type="Node2D" parent="."]
+position = Vector2(16, -12)
+
+[node name="Laser" parent="LeftArm" instance=ExtResource("2_7frw4")]
+
+[node name="RightArm" type="Node2D" parent="."]
+position = Vector2(16, 12)
+
+[node name="Gun" parent="RightArm" instance=ExtResource("3_p61gb")]
+projectile_scene = ExtResource("4_kme6s")
+
+[node name="Field" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field"]
+shape = SubResource("CircleShape2D_chgv8")
+
+[connection signal="body_entered" from="Field" to="." method="_on_field_body_entered"]

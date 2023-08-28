@@ -8,7 +8,7 @@ var active: bool: get = _get_active, set = _set_active
 var icon: Texture2D: get = _get_icon, set = _set_icon
 var size: SlotSize: get = _get_size, set = _set_size
 var type: SlotType: get = _get_type, set = _set_type
-var item
+var item: SlottableItem
 
 
 func _get_active():

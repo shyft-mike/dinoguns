@@ -1,19 +1,18 @@
 extends Button
 class_name CharacterSelectButton
 
-signal character_selected (character)
 signal character_hovered (character)
 
-var character: Character
+var _character: Character
 
 
-func init(character_in: Character):
-	character = character_in
+func setup(character: Character):
+	_character = character
 	
-	$Label.text = character.name
-	$TextureRect.texture = character.icon
+	$Label.text = _character.name
+	$TextureRect.texture = _character.icon
 	
-	if not character.is_selectable:
+	if not _character.is_selectable:
 		disabled = true
 		focus_mode = Control.FOCUS_NONE
 		
@@ -21,9 +20,9 @@ func init(character_in: Character):
 
 
 func _on_pressed():
-	character_selected.emit(character)
+	Events.character_selected.emit(_character)
 
 
 func _on_mouse_entered():
-	character_hovered.emit(character)
+	character_hovered.emit(_character)
 

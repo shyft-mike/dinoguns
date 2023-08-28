@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkrrgndccew62"]
+[gd_scene load_steps=7 format=3 uid="uid://bkrrgndccew62"]
 
 [ext_resource type="PackedScene" uid="uid://b8yem4h5cly3q" path="res://background.tscn" id="1_ae0bi"]
 [ext_resource type="Script" path="res://story_mode.gd" id="1_lp0gp"]
 [ext_resource type="PackedScene" uid="uid://bx7nhabnsal8q" path="res://world/tile_map.tscn" id="3_7u2lx"]
-[ext_resource type="PackedScene" uid="uid://b40pet0h07syn" path="res://player/player.tscn" id="3_ipj7e"]
+[ext_resource type="PackedScene" uid="uid://b40pet0h07syn" path="res://characters/player/player.tscn" id="3_ipj7e"]
+[ext_resource type="PackedScene" uid="uid://d37s1nlbu551r" path="res://inventory/pickups/gene.tscn" id="5_t56wj"]
+[ext_resource type="AudioStream" uid="uid://b2s8iy6icggby" path="res://art/die_by_the_claw_2.wav" id="6_jp0mv"]
 
 [node name="StoryMode" type="Node"]
 script = ExtResource("1_lp0gp")
@@ -22,3 +24,25 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" parent="Panel" instance=ExtResource("3_ipj7e")]
+
+[node name="Gene" parent="." instance=ExtResource("5_t56wj")]
+position = Vector2(1119, 265)
+
+[node name="Gene2" parent="." instance=ExtResource("5_t56wj")]
+position = Vector2(193, 153)
+
+[node name="Gene3" parent="." instance=ExtResource("5_t56wj")]
+position = Vector2(363, 93)
+
+[node name="Gene4" parent="." instance=ExtResource("5_t56wj")]
+position = Vector2(1434, 223)
+
+[node name="Gene5" parent="." instance=ExtResource("5_t56wj")]
+position = Vector2(972, 69)
+
+[node name="Gene6" parent="." instance=ExtResource("5_t56wj")]
+position = Vector2(844, 158)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_jp0mv")
+autoplay = true

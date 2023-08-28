@@ -1,0 +1,25 @@
+extends PlayerCharacter
+class_name Raptor
+
+
+func _init():
+	name = "Raptor"
+	icon = load("res://art/characters/RAPTOR_icon_64x64.png")
+	is_selectable = true
+	is_visible = true
+	
+	stats.attack.set_base_value(10)
+	stats.defense.set_base_value(7)
+	stats.health.set_base_value(90)
+	stats.special.set_base_value(7)
+	stats.move_speed.set_base_value(11)
+	stats.attack_speed.set_base_value(15)
+	
+	_init_inventory()
+	
+
+func _init_inventory():
+	inventory.add_slot(Slot.SlotType.ARM, Slot.SlotSize.MEDIUM)
+	inventory.add_slot(Slot.SlotType.ARM, Slot.SlotSize.MEDIUM)
+	inventory.add_slot(Slot.SlotType.NECK)
+	inventory.add_slot(Slot.SlotType.BACK)
