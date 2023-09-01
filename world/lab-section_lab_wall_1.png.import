@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqdvra7ij1ht5"
-path.s3tc="res://.godot/imported/BLOCKY_59x59.png-b53095f409bab910657029b37f035545.s3tc.ctex"
+uid="uid://ckmsqhnuirc66"
+path.s3tc="res://.godot/imported/lab-section_lab_wall_1.png-8bad89ef13bc181ec92b762e8b43ad42.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://art/particles/BLOCKY_59x59.png"
-dest_files=["res://.godot/imported/BLOCKY_59x59.png-b53095f409bab910657029b37f035545.s3tc.ctex"]
+source_file="res://world/lab-section_lab_wall_1.png"
+dest_files=["res://.godot/imported/lab-section_lab_wall_1.png-8bad89ef13bc181ec92b762e8b43ad42.s3tc.ctex"]
 
 [params]
 

@@ -12,9 +12,8 @@ func _ready():
 	
 
 func _process(delta):
-	var mouse_position = get_local_mouse_position()
-	rotation += mouse_position.angle() * rotation_speed * delta
-	
+	var mouse_position = get_global_mouse_position()
+		
 	var direction = Vector2.ZERO
 	
 	if Input.is_action_pressed("move_down"):
@@ -25,6 +24,44 @@ func _process(delta):
 		direction.x += 1
 	if Input.is_action_pressed("move_up"):
 		direction.y -= 1
+		
+	
+	var angle = rad_to_deg(global_position.angle_to_point(mouse_position))	
+	
+	# quadrants
+	if angle >= -22.5 and angle <= 22.5:
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_right")
+	if angle >= 22.5 and angle <= 67.5:
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_diag_down")
+	if angle >= 67.5 and angle <= 112.5:
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_down")
+	if angle >= 112.5 and angle <= 157.5:
+		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_diag_down")		
+	if angle >= 157.5 or angle <= -157.5:
+		$AnimatedSprite2D.flip_h = true		
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_right")
+	if angle >= -157.5 and angle <= -112.5:
+		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_diag_up")
+	if angle >= -112.5 and angle <= -67.5:
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_down")
+	if angle >= -67.5 and angle <= -22.5:
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_v = false
+		$AnimatedSprite2D.play("walk_diag_up")
+	
 	
 	# normalize the direction vector so you can't move faster in the diagonal
 	# than you can in just the horizontal/vertical
@@ -36,11 +73,7 @@ func _process(delta):
 		if collider is Item:
 			collider.on_pickup()
 	
-
-func _draw():
-	draw_circle(Vector2(0,0), 16, Color.WHITE)
-	
-	
+		
 func _on_character_selected(character: PlayerCharacter):
 	_character = character
 	

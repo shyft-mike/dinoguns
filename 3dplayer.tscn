@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5nigxtvnid80"]
+
+[ext_resource type="Script" path="res://3dplayer.gd" id="1_8xin1"]
+[ext_resource type="Texture2D" uid="uid://c2r1uwfln0nyj" path="res://art/characters/RAPTOR_sprite.png" id="2_82jjy"]
+[ext_resource type="PackedScene" uid="uid://dh5j60idul0kc" path="res://inventory/weapons/claw.tscn" id="3_7hvyr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3al5"]
+size = Vector3(3.79643, 3.83971, 3.06694)
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.16, 0)
+script = ExtResource("1_8xin1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.273093, 1.67104, -0.408974)
+shape = SubResource("BoxShape3D_m3al5")
+
+[node name="RotationOffset" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="RotationOffset"]
+transform = Transform3D(0.9, 0, 0, 0, 0.900001, 0, 0, 0, 0.900001, 0, 1.04381, 0.875858)
+cast_shadow = 2
+texture = ExtResource("2_82jjy")
+
+[node name="Camera3D" type="Camera3D" parent="RotationOffset/Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.762)
+projection = 1
+current = true
+size = 6.0
+
+[node name="Claw" parent="." instance=ExtResource("3_7hvyr")]
+transform = Transform3D(-0.731421, 0.118532, -0.671546, 0.00727237, 0.986077, 0.166127, 0.681887, 0.116625, -0.722099, -1.03745, 0, 0.554762)

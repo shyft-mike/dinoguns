@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_8"
+type="Resource"
+uid="uid://duws6tm810rvm"
+path="res://.godot/imported/raptor.dialogue-16493dad063a06d2ceada575c4748152.tres"
+
+[deps]
+
+source_file="res://characters/player/raptor.dialogue"
+dest_files=["res://.godot/imported/raptor.dialogue-16493dad063a06d2ceada575c4748152.tres"]
+
+[params]
+
+defaults=true
