@@ -1,10 +1,31 @@
-[gd_scene load_steps=9 format=3 uid="uid://yj6p2xsqtiiy"]
+[gd_scene load_steps=11 format=3 uid="uid://yj6p2xsqtiiy"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_rxf6e"]
 [ext_resource type="Texture2D" uid="uid://cpxh6rfvm0mv6" path="res://art/characters/COMPY_sprite_sheet.png" id="2_qpeoy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e43t1"]
 size = Vector2(38, 29)
+
+[sub_resource type="Shader" id="Shader_shr0c"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 new_color = previous_color;
+	if (active == true)
+	{
+		new_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	}
+	COLOR = new_color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahsmn"]
+resource_local_to_scene = true
+shader = SubResource("Shader_shr0c")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2pgr"]
 atlas = ExtResource("2_qpeoy")
@@ -47,8 +68,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 z_index = 1
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_rxf6e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -56,7 +79,7 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_e43t1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ahsmn")
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_7jf2c")
 animation = &"walk"
-frame_progress = 0.814491

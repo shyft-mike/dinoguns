@@ -66,7 +66,7 @@ func _process(delta):
 	
 	# normalize the direction vector so you can't move faster in the diagonal
 	# than you can in just the horizontal/vertical
-	var move_speed = _character.stats.calc_move_speed(State.standard_move_speed)
+	var move_speed = _character.calc_move_speed(State.standard_move_speed)
 	var collision = move_and_collide(direction.normalized() * move_speed * delta)
 	
 	if collision:
@@ -94,3 +94,9 @@ func _flash():
 	await get_tree().create_timer(0.1).timeout
 	($AnimatedSprite2D.material as ShaderMaterial).set_shader_parameter("active", false)
 	
+
+func _on_claw_body_entered(body):
+	if body.is_in_group("enemy"):
+		# calc damage, do damage, is enemy dead, what do they drop
+		body.take_damage(10)
+		

@@ -7,9 +7,9 @@ func _init():
 	is_selectable = false
 	is_visible = true
 	
-	stats.attack.set_base_value(15)
-	stats.defense.set_base_value(10)
-	stats.health.set_base_value(140)
-	stats.special.set_base_value(8)
-	stats.attack_speed.set_base_value(5)
-	stats.move_speed.set_base_value(5)	
+	stats.attack.init(15)
+	stats.defense.init(10)
+	stats.health.init(140)
+	stats.special.init(8)
+	stats.attack_speed.init(5)
+	stats.move_speed.init(5)	

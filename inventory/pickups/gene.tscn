@@ -25,6 +25,7 @@ glow_blend_mode = 0
 
 [node name="Gene" type="StaticBody2D"]
 scale = Vector2(0.6, 0.6)
+collision_layer = 8
 script = ExtResource("1_4tfup")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

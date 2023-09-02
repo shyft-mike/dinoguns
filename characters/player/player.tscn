@@ -1,14 +1,30 @@
 [gd_scene load_steps=27 format=3 uid="uid://b40pet0h07syn"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_m8ln3"]
-[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_7u2lr"]
 [ext_resource type="Texture2D" uid="uid://dvmuy26ulrs4x" path="res://art/characters/RAPTOR_sprite_2.png" id="2_8kska"]
 [ext_resource type="Script" path="res://characters/player/target_point.gd" id="3_obnbp"]
 [ext_resource type="PackedScene" uid="uid://d0f6h1g6b276f" path="res://characters/player/claw.tscn" id="5_o8747"]
 [ext_resource type="Script" path="res://characters/player/main_attack.gd" id="5_ofnl5"]
 
+[sub_resource type="Shader" id="Shader_r5x7c"]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 new_color = previous_color;
+	if (active == true)
+	{
+		new_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	}
+	COLOR = new_color;
+}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ynra2"]
-shader = ExtResource("2_7u2lr")
+resource_local_to_scene = true
+shader = SubResource("Shader_r5x7c")
 shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ltb7d"]
@@ -136,6 +152,33 @@ size = Vector2(77, 49)
 [sub_resource type="CircleShape2D" id="CircleShape2D_chgv8"]
 radius = 200.0
 
+[sub_resource type="Animation" id="Animation_10huc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Claw:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-37, 19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Claw:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.32353]
+}
+
 [sub_resource type="Animation" id="Animation_vjdbm"]
 resource_name = "slash"
 length = 0.15
@@ -164,33 +207,6 @@ tracks/1/keys = {
 "values": [-1.75848, -2.32353]
 }
 
-[sub_resource type="Animation" id="Animation_10huc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Claw:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-37, 19)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Claw:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-2.32353]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v5opw"]
 _data = {
 "RESET": SubResource("Animation_10huc"),
@@ -198,6 +214,8 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["players"]]
+z_index = 1
+collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_m8ln3")
 
@@ -249,3 +267,4 @@ libraries = {
 }
 
 [connection signal="body_entered" from="Field" to="." method="_on_field_body_entered"]
+[connection signal="body_entered" from="MainAttack/Claw" to="." method="_on_claw_body_entered"]

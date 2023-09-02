@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkrrgndccew62"]
+[gd_scene load_steps=4 format=3 uid="uid://bkrrgndccew62"]
 
 [ext_resource type="Script" path="res://story_mode.gd" id="1_lp0gp"]
-[ext_resource type="PackedScene" uid="uid://tlcg72uik28o" path="res://Grassfield_scene.tscn" id="2_w6tfy"]
+[ext_resource type="PackedScene" path="res://Grassfield_scene.tscn" id="2_w6tfy"]
 [ext_resource type="PackedScene" uid="uid://b40pet0h07syn" path="res://characters/player/player.tscn" id="3_ipj7e"]
-[ext_resource type="Script" path="res://monster_spawner.gd" id="5_3jywe"]
-[ext_resource type="PackedScene" uid="uid://d37s1nlbu551r" path="res://inventory/pickups/gene.tscn" id="5_t56wj"]
 
 [node name="StoryMode" type="Node2D"]
 y_sort_enabled = true
@@ -37,37 +35,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Player" parent="SubViewportContainer/SubViewport/Panel" instance=ExtResource("3_ipj7e")]
-z_index = 1
 
-[node name="Gene" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_t56wj")]
-z_index = 1
-position = Vector2(1119, 265)
-
-[node name="Gene2" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_t56wj")]
-z_index = 1
-position = Vector2(193, 153)
-
-[node name="Gene3" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_t56wj")]
-z_index = 1
-position = Vector2(363, 93)
-
-[node name="Gene4" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_t56wj")]
-z_index = 1
-position = Vector2(1434, 223)
-
-[node name="Gene5" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_t56wj")]
-z_index = 1
-position = Vector2(972, 69)
-
-[node name="Gene6" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_t56wj")]
-z_index = 1
-position = Vector2(844, 158)
-
-[node name="MonsterSpawner" type="Node2D" parent="SubViewportContainer/SubViewport"]
-script = ExtResource("5_3jywe")
-
-[node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/MonsterSpawner"]
-wait_time = 0.702
-autostart = true
-
-[connection signal="timeout" from="SubViewportContainer/SubViewport/MonsterSpawner/Timer" to="SubViewportContainer/SubViewport/MonsterSpawner" method="_on_timer_timeout"]
+[node name="Spawns" type="Node2D" parent="SubViewportContainer/SubViewport" groups=["spawner"]]
