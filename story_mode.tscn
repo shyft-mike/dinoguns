@@ -1,13 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://bkrrgndccew62"]
 
 [ext_resource type="Script" path="res://story_mode.gd" id="1_lp0gp"]
-[ext_resource type="Texture2D" uid="uid://cw57pikvq805p" path="res://world/lab-section_lab_floor_1.png" id="2_237xi"]
 [ext_resource type="PackedScene" uid="uid://b40pet0h07syn" path="res://characters/player/player.tscn" id="3_ipj7e"]
 [ext_resource type="Script" path="res://monster_spawner.gd" id="5_3jywe"]
 [ext_resource type="PackedScene" uid="uid://d37s1nlbu551r" path="res://inventory/pickups/gene.tscn" id="5_t56wj"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0mown"]
+load_path = "res://.godot/imported/lab-section_lab_floor_1.png-59ba2b529c8ea38dca2dac4e15836fbb.s3tc.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1rbyt"]
-texture = ExtResource("2_237xi")
+texture = SubResource("CompressedTexture2D_0mown")
 texture_region_size = Vector2i(128, 128)
 use_texture_padding = false
 0:0/next_alternative_id = 3

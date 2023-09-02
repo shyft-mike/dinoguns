@@ -23,11 +23,13 @@ func _get_selectable_characters():
 	#TODO: get all characters, grey out unselectable
 	
 	for character_type in CharacterFactory.CharacterType.values():
-		results.append(CharacterFactory.generate_character(character_type))
+		var character = CharacterFactory.generate_character(character_type)
+		
+		if "is_selectable" in character:
+			results.append(character)
 		
 	return results
 
 
 func _on_character_hovered(character):
-	print_debug("Character hovered: " + character.name)
 	$StatsPanel.load_character(character)

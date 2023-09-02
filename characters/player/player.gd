@@ -26,42 +26,43 @@ func _process(delta):
 		direction.y -= 1
 		
 	
-	var angle = rad_to_deg(global_position.angle_to_point(mouse_position))	
+	var angle = rad_to_deg(global_position.angle_to_point(mouse_position))
+	
+	$TargetPoint.position = (mouse_position - global_position).normalized() * 50
 	
 	# quadrants
 	if angle >= -22.5 and angle <= 22.5:
-		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_h = true
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_right")
 	if angle >= 22.5 and angle <= 67.5:
-		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_h = true
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_diag_down")
 	if angle >= 67.5 and angle <= 112.5:
-		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_h = true
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_down")
 	if angle >= 112.5 and angle <= 157.5:
-		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.flip_h = false
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_diag_down")		
 	if angle >= 157.5 or angle <= -157.5:
-		$AnimatedSprite2D.flip_h = true		
+		$AnimatedSprite2D.flip_h = false		
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_right")
 	if angle >= -157.5 and angle <= -112.5:
-		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.flip_h = false
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_diag_up")
 	if angle >= -112.5 and angle <= -67.5:
-		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_h = true
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_down")
 	if angle >= -67.5 and angle <= -22.5:
-		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_h = true
 		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.play("walk_diag_up")
-	
 	
 	# normalize the direction vector so you can't move faster in the diagonal
 	# than you can in just the horizontal/vertical
@@ -79,10 +80,17 @@ func _on_character_selected(character: PlayerCharacter):
 	
 
 func _on_experience_received(value: int):
-	print_debug("_on_experience_received - %d" % value)
 	_character.add_experience(value)
-
+	_flash()
+	
 
 func _on_field_body_entered(body):
 	if body != self and body is Item:
 		(body as Item).player_to_move_to = self
+		
+
+func _flash():
+	($AnimatedSprite2D.material as ShaderMaterial).set_shader_parameter("active", true)
+	await get_tree().create_timer(0.1).timeout
+	($AnimatedSprite2D.material as ShaderMaterial).set_shader_parameter("active", false)
+	

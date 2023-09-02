@@ -2,28 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw57pikvq805p"
-path.s3tc="res://.godot/imported/lab-section_lab_floor_1.png-59ba2b529c8ea38dca2dac4e15836fbb.s3tc.ctex"
+uid="uid://cpxh6rfvm0mv6"
+path="res://.godot/imported/COMPY_sprite_sheet.png-6a2491654e8b50aacadf437888563d2d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://world/lab-section_lab_floor_1.png"
-dest_files=["res://.godot/imported/lab-section_lab_floor_1.png-59ba2b529c8ea38dca2dac4e15836fbb.s3tc.ctex"]
+source_file="res://art/characters/COMPY_sprite_sheet.png"
+dest_files=["res://.godot/imported/COMPY_sprite_sheet.png-6a2491654e8b50aacadf437888563d2d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -33,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
