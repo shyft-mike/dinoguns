@@ -1,31 +1,17 @@
 [gd_scene load_steps=11 format=3 uid="uid://yj6p2xsqtiiy"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_rxf6e"]
+[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_mhljm"]
 [ext_resource type="Texture2D" uid="uid://cpxh6rfvm0mv6" path="res://art/characters/COMPY_sprite_sheet.png" id="2_qpeoy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e43t1"]
 size = Vector2(38, 29)
 
-[sub_resource type="Shader" id="Shader_shr0c"]
-code = "shader_type canvas_item;
-
-uniform bool active = false;
-
-void fragment() {
-	vec4 previous_color = texture(TEXTURE, UV);
-	vec4 new_color = previous_color;
-	if (active == true)
-	{
-		new_color = vec4(1.0, 1.0, 1.0, previous_color.a);
-	}
-	COLOR = new_color;
-}
-"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahsmn"]
 resource_local_to_scene = true
-shader = SubResource("Shader_shr0c")
+shader = ExtResource("2_mhljm")
 shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2pgr"]
 atlas = ExtResource("2_qpeoy")

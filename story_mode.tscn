@@ -1,39 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkrrgndccew62"]
+[gd_scene load_steps=5 format=3 uid="uid://bkrrgndccew62"]
 
 [ext_resource type="Script" path="res://story_mode.gd" id="1_lp0gp"]
-[ext_resource type="PackedScene" path="res://Grassfield_scene.tscn" id="2_w6tfy"]
+[ext_resource type="PackedScene" uid="uid://crodp7tijmpv3" path="res://story_mode_ui.tscn" id="2_w2avx"]
+[ext_resource type="PackedScene" uid="uid://tlcg72uik28o" path="res://Grassfield_scene.tscn" id="2_w6tfy"]
 [ext_resource type="PackedScene" uid="uid://b40pet0h07syn" path="res://characters/player/player.tscn" id="3_ipj7e"]
 
 [node name="StoryMode" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_lp0gp")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="StoryModeUI" parent="." instance=ExtResource("2_w2avx")]
 offset_right = 1600.0
 offset_bottom = 1200.0
-stretch = true
-stretch_shrink = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(800, 600)
-render_target_update_mode = 4
+[node name="Spawns" type="Node2D" parent="." groups=["spawner"]]
+z_index = 1
 
-[node name="TileMap" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_w6tfy")]
+[node name="TileMap" parent="." instance=ExtResource("2_w6tfy")]
 
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 544.0
-offset_top = 344.0
-offset_right = 544.0
-offset_bottom = 344.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Player" parent="SubViewportContainer/SubViewport/Panel" instance=ExtResource("3_ipj7e")]
-
-[node name="Spawns" type="Node2D" parent="SubViewportContainer/SubViewport" groups=["spawner"]]
+[node name="Player" parent="." instance=ExtResource("3_ipj7e")]
