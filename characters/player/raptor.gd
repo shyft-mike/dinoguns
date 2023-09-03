@@ -15,6 +15,7 @@ func _init():
 	stats.special.init(7)
 	stats.move_speed.init(11)
 	stats.attack_speed.init(15)
+	stats.health_regen.init(5)
 	
 	_init_inventory()
 	

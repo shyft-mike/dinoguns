@@ -7,7 +7,8 @@ func _ready():
 
 func start():
 	SceneManager.change_scene(SceneManager.LEVEL_1_SCENE)
-	TimeManager.reset().start()
+	TimeManager.reset()
+	TimeManager.start()
 
 	
 func _on_character_selected(character):
