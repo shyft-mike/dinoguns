@@ -1,11 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://do0g7c2prhnb4"]
+[gd_scene load_steps=2 format=3 uid="uid://do0g7c2prhnb4"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_4rbgf"]
 [ext_resource type="PackedScene" uid="uid://ds700fb06lab8" path="res://screens/start/start.tscn" id="2_tet3q"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_4rbgf")
 
 [node name="Start" parent="." instance=ExtResource("2_tet3q")]
-
-[connection signal="start_button_pressed" from="Start" to="." method="_on_start_button_pressed"]

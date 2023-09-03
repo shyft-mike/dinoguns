@@ -1,7 +1,5 @@
-extends Panel
-
-signal start_button_pressed
+extends PanelContainer
 
 
 func _on_button_pressed():
-	start_button_pressed.emit()
+	SceneManager.change_scene(SceneManager.CHARACTER_SELECT_SCENE)

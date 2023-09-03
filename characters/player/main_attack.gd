@@ -9,6 +9,7 @@ func _ready():
 
 
 func _unhandled_input(event):
+	"""TODO: This is too tightly coupled"""
 	if event.is_action_pressed("attack"):
 		visible = true
 		var angle = global_position.angle_to_point(target_point.position)

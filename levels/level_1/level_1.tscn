@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://uwf1mrb2kddk"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_or1jj"]
+[ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://interface/interface.tscn" id="2_3t4ql"]
+[ext_resource type="PackedScene" uid="uid://10x2k1pwsqcs" path="res://levels/level_1/Grassfield_scene.tscn" id="3_y4cxh"]
+
+[node name="Level1" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_or1jj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Interface" parent="CanvasLayer" instance=ExtResource("2_3t4ql")]
+mouse_filter = 1
+
+[node name="TileMap" parent="." instance=ExtResource("3_y4cxh")]
+
+[node name="Spawns" type="Node2D" parent="." groups=["spawner"]]
+y_sort_enabled = true
+
+[node name="Players" type="Node2D" parent="."]
+y_sort_enabled = true

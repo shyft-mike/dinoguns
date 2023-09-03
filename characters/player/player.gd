@@ -99,4 +99,21 @@ func _on_claw_body_entered(body):
 	if body.is_in_group("enemy"):
 		# calc damage, do damage, is enemy dead, what do they drop
 		body.take_damage(10)
-		
+
+
+# Health Bar! Maybe need to separate in the future so that max value only changes when max hp changes.
+# Such as a power up or mutation. 
+func _update_health():
+	var healthbar = $HealthBar
+	healthbar.max_value = _character.stats.health.total_value()
+	healthbar.value = _character.stats.current_health
+
+
+# HP Bar Regen timer
+func _on_timer_timeout():
+	if _character.stats.current_health < _character.stats.health.total_value():
+		_character.stats.current_health = _character.stats.current_health + _character.stats.health_regen
+		if _character.stats.current_health > _character.stats.health: 
+			_character.stats.current_health = _character.stats.health
+		if _character.stats.current_health <= 0:
+			_character.stats.current_health = 0
