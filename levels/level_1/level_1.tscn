@@ -8,6 +8,10 @@
 y_sort_enabled = true
 script = ExtResource("1_or1jj")
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+energy = 0.5
+shadow_enabled = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://b40pet0h07syn"]
+[gd_scene load_steps=28 format=3 uid="uid://b40pet0h07syn"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_m8ln3"]
 [ext_resource type="Texture2D" uid="uid://dvmuy26ulrs4x" path="res://art/characters/RAPTOR_sprite_2.png" id="2_8kska"]
+[ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_75evm"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_owa3r"]
 [ext_resource type="Script" path="res://characters/player/target_point.gd" id="3_obnbp"]
 [ext_resource type="PackedScene" uid="uid://d0f6h1g6b276f" path="res://characters/player/claw.tscn" id="5_o8747"]
@@ -205,18 +206,27 @@ collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_m8ln3")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.364706)
+light_mask = 0
+position = Vector2(-1, 15)
+scale = Vector2(1.72, 1)
+texture = ExtResource("2_75evm")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ynra2")
 sprite_frames = SubResource("SpriteFrames_yv0xw")
 animation = &"walk_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_exsg7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Field" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field"]
 shape = SubResource("CircleShape2D_chgv8")

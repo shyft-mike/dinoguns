@@ -6,3 +6,5 @@ signal experience_received (int)
 signal event_logged (String)
 
 signal player_health_changed
+
+signal time_of_day_changed (Color)

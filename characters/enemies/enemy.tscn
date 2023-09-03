@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://yj6p2xsqtiiy"]
+[gd_scene load_steps=12 format=3 uid="uid://yj6p2xsqtiiy"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_rxf6e"]
+[ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_iuftr"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_mhljm"]
 [ext_resource type="Texture2D" uid="uid://cpxh6rfvm0mv6" path="res://art/characters/COMPY_sprite_sheet.png" id="2_qpeoy"]
 
@@ -59,6 +60,12 @@ z_index = 1
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_rxf6e")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.407843)
+position = Vector2(0, 9)
+scale = Vector2(1.16, 1)
+texture = ExtResource("2_iuftr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
