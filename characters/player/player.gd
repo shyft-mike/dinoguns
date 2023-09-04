@@ -9,9 +9,6 @@ var _character: PlayerCharacter = null
 func _ready():
 	Events.character_selected.connect(_on_character_selected)
 	Events.experience_received.connect(_on_experience_received)
-	Events.player_health_changed.connect(_update_health)
-	_character.stats.current_health -= 50 # test that health regen works
-	_update_health()
 	
 
 func _process(delta):
@@ -102,11 +99,3 @@ func _on_claw_body_entered(body):
 	if body.is_in_group("enemy"):
 		# calc damage, do damage, is enemy dead, what do they drop
 		body.take_damage(10)
-
-
-# Health Bar! Maybe need to separate in the future so that max value only changes when max hp changes.
-# Such as a power up or mutation. 
-func _update_health():
-	var healthbar = $HealthBar
-	healthbar.max_value = _character.stats.health.total_value()
-	healthbar.value = _character.stats.current_health

@@ -219,14 +219,12 @@ sprite_frames = SubResource("SpriteFrames_yv0xw")
 animation = &"walk_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_exsg7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Field" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field"]
 shape = SubResource("CircleShape2D_chgv8")
@@ -261,15 +259,6 @@ initial_velocity_max = 20.0
 libraries = {
 "": SubResource("AnimationLibrary_v5opw")
 }
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-modulate = Color(0.247059, 0.85098, 0.254902, 1)
-offset_left = -24.0
-offset_top = 22.0
-offset_right = 406.0
-offset_bottom = 72.0
-scale = Vector2(0.1, 0.1)
-value = 90.0
 
 [connection signal="body_entered" from="Field" to="." method="_on_field_body_entered"]
 [connection signal="body_entered" from="MainAttack/Claw" to="." method="_on_claw_body_entered"]

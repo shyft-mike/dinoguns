@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_rxf6e"]
 [ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_iuftr"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_mhljm"]
-[ext_resource type="Texture2D" uid="uid://cpxh6rfvm0mv6" path="res://art/characters/COMPY_sprite_sheet.png" id="2_qpeoy"]
+[ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://art/characters/COMPY_sprite_sheet_2.png" id="4_pxj7y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e43t1"]
 size = Vector2(38, 29)
@@ -14,27 +14,27 @@ shader = ExtResource("2_mhljm")
 shader_parameter/active = false
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2pgr"]
-atlas = ExtResource("2_qpeoy")
+[sub_resource type="AtlasTexture" id="AtlasTexture_umgi7"]
+atlas = ExtResource("4_pxj7y")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j1wx5"]
-atlas = ExtResource("2_qpeoy")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddfkk"]
+atlas = ExtResource("4_pxj7y")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cxxfd"]
-atlas = ExtResource("2_qpeoy")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5elkm"]
+atlas = ExtResource("4_pxj7y")
 region = Rect2(0, 48, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_osyla"]
-atlas = ExtResource("2_qpeoy")
+[sub_resource type="AtlasTexture" id="AtlasTexture_015xo"]
+atlas = ExtResource("4_pxj7y")
 region = Rect2(0, 96, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7jf2c"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y2pgr")
+"texture": SubResource("AtlasTexture_umgi7")
 }],
 "loop": true,
 "name": &"default",
@@ -42,13 +42,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j1wx5")
+"texture": SubResource("AtlasTexture_ddfkk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cxxfd")
+"texture": SubResource("AtlasTexture_5elkm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_osyla")
+"texture": SubResource("AtlasTexture_015xo")
 }],
 "loop": true,
 "name": &"walk",
@@ -73,6 +73,5 @@ shape = SubResource("RectangleShape2D_e43t1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ahsmn")
-scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_7jf2c")
 animation = &"walk"
