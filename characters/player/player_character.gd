@@ -1,9 +1,11 @@
 extends Character
 class_name PlayerCharacter
 
+@export var base_experience := 10
+
 var level: int = 1
 var experience: int = 0
-var to_next_level: int = 100
+var to_next_level: int = base_experience
 var is_selectable := true
 var is_visible := true
 
@@ -20,4 +22,4 @@ func add_experience(value: int):
 
 
 func _experience_for_level(level: int) -> int:
-	return int(100 * pow(level, 2.5))
+	return int(base_experience * pow(level, 2.5))

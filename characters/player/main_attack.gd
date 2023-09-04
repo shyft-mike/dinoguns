@@ -12,9 +12,15 @@ func _unhandled_input(event):
 	"""TODO: This is too tightly coupled"""
 	if event.is_action_pressed("attack"):
 		visible = true
-		var angle = global_position.angle_to_point(target_point.position)
+		var angle = position.angle_to_point(target_point.position)
+#		print_debug("Attack")
+#		print_debug("target_point.position: ", target_point.position)
+#		print_debug("get_parent().position: ", get_parent().position)
+#		print_debug("position: ", position)
+#		print_debug("global_position: ", global_position)
+#		print_debug("angle_to_point: ", rad_to_deg(angle))
 		position = target_point.position
-		rotation += angle
+		rotation = angle + (PI)
 		$AnimationPlayer.play("slash")
 
 

@@ -12,11 +12,9 @@ script = ExtResource("1_or1jj")
 color = Color(1, 1, 0.784314, 0.658824)
 energy = 0.5
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="Interface" parent="CanvasLayer" instance=ExtResource("2_3t4ql")]
-mouse_filter = 1
+[node name="Interface" parent="UILayer" instance=ExtResource("2_3t4ql")]
 
 [node name="TileMap" parent="." instance=ExtResource("3_y4cxh")]
 

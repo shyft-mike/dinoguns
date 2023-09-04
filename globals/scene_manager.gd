@@ -1,6 +1,7 @@
 extends Node
 
 const CHARACTER_SELECT_SCENE = "res://screens/character_select/character_select.tscn"
+const LEVEL_UP_SCENE = "res://interface/level_up/level_up.tscn"
 const LEVEL_1_SCENE = "res://levels/level_1/level_1.tscn"
 
 var current_scene: Node = null

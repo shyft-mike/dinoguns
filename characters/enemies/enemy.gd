@@ -4,6 +4,7 @@ extends CharacterBody2D
 var character: EnemyCharacter
 var player 
 
+
 func _ready():
 	$AnimatedSprite2D.play($AnimatedSprite2D.animation)
 	player = get_tree().get_first_node_in_group("players")
