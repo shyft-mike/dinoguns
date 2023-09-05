@@ -4,5 +4,5 @@ extends Item
 
 
 func on_pickup():
-	Events.experience_received.emit(exp_value)
+	State.selected_character.add_experience(exp_value)
 	queue_free()

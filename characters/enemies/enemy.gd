@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
+enum EnemyState {PERSUING,RETREATING}
 
+var current_state: EnemyState = EnemyState.PERSUING
+var last_sighting: Vector2
 var character: EnemyCharacter
 var player 
 
@@ -12,9 +15,23 @@ func _ready():
 	
 
 func _physics_process(delta):
-#	velocity = (player.position - position).normalized() * 100 / delta
-	global_position = global_position.move_toward(player.global_position, delta * character.calc_move_speed(State.standard_move_speed))
-
+	var direction_to_player = global_position.direction_to(player.global_position)
+	var distance_to_player = global_position.distance_to(player.global_position)
+	
+	match current_state:
+		EnemyState.PERSUING:
+			if distance_to_player > 50:
+				velocity = direction_to_player * character.calc_move_speed(State.standard_move_speed)
+			if distance_to_player <= 50:
+				current_state = EnemyState.RETREATING
+				last_sighting = player.global_position
+				velocity = -direction_to_player * character.calc_move_speed(State.standard_move_speed) * 1.1
+		
+		EnemyState.RETREATING:
+			velocity = -global_position.direction_to(last_sighting) * character.calc_move_speed(State.standard_move_speed) * 1.1
+			if global_position.distance_to(last_sighting) > 300:
+				current_state = EnemyState.PERSUING
+		
 	move_and_slide()
 
 

@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var player_character := preload("res://characters/player/player.tscn")
+@export var player_character := preload("res://characters/player/raptor/raptor_player.tscn")
+
 
 func _ready():
 	var player_character_instance = player_character.instantiate()
