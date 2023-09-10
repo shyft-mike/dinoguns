@@ -23,7 +23,7 @@ func _get_selectable_characters():
 	#TODO: get all characters, grey out unselectable
 	
 	for character_type in CharacterFactory.CharacterType.values():
-		var character = CharacterFactory.generate_character(character_type)
+		var character = CharacterFactory.generate_character_sheet(character_type)
 		
 		if "is_selectable" in character:
 			results.append(character)

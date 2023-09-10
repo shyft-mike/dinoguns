@@ -5,8 +5,8 @@ var _messages = []
 
 func _ready():
 	Events.experience_received.connect(
-		func(value):
-			var message = "Received %d experience" % value
+		func():
+			var message = "Received experience"
 			_messages.append(message)
 			Events.event_logged.emit(message)
 	)

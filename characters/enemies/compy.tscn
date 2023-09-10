@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://c886suds3vd12"]
+
+[ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_1b8bb"]
+[ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_qmh8k"]
+[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="3_2lw4p"]
+[ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://art/characters/COMPY_sprite_sheet_2.png" id="4_jmmcq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e43t1"]
+size = Vector2(48, 36)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahsmn"]
+resource_local_to_scene = true
+shader = ExtResource("3_2lw4p")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umgi7"]
+atlas = ExtResource("4_jmmcq")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddfkk"]
+atlas = ExtResource("4_jmmcq")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5elkm"]
+atlas = ExtResource("4_jmmcq")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_015xo"]
+atlas = ExtResource("4_jmmcq")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7jf2c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umgi7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddfkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5elkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_015xo")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Compy" type="CharacterBody2D" groups=["enemy"]]
+z_index = 1
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_1b8bb")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.407843)
+position = Vector2(1, 11)
+scale = Vector2(1.16, 1)
+texture = ExtResource("2_qmh8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_e43t1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ahsmn")
+sprite_frames = SubResource("SpriteFrames_7jf2c")
+animation = &"walk"

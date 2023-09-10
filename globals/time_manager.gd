@@ -3,7 +3,7 @@ extends Node
 var _event_timer: Timer
 var _spawn_timer: Timer
 var _regen_timer: Timer
-#var _clock_timer: Timer
+var _clock_timer: Timer
 
 func _ready():
 	_create_timers()
@@ -13,6 +13,7 @@ func reset():
 	_event_timer.queue_free()
 	_spawn_timer.queue_free()
 	_regen_timer.queue_free()
+	_clock_timer.queue_free()
 	_create_timers()
 	
 	
@@ -20,14 +21,14 @@ func start():
 	_event_timer.start()
 	_spawn_timer.start()
 	_regen_timer.start()
-#	_clock_timer.start()
+	_clock_timer.start()
 	
 
 func _create_timers():
-	_event_timer = _create_timer(60, _on_event_timer_timeout)
+	_event_timer = _create_timer(5, _on_event_timer_timeout)
 	_spawn_timer = _create_timer(1, _on_spawn_timer_timeout)
 	_regen_timer = _create_timer(5, _on_regen_timer_timeout)
-#	_clock_timer = _create_timer(0.1, _on_clock_timer_timeout)
+	_clock_timer = _create_timer(0.1, _on_clock_timer_timeout)
 
 func _create_timer(wait_time: float, timeout_event: Callable) -> Timer:
 	var timer = Timer.new()
@@ -38,17 +39,15 @@ func _create_timer(wait_time: float, timeout_event: Callable) -> Timer:
 
 
 func _on_event_timer_timeout():
-	print_debug("event!")
+	SpawnManager.spawn(CharacterFactory.CharacterType.MEGA_COMPY)
 	
 	
 func _on_spawn_timer_timeout():
-	var enemy = load("res://characters/enemies/enemy.tscn").instantiate()
-	enemy.character = CharacterFactory.generate_character(CharacterFactory.CharacterType.COMPY)
-	get_tree().get_first_node_in_group("spawner").add_child(enemy)
+	SpawnManager.spawn(CharacterFactory.CharacterType.COMPY)
 
 
 func _on_regen_timer_timeout():
-	State.selected_character.regen()
+	State.player.character.regen()
 	
 # TODO: handle this elsewhere
 #var _ticks_per_day = 60
@@ -59,7 +58,8 @@ func _on_regen_timer_timeout():
 #const EVENING_COLOR = Color8(248, 148, 100)
 #const NIGHT_COLOR = Color8(88, 104, 94)
 #
-#func _on_clock_timer_timeout():
+func _on_clock_timer_timeout():
+	pass
 #	_ticks += 1
 #	var new_color
 #	if _ticks <= 60:

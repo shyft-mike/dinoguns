@@ -3,10 +3,10 @@ class_name CharacterSelectButton
 
 signal character_hovered (character)
 
-var _character: Character
+var _character: CharacterSheet
 
 
-func setup(character: Character):
+func setup(character: CharacterSheet):
 	_character = character
 	
 	$Label.text = _character.name
@@ -20,7 +20,10 @@ func setup(character: Character):
 
 
 func _on_pressed():
-	Events.character_selected.emit(_character)
+	var new_player = CharacterFactory.generate_character_template(_character.type).instantiate()
+	new_player.character = _character
+	
+	Events.character_selected.emit(new_player)
 
 
 func _on_mouse_entered():

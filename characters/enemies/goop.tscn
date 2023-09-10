@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpr6kds4upxk8"]
+
+[ext_resource type="Script" path="res://characters/enemies/goop.gd" id="1_as8us"]
+[ext_resource type="Texture2D" uid="uid://bbg63jqcxsra3" path="res://art/characters/goo_sack/Frame 1.png" id="1_cuyb2"]
+[ext_resource type="Texture2D" uid="uid://coou5u3gris3j" path="res://art/characters/goo_sack/Frame 2.png" id="2_bnoof"]
+[ext_resource type="Texture2D" uid="uid://3d3qwxpenlji" path="res://art/characters/goo_sack/Frame 3.png" id="3_ivbgt"]
+[ext_resource type="Texture2D" uid="uid://bpvfgfiali0wh" path="res://art/characters/goo_sack/Frame 4.png" id="4_c2yw5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kf1iu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cuyb2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cuyb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bnoof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ivbgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_c2yw5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ivbgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bnoof")
+}],
+"loop": true,
+"name": &"pulse",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lx46"]
+size = Vector2(39, 27)
+
+[node name="Goop" type="StaticBody2D"]
+script = ExtResource("1_as8us")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kf1iu")
+animation = &"pulse"
+frame_progress = 0.611797
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -3.5)
+shape = SubResource("RectangleShape2D_8lx46")

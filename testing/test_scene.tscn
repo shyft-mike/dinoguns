@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://h4e3jcdikdcf"]
+
+[ext_resource type="PackedScene" uid="uid://b1t63nlupu6fp" path="res://items/pickups/big_amber.tscn" id="1_dbv21"]
+
+[node name="test_scene" type="Node"]
+
+[node name="BigAmber" parent="." instance=ExtResource("1_dbv21")]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 617.0
+offset_top = 115.0
+offset_right = 625.0
+offset_bottom = 123.0
+text = "LAUNCH"
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[connection signal="pressed" from="Button" to="BigAmber" method="_on_button_pressed"]

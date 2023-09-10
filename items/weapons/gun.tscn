@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3hvaxrk45hpa"]
+
+[ext_resource type="Script" path="res://items/weapons/gun.gd" id="1_pu70v"]
+[ext_resource type="PackedScene" uid="uid://bjp33jjtrooqb" path="res://items/projectiles/bullet.tscn" id="2_2e2lk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65xn3"]
+radius = 500.0
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_pu70v")
+projectile_scene = ExtResource("2_2e2lk")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="RangeArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
+shape = SubResource("CircleShape2D_65xn3")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,15 +1,15 @@
 extends RefCounted
 class_name Stat
 
-var _base_value : int = 0
-var _bonus_value : int = 0
+var _base_value: int = 0
+var _bonus_value: int = 0
 
 
 func init(base_value: int, bonus_value: int = 0):
 	_base_value = base_value
 	_bonus_value = bonus_value
-		
-	
+
+
 func total_value():
 	return _base_value + _bonus_value
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhvqikhn3onuk"]
+
+[ext_resource type="Texture2D" uid="uid://dmdfnl8vc3idl" path="res://art/temp/uzi.png" id="1_fy7pj"]
+[ext_resource type="Script" path="res://items/pickups/uzi.gd" id="1_ivtb0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uix36"]
+size = Vector2(33, 33)
+
+[node name="Uzi" type="RigidBody2D"]
+freeze = true
+script = ExtResource("1_ivtb0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fy7pj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_uix36")

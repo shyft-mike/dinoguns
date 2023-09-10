@@ -200,9 +200,9 @@ _data = {
 "slash": SubResource("Animation_vjdbm")
 }
 
-[node name="RaptorPlayer" type="CharacterBody2D" groups=["players"]]
+[node name="RaptorPlayer" type="Area2D" groups=["players"]]
 z_index = 1
-collision_mask = 12
+collision_mask = 14
 script = ExtResource("1_qd347")
 
 [node name="Shadow" type="Sprite2D" parent="."]
