@@ -23,10 +23,19 @@ func _init():
 	
 
 func _ready():
+	setup()
+
+
+func setup():
 	super.setup()
 	
-	Events.player_health_changed.emit()
+	level = 1
+	experience = 0
+	total_experience = 0
+	to_next_level = base_experience
 	
+	Events.player_health_changed.emit()
+
 
 func _process(delta):
 	_process_movement(delta)
@@ -87,18 +96,20 @@ func _process_movement(delta):
 func _handle_collision(collider: Node2D):
 	if is_dead:
 		return
+		
+	var collider_parent = collider.get_parent()
 	
 	if collider is Item:
 		collider.on_pickup()
-	if collider is Enemy:
-		take_damage(collider.character.stats.attack.total_value())
+	if collider_parent is Enemy:
+		take_damage(collider_parent.attack.total_value())
 
 
 func take_damage(attack_damage: int):
 	if is_damagable:
 		is_damagable = false
 		_flash(Color.RED)
-		take_damage(attack_damage)		
+		CharacterService.take_damage(self, attack_damage)
 		await get_tree().create_timer(hit_invincibility_time).timeout
 		is_damagable = true
 	

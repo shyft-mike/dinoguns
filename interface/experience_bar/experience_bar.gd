@@ -4,7 +4,6 @@ extends ProgressBar
 func _ready():
 	Events.experience_received.connect(_update)
 	Events.player_leveled_up.connect(_update)
-	_update()
 	
 
 func _update(_experience = null):

@@ -14,7 +14,7 @@ func spawn(type: int):
 	
 	enemy.position = _get_spawn_location()
 	
-	SceneManager.current_scene.enemies_container.add_child(enemy)
+	SceneManager.current_scene.spawns_container.add_child(enemy)
 	
 
 func _get_spawn_location() -> Vector2:

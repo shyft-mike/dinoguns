@@ -12,9 +12,9 @@ func exit_state(node):
 	
 	
 func process_physics(node, delta):
-	print_debug("launched item pos: ", node.position)
-	print_debug("launched item gpos: ", node.global_position)
-	print_debug("launched item ", node.get_instance_id(), " linear v: ", node.linear_velocity)
+#	print_debug("launched item pos: ", node.position)
+#	print_debug("launched item gpos: ", node.global_position)
+#	print_debug("launched item ", node.get_instance_id(), " linear v: ", node.linear_velocity)
 	node.linear_velocity -= (node.friction * node.linear_velocity.normalized())
 	if node.linear_velocity.length() < node.stop_threshold:
 		print_debug("launched item ", node.get_instance_id(), " under stop_threshold")

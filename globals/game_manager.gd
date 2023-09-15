@@ -7,9 +7,7 @@ func _ready():
 
 
 func start():
-	SceneManager.change_scene(
-		SceneManager.LEVEL_1_SCENE, 
-		func(): SceneManager.current_scene.players_container.add_child(State.player))
+	SceneManager.change_scene(SceneManager.LEVEL_1_SCENE, _player_start_callback)
 	TimeManager.reset()
 	TimeManager.start()
 	get_tree().paused = false
@@ -17,7 +15,7 @@ func start():
 
 func game_over():
 	get_tree().paused = true
-	SceneManager.current_scene.remove_child(State.player)
+	State.player.get_parent().remove_child(State.player)
 	SceneManager.change_scene(SceneManager.GAME_OVER_SCENE)
 
 	
@@ -31,4 +29,9 @@ func _on_player_leveled_up():
 	var level_up_scene = ResourceLoader.load(SceneManager.LEVEL_UP_SCENE).instantiate()
 	SceneManager.current_scene.get_node("UILayer").add_child(level_up_scene)
 	get_tree().paused = true
+	
+
+func _player_start_callback():
+	SceneManager.current_scene.spawns_container.add_child(State.player)
+	State.player.setup()
 	

@@ -112,7 +112,3 @@ func _show_damage_popup(damage_done: int):
 func remove():
 	if is_instance_valid(self) and is_inside_tree():
 		get_parent().remove_child(self)
-
-
-func _on_area_2d_body_entered(body):
-	print_debug(body)

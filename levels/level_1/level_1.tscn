@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://uwf1mrb2kddk"]
+[gd_scene load_steps=4 format=3 uid="uid://uwf1mrb2kddk"]
 
 [ext_resource type="Script" path="res://levels/level_1/level_1.gd" id="1_epolj"]
 [ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://interface/interface.tscn" id="2_3t4ql"]
 [ext_resource type="PackedScene" uid="uid://10x2k1pwsqcs" path="res://levels/level_1/Grassfield_scene.tscn" id="3_y4cxh"]
-[ext_resource type="PackedScene" uid="uid://bhvqikhn3onuk" path="res://items/pickups/uzi.tscn" id="4_ug1g8"]
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_epolj")
+spawn_pattern_path = "res://levels/level_1/spawn_pattern.csv"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(1, 1, 0.784314, 0.658824)
@@ -19,27 +19,16 @@ energy = 0.5
 
 [node name="Map" parent="." instance=ExtResource("3_y4cxh")]
 
-[node name="Enemies" type="Node2D" parent="Map"]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-
 [node name="Items" type="Node2D" parent="Map"]
 z_index = 1
-z_as_relative = false
 y_sort_enabled = true
 
-[node name="Uzi" parent="Map/Items" instance=ExtResource("4_ug1g8")]
-collision_layer = 8
-
-[node name="Players" type="Node2D" parent="Map"]
+[node name="Spawns" type="Node2D" parent="Map"]
 z_index = 2
-z_as_relative = false
 y_sort_enabled = true
 
 [node name="DamagePopup" type="Node2D" parent="Map"]
 z_index = 10
-z_as_relative = false
 y_sort_enabled = true
 
 [node name="SpawnTimer" type="Timer" parent="."]

@@ -20,8 +20,8 @@ var attack_speed: Stat
 var health_regen: Stat
 
 var current_health: int
-var is_dead: bool  ## True if the character is dead.
-var is_damagable: bool  ## True if the character can take damage.
+var is_dead: bool         ## True if the character is dead.
+var is_damagable: bool    ## True if the character can take damage.
 var is_player: bool
 
 
@@ -34,3 +34,6 @@ func setup():
 	health_regen = Stat.create("Health Regen", base_health_regen)
 
 	current_health = health.total_value()
+	
+	is_dead = false
+	is_damagable = true
