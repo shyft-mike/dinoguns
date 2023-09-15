@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://h4e3jcdikdcf"]
+[gd_scene load_steps=4 format=3 uid="uid://h4e3jcdikdcf"]
 
 [ext_resource type="PackedScene" uid="uid://b1t63nlupu6fp" path="res://items/pickups/big_amber.tscn" id="1_dbv21"]
+[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="2_sjmpa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ag27v"]
+shader = ExtResource("2_sjmpa")
 
 [node name="test_scene" type="Node"]
 
 [node name="BigAmber" parent="." instance=ExtResource("1_dbv21")]
+
+[node name="Sprite2D" parent="BigAmber" index="1"]
+material = SubResource("ShaderMaterial_ag27v")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 617.0
@@ -16,3 +23,5 @@ text = "LAUNCH"
 [node name="Line2D" type="Line2D" parent="."]
 
 [connection signal="pressed" from="Button" to="BigAmber" method="_on_button_pressed"]
+
+[editable path="BigAmber"]

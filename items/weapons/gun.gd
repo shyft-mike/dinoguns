@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var thumbnail_texture: Texture2D
 @export var projectile_scene: PackedScene
 @export var fire_rate := 3
 @export var bullet_life := 3

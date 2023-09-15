@@ -14,6 +14,6 @@ static func generate_item(type: ItemType) -> Item:
 		ItemType.BIG_AMBER:
 			item = ResourceLoader.load("res://items/pickups/big_amber.tscn").instantiate()
 		ItemType.MYSTERIOUS_GOO:
-			assert(false, "Item MYTERIOUS_GOO not yet implemented")
+			assert(false, "Item MYSTERIOUS_GOO not yet implemented")
 
 	return item

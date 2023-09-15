@@ -1,6 +1,6 @@
-extends Item
 class_name SlottableItem
+extends Item
 
 
-var slot_type: int
-var slot_size: int
+@export var slot_type: Slot.SlotType 
+@export var slot_size: Slot.SlotSize

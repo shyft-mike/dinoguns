@@ -5,5 +5,5 @@ extends Item
 
 
 func on_pickup():
-	State.player.character.add_experience(exp_value)
+	CharacterService.add_experience(State.player, exp_value)
 	remove()

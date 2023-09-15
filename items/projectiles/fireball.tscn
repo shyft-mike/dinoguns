@@ -17,6 +17,8 @@ colors = PackedColorArray(0.680099, 0.438896, 0, 1, 0.842543, 0.536669, 0.032066
 z_index = 2
 collision_layer = 16
 script = ExtResource("1_3c6mr")
+speed = 150.0
+damage = 15
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 70

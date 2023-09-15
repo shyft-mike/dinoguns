@@ -7,7 +7,9 @@ func _ready():
 
 
 func start():
-	SceneManager.change_scene(SceneManager.LEVEL_1_SCENE)
+	SceneManager.change_scene(
+		SceneManager.LEVEL_1_SCENE, 
+		func(): SceneManager.current_scene.players_container.add_child(State.player))
 	TimeManager.reset()
 	TimeManager.start()
 	get_tree().paused = false
@@ -15,12 +17,13 @@ func start():
 
 func game_over():
 	get_tree().paused = true
-	State.player.get_parent().remove_child(State.player)
+	SceneManager.current_scene.remove_child(State.player)
 	SceneManager.change_scene(SceneManager.GAME_OVER_SCENE)
 
 	
 func _on_character_selected(new_player):
 	State.player = new_player
+	State.player.is_player = true
 	start()
 
 

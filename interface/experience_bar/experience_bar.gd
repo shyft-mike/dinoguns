@@ -8,5 +8,5 @@ func _ready():
 	
 
 func _update(_experience = null):
-	max_value = State.player.character.to_next_level
-	value = State.player.character.experience
+	max_value = State.player.to_next_level
+	value = State.player.experience

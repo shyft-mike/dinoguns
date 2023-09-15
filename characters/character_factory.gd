@@ -4,24 +4,6 @@ extends RefCounted
 enum CharacterType { RAPTOR, ANKY, REX, COMPY, MEGA_COMPY }
 
 
-static func generate_character_sheet(type: CharacterType) -> CharacterSheet:
-	var character = RaptorCharacterSheet.new()
-
-	match type:
-		CharacterType.RAPTOR:
-			character = RaptorCharacterSheet.new()
-		CharacterType.REX:
-			character = RexCharacterSheet.new()
-		CharacterType.COMPY:
-			character = CompyCharacterSheet.new()
-		CharacterType.MEGA_COMPY:
-			character = MegaCompyCharacterSheet.new()
-
-	character.type = type
-
-	return character
-
-
 static func generate_character_template(type: CharacterType) -> PackedScene:
 	var template
 

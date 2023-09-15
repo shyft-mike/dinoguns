@@ -1,10 +1,10 @@
-extends Node2D
 class_name DamagePopup
+extends Node2D
 
 
 func remove() -> void:
 	$AnimationPlayer.stop()
-	if is_inside_tree():
+	if is_instance_valid(self) and is_inside_tree():
 		get_parent().remove_child(self)
 
 

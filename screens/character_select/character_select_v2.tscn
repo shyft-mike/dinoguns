@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0uf3meu4fu6s"]
+
+[ext_resource type="Script" path="res://screens/character_select/character_select.gd" id="1_yalse"]
+[ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_lk6e3"]
+[ext_resource type="Texture2D" uid="uid://dian51qv0ypgu" path="res://art/lights/spotlight.png" id="2_xkx5e"]
+[ext_resource type="PackedScene" uid="uid://e0iembd1f2h5" path="res://screens/stats_panel.tscn" id="3_a4y7a"]
+[ext_resource type="Texture2D" uid="uid://dcmv237jjn8b1" path="res://art/characters/raptor_outline.png" id="5_3w8a7"]
+[ext_resource type="Texture2D" uid="uid://dvsiocf4h0via" path="res://art/temp/arrow_right.png" id="6_7nkhr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbhqp"]
+atlas = ExtResource("5_3w8a7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l21xl"]
+atlas = ExtResource("5_3w8a7")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppwqd"]
+atlas = ExtResource("5_3w8a7")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kkkw1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbhqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l21xl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppwqd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterSelect" type="Panel"]
+self_modulate = Color(0.054902, 0.054902, 0.054902, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yalse")
+
+[node name="DirectionalLight2D" type="PointLight2D" parent="."]
+position = Vector2(441, 114)
+scale = Vector2(3.12, 7.68)
+texture = ExtResource("2_xkx5e")
+offset = Vector2(0, 128)
+
+[node name="BackgroundSprite2D" type="Sprite2D" parent="."]
+position = Vector2(800, 600)
+
+[node name="StatsPanel" parent="." instance=ExtResource("3_a4y7a")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -676.0
+offset_top = -441.0
+offset_right = -76.0
+offset_bottom = 359.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Viewer" type="Node2D" parent="."]
+
+[node name="SpotlightShadow" type="Sprite2D" parent="Viewer"]
+position = Vector2(446, 978)
+scale = Vector2(25.0306, 15.7906)
+texture = ExtResource("2_lk6e3")
+
+[node name="Character" type="AnimatedSprite2D" parent="Viewer"]
+position = Vector2(467, 802)
+scale = Vector2(9.95735, 9.95735)
+sprite_frames = SubResource("SpriteFrames_kkkw1")
+
+[node name="ChangeRight" type="TextureButton" parent="Viewer"]
+offset_left = 634.0
+offset_top = 400.0
+offset_right = 890.0
+offset_bottom = 656.0
+texture_normal = ExtResource("6_7nkhr")
+
+[node name="ChangeLeft" type="TextureButton" parent="Viewer"]
+offset_left = -27.0
+offset_top = 400.0
+offset_right = 229.0
+offset_bottom = 656.0
+texture_normal = ExtResource("6_7nkhr")
+flip_h = true

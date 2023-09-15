@@ -3,13 +3,50 @@ extends RigidBody2D
 
 enum ItemState { STATIC, LAUNCHED, SEEKING }
 
+@export var thumbnail_image: Texture2D;
 @export var state := ItemState.STATIC : set = set_state
 @export var friction: float = 1.2
 @export var stop_threshold: float = 5.0
+@export var can_seek: bool = true
+@export var can_shine: bool = false
+
+var launched_state: StateMachine = ItemLaunchedState.new()
+var seeking_state: StateMachine = ItemSeekingState.new()
+var static_state: StateMachine = ItemStaticState.new()
+var current_state: StateMachine
+
+var shine_timer: Timer
+
 
 func _ready():
+	print_debug("Item spawned at: ", position, global_position)
+	if can_shine:
+		_create_shine_timer()
+	
 	gravity_scale = 0
-	set_physics_process(false)
+	current_state = static_state
+	current_state.enter_state(self)
+
+
+func _process(delta):
+	current_state.process_movement(self, delta)
+	
+	
+func _physics_process(delta):
+	current_state.process_physics(self, delta)
+	
+
+func _create_shine_timer():
+	shine_timer = Timer.new()
+	shine_timer.autostart = true
+	shine_timer.wait_time = 1.5
+	shine_timer.timeout.connect(_on_shine_timer_timeout)
+	add_child(shine_timer)
+	
+	
+func _on_shine_timer_timeout():
+	$AnimatedSprite2D.play("shine")
+	$AnimatedSprite2D.animation_looped.connect(func(): $AnimatedSprite2D.play("default"))
 
 
 func on_pickup():
@@ -17,21 +54,27 @@ func on_pickup():
 
 
 func set_state(value: ItemState):
-	state = value
+	current_state.exit_state(self)
 	
-	if state == ItemState.STATIC:
-		set_physics_process(false)
-	else:
-		set_physics_process(true)
+	match value:
+		ItemState.LAUNCHED:
+			current_state = launched_state
+		ItemState.SEEKING:
+			current_state = seeking_state
+		ItemState.STATIC:
+			current_state = static_state
+	
+	current_state.enter_state(self)
 
 
-func seek_player():
-	state = ItemState.SEEKING
+func seek():
+	if can_seek:
+		state = ItemState.SEEKING
 
 
 func remove():
 	state = ItemState.STATIC
-	if is_inside_tree():
+	if is_instance_valid(self) and is_inside_tree():
 		get_parent().remove_child(self)
 		
 	
@@ -41,33 +84,7 @@ func launch(direction: Vector2 = Vector2.ZERO):
 	if direction.length() == 0:
 		direction = Vector2(randi_range(-100, 100),randi_range(-100, 100))
 	
+	print_debug("launch toward: ", direction)
+	
 	linear_velocity = direction
-	angular_velocity = direction.angle() / friction
-	
-	
-func _physics_process(delta):
-	match state:
-		ItemState.SEEKING:
-			rotation = global_position.angle_to(State.player.global_position) * delta * 40
-			global_position = global_position.move_toward(State.player.global_position, delta * 100)
-			
-		ItemState.LAUNCHED:
-			linear_velocity -= (friction * linear_velocity.normalized())
-			if linear_velocity.length() < stop_threshold:
-				linear_velocity = Vector2.ZERO
-				angular_velocity = 0
-				state = ItemState.STATIC
-	
-#	velocity.y += gravity * delta
-#	velocity.x -= friction * delta
-#
-#	position += velocity * delta
-	
-#	if position.cross(direction_of_ground) < 0:
-#		position.y = direction_of_ground.y * position.x
-#		if velocity.length() < stop_threshold:
-#			velocity = Vector2.ZERO
-#			set_physics_process(false)
-#		else:
-#			velocity.y = -abs(velocity.y) * 0.5
-
+#	angular_velocity = direction.angle() / friction	

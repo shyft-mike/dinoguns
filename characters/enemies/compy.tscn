@@ -1,12 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://c886suds3vd12"]
+[gd_scene load_steps=16 format=3 uid="uid://c886suds3vd12"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_1b8bb"]
-[ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_qmh8k"]
+[ext_resource type="PackedScene" uid="uid://bl8sykupf1q8n" path="res://effects/spray.tscn" id="2_5xrtr"]
+[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/shadow.tscn" id="2_y43uf"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="3_2lw4p"]
+[ext_resource type="PackedScene" uid="uid://1ql714esnalu" path="res://interface/damage_popup.tscn" id="3_wyue7"]
 [ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://art/characters/COMPY_sprite_sheet_2.png" id="4_jmmcq"]
+[ext_resource type="PackedScene" uid="uid://b8u30rvbrei3c" path="res://items/pickups/amber.tscn" id="4_sy2f1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e43t1"]
-size = Vector2(48, 36)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h3am1"]
+radius = 3.0
+height = 18.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahsmn"]
 resource_local_to_scene = true
@@ -55,23 +59,47 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Compy" type="CharacterBody2D" groups=["enemy"]]
-z_index = 1
-collision_layer = 2
-collision_mask = 7
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pqna"]
+size = Vector2(26.1765, 23.5294)
+
+[node name="CompyEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_1b8bb")
+spray_template = ExtResource("2_5xrtr")
+damage_popup_template = ExtResource("3_wyue7")
+drops = Array[PackedScene]([ExtResource("4_sy2f1")])
+base_attack = 5
+base_defense = 3
+base_health = 3
+base_move_speed = 7
+base_attack_speed = 7
 
-[node name="Shadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.407843)
-position = Vector2(1, 11)
-scale = Vector2(1.16, 1)
-texture = ExtResource("2_qmh8k")
+[node name="Enemy" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 23
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_e43t1")
+[node name="Shadow" parent="Enemy" instance=ExtResource("2_y43uf")]
+position = Vector2(0, 12)
+scale = Vector2(1.32, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="MovementCollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(0, 12)
+rotation = 1.5708
+scale = Vector2(1.36, 2.04)
+shape = SubResource("CapsuleShape2D_h3am1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
 material = SubResource("ShaderMaterial_ahsmn")
 sprite_frames = SubResource("SpriteFrames_7jf2c")
 animation = &"walk"
+
+[node name="Area2D" type="Area2D" parent="Enemy"]
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
+position = Vector2(-8.34465e-07, -2.2)
+rotation = 1.5708
+scale = Vector2(1.36, 2.04)
+shape = SubResource("RectangleShape2D_4pqna")
+debug_color = Color(0.992157, 0, 0.25098, 0.419608)
+
+[connection signal="body_entered" from="Enemy/Area2D" to="." method="_on_area_2d_body_entered"]

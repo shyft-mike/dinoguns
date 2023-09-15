@@ -12,10 +12,9 @@ func spawn(type: int):
 		CharacterFactory.CharacterType.MEGA_COMPY:
 			enemy = CharacterFactory.generate_character_template(type).instantiate()
 	
-	enemy.character = CharacterFactory.generate_character_sheet(type)	
 	enemy.position = _get_spawn_location()
 	
-	get_tree().get_first_node_in_group("spawner").add_child(enemy)
+	SceneManager.current_scene.enemies_container.add_child(enemy)
 	
 
 func _get_spawn_location() -> Vector2:

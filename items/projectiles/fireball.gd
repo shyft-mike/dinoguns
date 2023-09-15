@@ -1,31 +1,18 @@
-extends Area2D
 class_name Fireball
+extends Projectile
 
-@export var lifetime := 0
+@export var initial_speed: float = 25.0
+@export var lifetime: float = 3.0
 
-var _initial_speed: float = 25.0
-var _direction: Vector2
-var _speed: float
 
 func _ready():
-	if lifetime > 0:
-		await get_tree().create_timer(lifetime).timeout
-		queue_free()
-		
-	set_physics_process(false)
-
-
-func _physics_process(delta):
-	position += _direction.normalized() * _speed * delta
-	
-
-func shoot(direction: Vector2, speed: float):
-	_direction = direction
-	_speed = _initial_speed
-	
-	set_physics_process(true)
-	
+	get_tree().create_timer(lifetime).timeout.connect(_on_lifetime_timer_timeout)
+	var final_speed = speed
+	speed = initial_speed
 	await get_tree().create_timer(0.2).timeout
-	
-	# maximum speed!
-	_speed = speed
+	speed = final_speed
+
+
+func _on_lifetime_timer_timeout():
+	if is_instance_valid(self):
+		get_parent().remove_child(self)

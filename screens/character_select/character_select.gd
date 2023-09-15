@@ -4,11 +4,11 @@ extends Panel
 func _ready():
 	var characters = _get_characters()
 	
-	for character in characters:
-		var button = preload("res://screens/character_select/character_select_button.tscn").instantiate()
-		button.setup(character)
-		button.character_hovered.connect(_on_character_hovered)
-		$GridContainer.add_child(button)
+#	for character in characters:
+#		var button = preload("res://screens/character_select/character_select_button.tscn").instantiate()
+#		button.setup(character)
+#		button.character_hovered.connect(_on_character_hovered)
+#		$GridContainer.add_child(button)
 		
 
 func _get_characters():
@@ -25,7 +25,7 @@ func _get_selectable_characters():
 	for character_type in CharacterFactory.CharacterType.values():
 		var character = CharacterFactory.generate_character_sheet(character_type)
 		
-		if "is_selectable" in character:
+		if "is_selectable" in character and character.is_selectable:
 			results.append(character)
 		
 	return results

@@ -1,7 +1,6 @@
 extends Node
 
 var _event_timer: Timer
-var _spawn_timer: Timer
 var _regen_timer: Timer
 var _clock_timer: Timer
 
@@ -11,7 +10,6 @@ func _ready():
 
 func reset():
 	_event_timer.queue_free()
-	_spawn_timer.queue_free()
 	_regen_timer.queue_free()
 	_clock_timer.queue_free()
 	_create_timers()
@@ -19,19 +17,18 @@ func reset():
 	
 func start():
 	_event_timer.start()
-	_spawn_timer.start()
 	_regen_timer.start()
 	_clock_timer.start()
 	
 
 func _create_timers():
 	_event_timer = _create_timer(5, _on_event_timer_timeout)
-	_spawn_timer = _create_timer(1, _on_spawn_timer_timeout)
 	_regen_timer = _create_timer(5, _on_regen_timer_timeout)
-	_clock_timer = _create_timer(0.1, _on_clock_timer_timeout)
+	_clock_timer = _create_timer(0.1, _on_clock_timer_timeout, PROCESS_MODE_ALWAYS)
 
-func _create_timer(wait_time: float, timeout_event: Callable) -> Timer:
+func _create_timer(wait_time: float, timeout_event: Callable, mode: ProcessMode = PROCESS_MODE_INHERIT) -> Timer:
 	var timer = Timer.new()
+	timer.process_mode = mode
 	timer.wait_time = wait_time
 	timer.timeout.connect(timeout_event)
 	add_child(timer)
@@ -41,13 +38,9 @@ func _create_timer(wait_time: float, timeout_event: Callable) -> Timer:
 func _on_event_timer_timeout():
 	SpawnManager.spawn(CharacterFactory.CharacterType.MEGA_COMPY)
 	
-	
-func _on_spawn_timer_timeout():
-	SpawnManager.spawn(CharacterFactory.CharacterType.COMPY)
-
 
 func _on_regen_timer_timeout():
-	State.player.character.regen()
+	CharacterService.regen(State.player)
 	
 # TODO: handle this elsewhere
 #var _ticks_per_day = 60

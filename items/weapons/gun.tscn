@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3hvaxrk45hpa"]
+[gd_scene load_steps=5 format=3 uid="uid://c3hvaxrk45hpa"]
 
 [ext_resource type="Script" path="res://items/weapons/gun.gd" id="1_pu70v"]
 [ext_resource type="PackedScene" uid="uid://bjp33jjtrooqb" path="res://items/projectiles/bullet.tscn" id="2_2e2lk"]
+[ext_resource type="Texture2D" uid="uid://dmdfnl8vc3idl" path="res://art/temp/uzi.png" id="2_yr6dx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_65xn3"]
 radius = 500.0
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_pu70v")
+thumbnail_texture = ExtResource("2_yr6dx")
 projectile_scene = ExtResource("2_2e2lk")
 
 [node name="Timer" type="Timer" parent="."]

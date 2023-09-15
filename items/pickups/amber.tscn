@@ -1,19 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8u30rvbrei3c"]
+[gd_scene load_steps=13 format=3 uid="uid://b8u30rvbrei3c"]
 
 [ext_resource type="Script" path="res://items/pickups/exp_pickup.gd" id="1_itrmc"]
-[ext_resource type="Texture2D" uid="uid://dm4m5jtxja6yu" path="res://art/pickups/amber.png" id="2_7f86s"]
+[ext_resource type="Texture2D" uid="uid://b8iyovemyhhfq" path="res://art/pickups/amber/Background (1000ms).png" id="2_pp3r2"]
+[ext_resource type="Texture2D" uid="uid://c3xotvrj3s7r5" path="res://art/pickups/amber/Frame 2 (1000ms) (replace).png" id="3_i428r"]
+[ext_resource type="Texture2D" uid="uid://cmibxfrsxsstp" path="res://art/pickups/amber/Frame 3 (1000ms) (replace).png" id="4_k74dn"]
+[ext_resource type="Texture2D" uid="uid://dpiead63oxuy" path="res://art/pickups/amber/Frame 4 (1000ms) (replace).png" id="5_gncsu"]
+[ext_resource type="Texture2D" uid="uid://db1yg54untwkw" path="res://art/pickups/amber/Frame 5 (1000ms) (replace).png" id="6_0rvqp"]
+[ext_resource type="Texture2D" uid="uid://dq6niirqsuiu" path="res://art/pickups/amber/Frame 6 (1000ms) (replace).png" id="7_bug2w"]
+[ext_resource type="Texture2D" uid="uid://cvyvq4n0dc7su" path="res://art/pickups/amber/Frame 7 (1000ms) (replace).png" id="8_8ayfv"]
+[ext_resource type="Texture2D" uid="uid://b2ou0684oh8pc" path="res://art/pickups/amber/Frame 8 (1000ms) (replace).png" id="9_6iivp"]
+[ext_resource type="Texture2D" uid="uid://2iulfesw3km7" path="res://art/pickups/amber/Frame 9 (1000ms) (replace).png" id="10_cyxj6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfi7g"]
 size = Vector2(15, 15)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_4x7nd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pp3r2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pp3r2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i428r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k74dn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gncsu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0rvqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bug2w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8ayfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6iivp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cyxj6")
+}],
+"loop": true,
+"name": &"shine",
+"speed": 10.0
+}]
+
 [node name="Amber" type="RigidBody2D"]
-z_index = 1
 collision_layer = 8
 script = ExtResource("1_itrmc")
+can_seek = false
+can_shine = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.98023e-07, 0)
 shape = SubResource("RectangleShape2D_sfi7g")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_7f86s")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4x7nd")
+frame_progress = 0.925421

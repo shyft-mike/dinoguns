@@ -12,7 +12,7 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 	
 
-func change_scene(path: String):
+func change_scene(path: String, callback: Callable = Callable()):
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
 	# Deleting the current scene at this point is
@@ -22,10 +22,10 @@ func change_scene(path: String):
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
 
-	call_deferred("_deferred_change_scene", path)
+	call_deferred("_deferred_change_scene", path, callback)
 
 
-func _deferred_change_scene(path):
+func _deferred_change_scene(path: String, callback: Callable):
 	# It is now safe to remove the current scene
 	current_scene.free()
 
@@ -40,3 +40,6 @@ func _deferred_change_scene(path):
 
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
+	
+	if callback:
+		callback.call()

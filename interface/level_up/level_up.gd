@@ -17,11 +17,11 @@ func _on_item_list_item_selected(index):
 	
 	match selected_item.stat:
 		"attack":
-			State.player.character.stats.attack.add_bonus(selected_item.value)			
+			State.player.attack.bonus_value += selected_item.value
 		"speed":
-			State.player.character.stats.move_speed.add_bonus(selected_item.value)
+			State.player.move_speed.bonus_value += selected_item.value
 		"regen":
-			State.player.character.stats.health_regen.add_bonus(selected_item.value)
+			State.player.health_regen.bonus_value += selected_item.value
 	
 	get_tree().paused = false
 	queue_free()

@@ -96,7 +96,7 @@ _data = {
 }
 
 [node name="DamagePopup" type="Node2D"]
-z_index = 2
+z_index = 10
 script = ExtResource("1_br5e5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,30 +1,21 @@
-extends RefCounted
 class_name Stat
+extends Resource
 
-var _base_value: int = 0
-var _bonus_value: int = 0
+@export var name: String
+@export var base_value: int
+var bonus_value: int = 0
 
 
-func init(base_value: int, bonus_value: int = 0):
-	_base_value = base_value
-	_bonus_value = bonus_value
+static func create(stat_name: String, stat_base_value: int = 0) -> Stat:
+	var result = Stat.new()
+	result.name = stat_name
+	result.base_value = stat_base_value
+	return result
 
 
 func total_value():
-	return _base_value + _bonus_value
-
-
-func set_base_value(value):
-	_base_value = value
-
-
-func add_bonus(amount):
-	_bonus_value += amount
-
-
-func remove_bonus(amount):
-	_bonus_value -= amount
+	return base_value + bonus_value
 
 
 func _to_string():
-	return "Health: %d(+%d)" % [_base_value, _bonus_value]
+	return "%s: %d(+%d)" % [name, base_value, bonus_value]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bl8sykupf1q8n"]
+
+[node name="spray" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 1
+amount = 25
+lifetime = 0.34
+randomness = 0.43
+lifetime_randomness = 0.44
+spread = 21.86
+initial_velocity_min = 128.57
+initial_velocity_max = 128.57
+color = Color(0.713726, 0, 0, 1)
