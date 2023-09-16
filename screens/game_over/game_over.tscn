@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhevupyx4t5fm"]
+[gd_scene load_steps=4 format=3 uid="uid://dhevupyx4t5fm"]
 
+[ext_resource type="StyleBox" uid="uid://bagfiepcotjx6" path="res://interface/panel_style.tres" id="1_8yhur"]
 [ext_resource type="Script" path="res://screens/game_over/game_over.gd" id="1_mto6b"]
 [ext_resource type="Texture2D" uid="uid://cxdou5acbn0n1" path="res://art/temp/skull.png" id="2_n0urv"]
 
@@ -12,6 +13,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_8yhur")
 script = ExtResource("1_mto6b")
 
 [node name="Panel" type="Panel" parent="."]

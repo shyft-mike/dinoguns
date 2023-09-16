@@ -1,4 +1,29 @@
-[gd_scene format=3 uid="uid://d00fk8hpxokx2"]
+[gd_scene load_steps=6 format=3 uid="uid://qelsp1vqa35w"]
 
-[node name="ExperienceBar" type="ProgressBar"]
-modulate = Color(0.835294, 0.423529, 0.0352941, 1)
+[ext_resource type="Texture2D" uid="uid://3m8ojdc1emcb" path="res://art/temp/bar.png" id="1_rs20d"]
+
+[sub_resource type="Gradient" id="Gradient_sjlwv"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a5jr8"]
+gradient = SubResource("Gradient_sjlwv")
+width = 610
+height = 40
+
+[sub_resource type="Gradient" id="Gradient_liwsx"]
+offsets = PackedFloat32Array(0.00884956, 0.522124, 1)
+colors = PackedColorArray(1, 0.620491, 0.421828, 0.768627, 1, 0.478431, 0.141176, 0.768627, 1, 0.693163, 0.53722, 0.768627)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ilyah"]
+gradient = SubResource("Gradient_liwsx")
+width = 610
+height = 40
+
+[node name="ExperienceBar" type="TextureProgressBar"]
+offset_right = 620.0
+offset_bottom = 50.0
+value = 50.0
+texture_under = SubResource("GradientTexture2D_a5jr8")
+texture_over = ExtResource("1_rs20d")
+texture_progress = SubResource("GradientTexture2D_ilyah")

@@ -1,7 +1,7 @@
 extends Level
 
 @onready var spawn_timer: Timer = $SpawnTimer
-@onready var dialog_balloon: Balloon = $UILayer/Interface/DialogBalloon
+@onready var dialog_balloon: Balloon = $UILayer/Interface/BottomBar/HBoxContainer/DialogBalloon
 
 var minutes_elapsed: float
 

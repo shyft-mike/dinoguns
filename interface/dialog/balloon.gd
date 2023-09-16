@@ -11,12 +11,13 @@ const DIALOGUE_PITCHES = {
 @export var file_suffix: String = ""
 
 @onready var talk_sound: AudioStreamPlayer = $TalkSound
-@onready var balloon: Panel = $Balloon
-@onready var margin: MarginContainer = $Balloon/Margin
-@onready var character_portrait: Sprite2D = $Balloon/Margin/HBox/Portrait/Sprite2D
-@onready var character_label: RichTextLabel = $Balloon/Margin/HBox/VBox/CharacterLabel
-@onready var dialogue_label := $Balloon/Margin/HBox/VBox/DialogueLabel
-@onready var responses_menu: VBoxContainer = $Balloon/Margin/HBox/VBox/Responses
+@onready var balloon: Panel = $HBox/Balloon
+@onready var margin: MarginContainer = $HBox/Balloon/Margin
+@onready var character_portrait: Sprite2D = $HBox/Portrait/Panel/MarginContainer/Sprite2D
+@onready var character_label: RichTextLabel = $HBox/Balloon/Panel/CharacterLabel
+@onready var dialogue_label := $HBox/Balloon/Margin/VBox/DialogueLabel
+@onready var responses_menu: VBoxContainer = $HBox/Balloon/Margin/VBox/Responses
+
 
 var raptor_sounds: Array[AudioStreamWAV]
 
@@ -119,7 +120,7 @@ func next(next_id: String) -> void:
 
 ### Helpers
 
-
+## This is mostly proof of concept
 func load_sounds_for_character(character, sound_array):
 	var root = "res://audio/dialog/raptor/"
 	var audio_files = DirAccess.get_files_at(root)
@@ -177,8 +178,8 @@ func handle_resize() -> void:
 		call_deferred("handle_resize")
 		return
 	
-	balloon.custom_minimum_size.y = margin.size.y
-	balloon.size.y = 0
+#	balloon.custom_minimum_size.y = margin.size.y
+#	balloon.size.y = 0
 
 
 ### Signals
