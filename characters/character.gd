@@ -3,6 +3,8 @@ extends Node2D
 
 @export var icon: Texture2D
 
+@export var number_popup_template: PackedScene = preload("res://interface/number_popup.tscn")
+
 @export_group("Stats")
 @export var base_attack: int
 @export var base_defense: int

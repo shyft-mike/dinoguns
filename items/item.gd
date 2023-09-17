@@ -19,7 +19,6 @@ var shine_timer: Timer
 
 
 func _ready():
-	print_debug("Item spawned at: ", position, global_position)
 	if can_shine:
 		_create_shine_timer()
 	
@@ -54,6 +53,9 @@ func on_pickup():
 
 
 func set_state(value: ItemState):
+	if state == value:
+		return
+	
 	current_state.exit_state(self)
 	
 	match value:
@@ -83,8 +85,6 @@ func launch(direction: Vector2 = Vector2.ZERO):
 	
 	if direction.length() == 0:
 		direction = Vector2(randi_range(-100, 100),randi_range(-100, 100))
-	
-	print_debug("launch toward: ", direction)
 	
 	linear_velocity = direction
 #	angular_velocity = direction.angle() / friction	

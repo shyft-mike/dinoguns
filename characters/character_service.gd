@@ -53,7 +53,7 @@ static func take_true_damage(character: Character, true_damage: int) -> int:
 	character.current_health -= true_damage
 	
 	if character.is_player:
-		Events.player_health_changed.emit()
+		Events.player_health_changed.emit(-true_damage)
 
 	if character.current_health <= 0:
 		character.is_dead = true
@@ -69,4 +69,4 @@ static func regen(character: Character):
 			character.current_health = character.health.total_value()
 
 		if character.is_player:
-			Events.player_health_changed.emit()
+			Events.player_health_changed.emit(character.health_regen.total_value())

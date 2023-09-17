@@ -4,9 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://bl8sykupf1q8n" path="res://effects/spray.tscn" id="2_5xrtr"]
 [ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/shadow.tscn" id="2_y43uf"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="3_2lw4p"]
-[ext_resource type="PackedScene" uid="uid://1ql714esnalu" path="res://interface/damage_popup.tscn" id="3_wyue7"]
+[ext_resource type="Script" path="res://items/drop.gd" id="3_hr6rh"]
 [ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://art/characters/COMPY_sprite_sheet_2.png" id="4_jmmcq"]
-[ext_resource type="PackedScene" uid="uid://b8u30rvbrei3c" path="res://items/pickups/amber.tscn" id="4_sy2f1"]
+
+[sub_resource type="Resource" id="Resource_tvb37"]
+script = ExtResource("3_hr6rh")
+item_type = 0
+drop_rate = 0.55
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2uf3p"]
 size = Vector2(33, 34)
@@ -61,8 +65,7 @@ animations = [{
 [node name="CompyEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_1b8bb")
 spray_template = ExtResource("2_5xrtr")
-damage_popup_template = ExtResource("3_wyue7")
-drops = Array[PackedScene]([ExtResource("4_sy2f1")])
+drops = Array[ExtResource("3_hr6rh")]([SubResource("Resource_tvb37")])
 base_attack = 5
 base_defense = 3
 base_health = 3

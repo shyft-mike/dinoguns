@@ -4,7 +4,7 @@ extends Node2D
 @onready var map: TileMap = $Map
 @onready var items_container: Node2D = $Map/Items
 @onready var spawns_container: Node2D = $Map/Spawns
-@onready var damage_popup_container: Node2D = $Map/DamagePopup
+@onready var popup_container: Node2D = $Map/Popups
 
 @export var spawn_pattern_path: String
 

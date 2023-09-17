@@ -1,14 +1,23 @@
-[gd_scene load_steps=14 format=3 uid="uid://yj6p2xsqtiiy"]
+[gd_scene load_steps=15 format=3 uid="uid://yj6p2xsqtiiy"]
 
 [ext_resource type="Script" path="res://characters/enemies/mega_compy.gd" id="1_dgv55"]
-[ext_resource type="PackedScene" uid="uid://1ql714esnalu" path="res://interface/damage_popup.tscn" id="2_ju8ut"]
 [ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/shadow.tscn" id="2_o205b"]
-[ext_resource type="PackedScene" uid="uid://b1t63nlupu6fp" path="res://items/pickups/big_amber.tscn" id="3_a7f3v"]
+[ext_resource type="Script" path="res://items/drop.gd" id="2_y4afp"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="3_vqf63"]
 [ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://art/characters/COMPY_sprite_sheet_2.png" id="4_p8hmv"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5x67s"]
-height = 33.8462
+[sub_resource type="Resource" id="Resource_c5vju"]
+script = ExtResource("2_y4afp")
+item_type = 0
+drop_rate = 2.3
+
+[sub_resource type="Resource" id="Resource_ay3m6"]
+script = ExtResource("2_y4afp")
+item_type = 1
+drop_rate = 1.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwamj"]
+size = Vector2(38.4615, 33.0769)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahsmn"]
 resource_local_to_scene = true
@@ -59,8 +68,7 @@ animations = [{
 
 [node name="MegaCompy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_dgv55")
-damage_popup_template = ExtResource("2_ju8ut")
-drops = Array[PackedScene]([ExtResource("3_a7f3v")])
+drops = Array[ExtResource("2_y4afp")]([SubResource("Resource_c5vju"), SubResource("Resource_ay3m6")])
 base_attack = 10
 base_defense = 15
 base_health = 200
@@ -78,10 +86,8 @@ position = Vector2(0, 12.3077)
 scale = Vector2(1.4, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(1.53846, 11.8462)
-rotation = 1.5708
-scale = Vector2(0.446153, 1)
-shape = SubResource("CapsuleShape2D_5x67s")
+position = Vector2(0.769231, -0.384616)
+shape = SubResource("RectangleShape2D_uwamj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
 modulate = Color(0.764706, 0.305882, 0.219608, 1)

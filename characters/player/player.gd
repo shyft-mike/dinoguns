@@ -2,8 +2,10 @@ class_name Player
 extends Character
 
 @onready var player_area_2d: Area2D = $Player
+@onready var pickup_field_collision: CollisionShape2D = $Player/PickupField/CollisionShape2D
 
 @export var base_experience: int = 10
+@export var base_pickup_field_radius: int = 50
 
 @export var is_selectable: bool
 @export var is_visible: bool
@@ -20,6 +22,7 @@ var to_next_level: int = base_experience
 func _init():
 	Events.experience_received.connect(_on_experience_received)
 	Events.item_picked_up.connect(_on_item_picked_up)
+	Events.player_health_changed.connect(_on_health_changed)
 	
 
 func _ready():
@@ -33,8 +36,10 @@ func setup():
 	experience = 0
 	total_experience = 0
 	to_next_level = base_experience
+	pickup_field_collision.shape.radius = base_pickup_field_radius
 	
-	Events.player_health_changed.emit()
+	Events.player_health_changed.emit(0)
+	Events.experience_received.emit()
 
 
 func _process(delta):
@@ -142,3 +147,9 @@ func _on_claw_body_entered(body: Node2D):
 		# calc damage, do damage, is enemy dead, what do they drop
 		parent_node.take_damage(attack.total_value())
 		
+
+func _on_health_changed(value: int):
+	if value > 0:
+		var popup = Pooling.get_from_pool(Pooling.PoolType.POPUP, func(): return number_popup_template.instantiate()) as NumberPopup
+		SceneManager.current_scene.popup_container.add_child(popup)
+		popup.health(str(value), global_position, 0, 0)

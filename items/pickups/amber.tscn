@@ -60,7 +60,6 @@ animations = [{
 [node name="Amber" type="RigidBody2D"]
 collision_layer = 8
 script = ExtResource("1_itrmc")
-can_seek = false
 can_shine = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

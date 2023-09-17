@@ -3,18 +3,22 @@ extends RefCounted
 
 enum CharacterType { RAPTOR, ANKY, REX, COMPY, MEGA_COMPY }
 
+static var raptor_template = preload("res://characters/player/raptor/raptor_player.tscn")
+static var compy_template = preload("res://characters/enemies/compy.tscn")
+static var mega_compy_template = preload("res://characters/enemies/mega_compy.tscn")
+
 
 static func generate_character_template(type: CharacterType) -> PackedScene:
 	var template
 
 	match type:
 		CharacterType.RAPTOR:
-			template = ResourceLoader.load("res://characters/player/raptor/raptor_player.tscn")
+			template = raptor_template
 		CharacterType.REX:
 			assert(false, "Player REX not yet implemented")
 		CharacterType.COMPY:
-			template = ResourceLoader.load("res://characters/enemies/compy.tscn")
+			template = compy_template
 		CharacterType.MEGA_COMPY:
-			template = ResourceLoader.load("res://characters/enemies/mega_compy.tscn")
+			template = mega_compy_template
 
 	return template

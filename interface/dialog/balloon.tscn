@@ -46,7 +46,7 @@ layout_mode = 2
 
 [node name="Balloon" type="Panel" parent="HBox"]
 texture_filter = 2
-custom_minimum_size = Vector2(360, 128)
+custom_minimum_size = Vector2(360, 136)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -55,10 +55,10 @@ theme_override_styles/panel = ExtResource("2_t8msw")
 [node name="Panel" type="Panel" parent="HBox/Balloon"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
-offset_left = 12.0
-offset_top = -9.0
-offset_right = 112.0
-offset_bottom = 11.0
+offset_left = 1.0
+offset_top = -19.0
+offset_right = 101.0
+offset_bottom = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ee5f3")
 
 [node name="CharacterLabel" type="RichTextLabel" parent="HBox/Balloon/Panel"]

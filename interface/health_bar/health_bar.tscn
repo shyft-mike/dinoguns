@@ -1,32 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://by7hj3l3vvi1t"]
+[gd_scene load_steps=5 format=3 uid="uid://by7hj3l3vvi1t"]
 
-[ext_resource type="Texture2D" uid="uid://3m8ojdc1emcb" path="res://art/temp/bar.png" id="1_bswm1"]
+[ext_resource type="Texture2D" uid="uid://31qs2pwma5df" path="res://art/temp/bar_background.png" id="1_1emjl"]
 [ext_resource type="Script" path="res://interface/health_bar/health_bar.gd" id="1_y4ixe"]
-
-[sub_resource type="Gradient" id="Gradient_mtqk7"]
-offsets = PackedFloat32Array(0.845133)
-colors = PackedColorArray(0.0431373, 0.0431373, 0.0431373, 0.886275)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_p7hvq"]
-gradient = SubResource("Gradient_mtqk7")
-width = 610
-height = 40
-
-[sub_resource type="Gradient" id="Gradient_yafgj"]
-offsets = PackedFloat32Array(0, 0.207965)
-colors = PackedColorArray(0.806427, 0.0987492, 2.88785e-07, 0.72549, 0.443137, 0.823529, 0, 0.72549)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3csab"]
-gradient = SubResource("Gradient_yafgj")
-width = 610
-height = 40
+[ext_resource type="Texture2D" uid="uid://d02kd3f3hw72s" path="res://art/temp/vertical_bar.png" id="2_bbwxw"]
+[ext_resource type="Texture2D" uid="uid://cq4lgqc8wb2w8" path="res://art/temp/health_bar_texture.png" id="3_vvdab"]
 
 [node name="HealthBar" type="TextureProgressBar"]
-offset_right = 600.0
-offset_bottom = 50.0
-size_flags_horizontal = 3
+offset_right = 48.0
+offset_bottom = 616.0
 value = 50.0
-texture_under = SubResource("GradientTexture2D_p7hvq")
-texture_over = ExtResource("1_bswm1")
-texture_progress = SubResource("GradientTexture2D_3csab")
+fill_mode = 3
+texture_under = ExtResource("1_1emjl")
+texture_over = ExtResource("2_bbwxw")
+texture_progress = ExtResource("3_vvdab")
+texture_progress_offset = Vector2(8, 8)
 script = ExtResource("1_y4ixe")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c65cgqprr57y3"]
+[gd_scene load_steps=7 format=3 uid="uid://c65cgqprr57y3"]
 
 [ext_resource type="PackedScene" uid="uid://by7hj3l3vvi1t" path="res://interface/health_bar/health_bar.tscn" id="1_82rhb"]
 [ext_resource type="Script" path="res://interface/interface.gd" id="1_ttrrb"]
@@ -6,9 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://eg331gs8vn57" path="res://interface/item_bar/item_bar.tscn" id="2_u38mo"]
 [ext_resource type="Script" path="res://interface/experience_bar/experience_bar.gd" id="3_qqism"]
 [ext_resource type="PackedScene" uid="uid://bo1dtknm0qdq5" path="res://interface/dialog/balloon.tscn" id="6_h7grf"]
-
-[sub_resource type="Gradient" id="Gradient_h6xu4"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Interface" type="Control"]
 layout_mode = 3
@@ -44,53 +41,22 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomBar"]
+[node name="VBox" type="VBoxContainer" parent="BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 4
+
+[node name="HBox" type="HBoxContainer" parent="BottomBar/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HealthBar" parent="BottomBar/VBox/HBox" instance=ExtResource("1_82rhb")]
 layout_mode = 2
 
-[node name="DialogBalloon" parent="BottomBar/HBoxContainer" instance=ExtResource("6_h7grf")]
-custom_minimum_size = Vector2(500, 136)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BottomBar/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 35
-
-[node name="HealthBar" parent="BottomBar/HBoxContainer/VBoxContainer" instance=ExtResource("1_82rhb")]
-layout_mode = 2
-
-[node name="ExperienceBar" parent="BottomBar/HBoxContainer/VBoxContainer" instance=ExtResource("2_0lad7")]
+[node name="ExperienceBar" parent="BottomBar/VBox/HBox" instance=ExtResource("2_0lad7")]
 layout_mode = 2
 script = ExtResource("3_qqism")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(209, 1114)
-rotation = -1.5708
-emitting = false
-amount = 200
-lifetime = 2.0
-spread = 9.57
-initial_velocity_min = 607.14
-initial_velocity_max = 628.57
-scale_amount_min = 4.0
-scale_amount_max = 8.0
-color = Color(0.262745, 0.301961, 1, 1)
-color_ramp = SubResource("Gradient_h6xu4")
-hue_variation_min = -0.72
-hue_variation_max = 0.84
-
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
-position = Vector2(1389, 1115)
-rotation = -1.5708
-emitting = false
-amount = 200
-lifetime = 2.0
-spread = 9.57
-initial_velocity_min = 607.14
-initial_velocity_max = 628.57
-scale_amount_min = 4.0
-scale_amount_max = 8.0
-color = Color(0.262745, 0.301961, 1, 1)
-color_ramp = SubResource("Gradient_h6xu4")
-hue_variation_min = -0.72
-hue_variation_max = 0.84
+[node name="DialogBalloon" parent="BottomBar/VBox" instance=ExtResource("6_h7grf")]
+custom_minimum_size = Vector2(500, 136)
+layout_mode = 2

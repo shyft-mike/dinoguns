@@ -12,10 +12,10 @@ func spawn(type: int):
 		CharacterFactory.CharacterType.MEGA_COMPY:
 			enemy = CharacterFactory.generate_character_template(type).instantiate()
 	
-	enemy.position = _get_spawn_location()
+	enemy.position = _get_random_spawn_location()
 	
 	SceneManager.current_scene.spawns_container.add_child(enemy)
 	
 
-func _get_spawn_location() -> Vector2:
-	return State.player.position + Vector2(1000, 0).rotated(randf_range(0, 2*PI))
+func _get_random_spawn_location() -> Vector2:
+	return State.player.position + Vector2(randi_range(1200, 3000), 0).rotated(randf_range(0, 2*PI))

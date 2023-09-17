@@ -32,6 +32,7 @@ func _on_player_leveled_up():
 	
 
 func _player_start_callback():
+	Pooling.clear()
 	SceneManager.current_scene.spawns_container.add_child(State.player)
 	State.player.setup()
 	

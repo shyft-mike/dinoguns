@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://1ql714esnalu"]
 
-[ext_resource type="Script" path="res://interface/damage_popup.gd" id="1_br5e5"]
+[ext_resource type="Script" path="res://interface/number_popup.gd" id="1_4rjnf"]
 
 [sub_resource type="Animation" id="Animation_kgiao"]
 length = 0.001
@@ -97,7 +97,7 @@ _data = {
 
 [node name="DamagePopup" type="Node2D"]
 z_index = 10
-script = ExtResource("1_br5e5")
+script = ExtResource("1_4rjnf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

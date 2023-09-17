@@ -1,7 +1,7 @@
 extends Node
 
 
-enum PoolType { BULLET, DAMAGE_POPUP, COMPY, AMBER, BIG_AMBER }
+enum PoolType { BULLET, POPUP, COMPY, AMBER, BIG_AMBER }
 
 var _pools = {} 
 
@@ -26,9 +26,16 @@ func get_from_pool(type: PoolType, instance_func: Callable):
 		
 		if is_instance_valid(instance):
 			return instance
+		else:
+			print_debug("instance NOT valid", type, len(pool))
 	
 	var instance = instance_func.call()
 	
 	instance.tree_exiting.connect(func(): add_to_pool(type, instance))
 	
 	return instance
+
+
+func clear():
+	for pool in _pools.values():
+		(pool as Array).clear()

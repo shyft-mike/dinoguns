@@ -7,12 +7,11 @@ enum EnemyState {PERSUING,RETREATING}
 @onready var enemy_sprite: AnimatedSprite2D = $Enemy/AnimatedSprite2D
 
 @export var spray_template: PackedScene
-@export var damage_popup_template: PackedScene = load("res://interface/damage_popup.tscn")
-@export var drops: Array[PackedScene] = []
+@export var drops: Array[Drop] = []
 
 var current_state: EnemyState = EnemyState.PERSUING
 var last_sighting: Vector2
-
+var original_drops
 
 func _ready():
 	setup()
@@ -78,24 +77,32 @@ func _spray():
 
 func _drop_items():
 	for drop in drops:
-		var item_to_drop = drop.instantiate()
-#		match drop:
-#			ItemFactory.ItemType.AMBER:
-#				item_to_drop = Pooling.get_from_pool(
-#					Pooling.PoolType.AMBER, 
-#					func(): return ItemFactory.generate_item(drop))				
-#			ItemFactory.ItemType.BIG_AMBER:
-#				item_to_drop = Pooling.get_from_pool(
-#					Pooling.PoolType.BIG_AMBER, 
-#					func(): return ItemFactory.generate_item(drop))
+		var current_drop_rate = drop.drop_rate
+		while current_drop_rate > 0:
+			if randf() < current_drop_rate:
+				var item_to_drop = _get_drop_item(drop)		
+				item_to_drop.position = enemy.global_position
+				SceneManager.current_scene.items_container.call_deferred("add_child", item_to_drop)
+				item_to_drop.call_deferred("launch")
+			current_drop_rate -= 1.0
+
 #		print_debug("enemy gpos: ", enemy.global_position)
 #		print_debug("enemy pos: ", enemy.position)
 #		print_debug("self gpos: ", self.global_position)
 #		print_debug("self pos: ", self.position)
-		item_to_drop.position = enemy.global_position
-		SceneManager.current_scene.items_container.call_deferred("add_child", item_to_drop)
-		item_to_drop.call_deferred("launch")
 		
+
+func _get_drop_item(drop: Drop) -> Item:
+	var pool_type
+	
+	match drop.item_type:
+		ItemFactory.ItemType.AMBER:
+			pool_type = Pooling.PoolType.AMBER
+		ItemFactory.ItemType.BIG_AMBER:
+			pool_type = Pooling.PoolType.BIG_AMBER
+	
+	return Pooling.get_from_pool(pool_type, ItemFactory.generate_item.bind(drop.item_type))
+	
 
 func _flash():
 	ShaderEffects.flash(enemy_sprite.material, true, Color.RED)
@@ -104,9 +111,9 @@ func _flash():
 	
 	
 func _show_damage_popup(damage_done: int):
-	var damage_popup = Pooling.get_from_pool(Pooling.PoolType.DAMAGE_POPUP, func(): return damage_popup_template.instantiate())
-	SceneManager.current_scene.damage_popup_container.add_child(damage_popup)
-	damage_popup.execute(str(damage_done), enemy.global_position, 0, 0)
+	var popup = Pooling.get_from_pool(Pooling.PoolType.POPUP, func(): return number_popup_template.instantiate()) as NumberPopup
+	SceneManager.current_scene.popup_container.add_child(popup)
+	popup.damage(str(damage_done), enemy.global_position, 0, 0)
 	
 	
 func remove():

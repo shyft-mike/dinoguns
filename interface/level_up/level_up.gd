@@ -2,7 +2,7 @@ extends PanelContainer
 
 
 var upgrade_options = [
-	{"icon": load("res://art/characters/claw.png"), "stat": "attack", "value": 10},
+	{"icon": preload("res://art/characters/claw.png"), "stat": "attack", "value": 10},
 	{"icon": null, "stat": "speed", "value": 10},
 	{"icon": null, "stat": "regen", "value": 5},
 ]
