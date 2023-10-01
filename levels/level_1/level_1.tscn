@@ -1,35 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://uwf1mrb2kddk"]
+[gd_scene load_steps=7 format=3 uid="uid://uwf1mrb2kddk"]
 
 [ext_resource type="Script" path="res://levels/level_1/level_1.gd" id="1_epolj"]
 [ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://interface/interface.tscn" id="2_3t4ql"]
+[ext_resource type="Shader" path="res://levels/level_1/ripple.gdshader" id="2_xk0ax"]
 [ext_resource type="PackedScene" uid="uid://10x2k1pwsqcs" path="res://levels/level_1/Grassfield_scene.tscn" id="3_y4cxh"]
+[ext_resource type="PackedScene" uid="uid://bhvqikhn3onuk" path="res://items/pickups/uzi.tscn" id="4_vr478"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2fgva"]
+shader = ExtResource("2_xk0ax")
+shader_parameter/amplitude = 0.1
+shader_parameter/frequency = 2.0
+shader_parameter/rippleRate = 9.2
+shader_parameter/waveAmplitude = 0.1
+shader_parameter/waveFrequency = 4.0
+shader_parameter/blendingAmount = 0.6
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_epolj")
 spawn_pattern_path = "res://levels/level_1/spawn_pattern.csv"
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_2fgva")
+custom_minimum_size = Vector2(1600, 1200)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(1600, 1200)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="SubViewportContainer/SubViewport"]
 color = Color(1, 1, 0.784314, 0.658824)
 energy = 0.5
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
 
-[node name="Interface" parent="UILayer" instance=ExtResource("2_3t4ql")]
+[node name="Interface" parent="SubViewportContainer/SubViewport/UILayer" instance=ExtResource("2_3t4ql")]
+metadata/_edit_use_anchors_ = true
 
-[node name="Map" parent="." instance=ExtResource("3_y4cxh")]
+[node name="Map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_y4cxh")]
 
-[node name="Items" type="Node2D" parent="Map"]
+[node name="Items" type="Node2D" parent="SubViewportContainer/SubViewport/Map"]
 z_index = 1
 y_sort_enabled = true
 
-[node name="Spawns" type="Node2D" parent="Map"]
+[node name="Uzi" parent="SubViewportContainer/SubViewport/Map/Items" instance=ExtResource("4_vr478")]
+position = Vector2(1534, 127)
+
+[node name="Spawns" type="Node2D" parent="SubViewportContainer/SubViewport/Map"]
 z_index = 2
 y_sort_enabled = true
 
-[node name="Popups" type="Node2D" parent="Map"]
+[node name="Popups" type="Node2D" parent="SubViewportContainer/SubViewport/Map"]
 z_index = 10
 y_sort_enabled = true
 
-[node name="SpawnTimer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="SubViewportContainer/SubViewport"]
 autostart = true

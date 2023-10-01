@@ -3,15 +3,14 @@ extends Character
 
 @onready var player_area_2d: Area2D = $Player
 @onready var pickup_field_collision: CollisionShape2D = $Player/PickupField/CollisionShape2D
+@onready var mutations: Node = $Player/Mutations
+@onready var abilities: Node = $Player/Abilities
 
 @export var base_experience: int = 10
 @export var base_pickup_field_radius: int = 50
 
 @export var is_selectable: bool
 @export var is_visible: bool
-
-@export_group("Inventory")
-@export var slots: Array[Slot]
 
 var level: int = 1
 var experience: int = 0

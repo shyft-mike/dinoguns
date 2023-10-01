@@ -12,6 +12,7 @@ shader = ExtResource("2_wpaot")
 size = Vector2(33, 33)
 
 [node name="Uzi" type="RigidBody2D"]
+collision_layer = 8
 freeze = true
 script = ExtResource("1_ivtb0")
 thumbnail_image = ExtResource("1_fy7pj")

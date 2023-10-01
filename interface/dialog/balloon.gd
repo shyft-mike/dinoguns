@@ -3,7 +3,7 @@ extends Control
 
 
 const DIALOGUE_PITCHES = {
-	Raptor = 0.8,
+	Raptor = 1.0,
 }
 
 
