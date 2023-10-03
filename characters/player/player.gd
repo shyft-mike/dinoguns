@@ -1,10 +1,11 @@
 class_name Player
 extends Character
 
-@onready var player_area_2d: Area2D = $Player
-@onready var pickup_field_collision: CollisionShape2D = $Player/PickupField/CollisionShape2D
-@onready var mutations: Node = $Player/Mutations
-@onready var abilities: Node = $Player/Abilities
+# Abilities
+var move: Move = load_ability("move")
+
+@onready var pickup_field_collision: CollisionShape2D = $PickupField/CollisionShape2D
+@onready var mutations: Node = $Mutations
 
 @export var base_experience: int = 10
 @export var base_pickup_field_radius: int = 50
@@ -12,7 +13,7 @@ extends Character
 @export var is_selectable: bool
 @export var is_visible: bool
 
-var level: int = 1
+var level: int = 0
 var experience: int = 0
 var total_experience: int = 0
 var to_next_level: int = base_experience
@@ -31,7 +32,7 @@ func _ready():
 func setup():
 	super.setup()
 	
-	level = 1
+	level = 0
 	experience = 0
 	total_experience = 0
 	to_next_level = base_experience
@@ -41,60 +42,27 @@ func setup():
 	Events.experience_received.emit()
 
 
-func _process(delta):
-	_process_movement(delta)
-	
+func _process_mouse(delta):
 	var mouse_position = get_global_mouse_position()
-	var angle = rad_to_deg(global_position.angle_to_point(mouse_position))
+	var player_mouse_direction = global_position.direction_to(mouse_position)
 	
-	$Player/TargetPoint.position = (mouse_position - global_position).normalized() * 50
-	
-	# quadrants
-	if angle >= -22.5 and angle <= 22.5:
-		$Player/AnimatedSprite2D.flip_h = true
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_right")
-	if angle >= 22.5 and angle <= 67.5:
-		$Player/AnimatedSprite2D.flip_h = true
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_diag_down")
-	if angle >= 67.5 and angle <= 112.5:
-		$Player/AnimatedSprite2D.flip_h = true
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_down")
-	if angle >= 112.5 and angle <= 157.5:
-		$Player/AnimatedSprite2D.flip_h = false
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_diag_down")		
-	if angle >= 157.5 or angle <= -157.5:
-		$Player/AnimatedSprite2D.flip_h = false		
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_right")
-	if angle >= -157.5 and angle <= -112.5:
-		$Player/AnimatedSprite2D.flip_h = false
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_diag_up")
-	if angle >= -112.5 and angle <= -67.5:
-		$Player/AnimatedSprite2D.flip_h = true
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_down")
-	if angle >= -67.5 and angle <= -22.5:
-		$Player/AnimatedSprite2D.flip_h = true
-		$Player/AnimatedSprite2D.flip_v = false
-		$Player/AnimatedSprite2D.play("walk_diag_up")
+	$Player/AnimatedSprite2D.flip_h = player_mouse_direction.x >= 0
 
 
-func _process_movement(delta):
+func _process_input(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 	if direction.length() == 0:
 		$Player/AnimatedSprite2D.play("default")
-
-	# normalize the direction vector so you can't move faster in the diagonal
-	# than you can in just the horizontal/vertical
-	var calculated_move_speed = CharacterService.calc_move_speed(self)
+	else:
+		$Player/AnimatedSprite2D.play("walk_right")
+		
+	move.execute(self, direction)
 	
-	position += direction.normalized() * calculated_move_speed * delta
+
+func _physics_process(delta):
+	_process_mouse(delta)
+	_process_input(delta)
 
 
 func _handle_collision(collider: Node2D):
@@ -107,12 +75,12 @@ func _handle_collision(collider: Node2D):
 		collider.on_pickup()
 	if collider_parent is Enemy:
 		take_damage(collider_parent.attack.total_value())
-
+		
 
 func take_damage(attack_damage: int):
 	if is_damagable:
 		is_damagable = false
-		_flash(Color.RED)
+		flash(Color.RED)
 		CharacterService.take_damage(self, attack_damage)
 		await get_tree().create_timer(hit_invincibility_time).timeout
 		is_damagable = true
@@ -122,7 +90,7 @@ func take_damage(attack_damage: int):
 			
 
 func _on_experience_received():
-	_flash()
+	flash()
 
 
 func _on_item_picked_up(item):
@@ -132,23 +100,11 @@ func _on_item_picked_up(item):
 func _on_field_body_entered(body):
 	if body != self and body is Item:
 		(body as Item).seek()
-		
-
-func _flash(color: Color = Color.WHITE):
-	ShaderEffects.flash($Player/AnimatedSprite2D.material, true, color)
-	await get_tree().create_timer(0.1).timeout
-	ShaderEffects.flash($Player/AnimatedSprite2D.material, false, color)
-	
-
-func _on_claw_body_entered(body: Node2D):
-	var parent_node = body.get_parent()
-	if parent_node is Enemy:
-		# calc damage, do damage, is enemy dead, what do they drop
-		parent_node.take_damage(attack.total_value())
-		
+			
 
 func _on_health_changed(value: int):
 	if value > 0:
 		var popup = Pooling.get_from_pool(Pooling.PoolType.POPUP, func(): return number_popup_template.instantiate()) as NumberPopup
 		SceneManager.current_scene.popup_container.add_child(popup)
 		popup.health(str(value), global_position, 0, 0)
+

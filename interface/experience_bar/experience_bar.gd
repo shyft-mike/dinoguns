@@ -1,6 +1,6 @@
 extends TextureProgressBar
 
-@export var value_tween_time: float = 0.2
+@export var value_tween_time: float = 0.4
 
 var value_tween: Tween
 
@@ -15,6 +15,7 @@ func _update(_experience = null):
 		value_tween.kill()
 		
 	value_tween = get_tree().create_tween()
-	value_tween.tween_property(self, "value", State.player.experience, value_tween_time)
+	value_tween.tween_property(self, "value", float(State.player.experience), value_tween_time)
+	value_tween.play()
 	
 	max_value = State.player.to_next_level

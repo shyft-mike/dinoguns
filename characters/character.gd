@@ -1,5 +1,5 @@
 class_name Character
-extends Node2D
+extends CharacterBody2D
 
 @export var icon: Texture2D
 
@@ -13,6 +13,9 @@ extends Node2D
 @export var base_attack_speed: int
 @export var base_health_regen: int
 @export var hit_invincibility_time: float = 0.2
+
+@onready var abilities: Node = $Abilities
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var attack: Stat
 var defense: Stat
@@ -39,3 +42,16 @@ func setup():
 	
 	is_dead = false
 	is_damagable = true
+
+
+func load_ability(name: String):
+	var scene = ResourceLoader.load("res://characters/abilities/" + name + "/" + name + ".gd")
+	var scene_instance = scene.instantiate()
+	abilities.add_child(scene_instance)
+	return scene_instance
+	
+	
+func flash(color: Color = Color.WHITE):
+	ShaderEffects.flash(animated_sprite.material, true, color)
+	await get_tree().create_timer(0.1).timeout
+	ShaderEffects.flash(animated_sprite.material, false, color)

@@ -15,4 +15,3 @@ texture_over = ExtResource("2_tuhwb")
 texture_progress = ExtResource("3_hmsxm")
 texture_progress_offset = Vector2(8, 8)
 script = ExtResource("4_1q2ol")
-value_tween_time = 0.4

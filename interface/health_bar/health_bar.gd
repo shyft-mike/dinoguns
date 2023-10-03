@@ -1,6 +1,6 @@
 extends TextureProgressBar
 
-@export var value_tween_time: float = 0.2
+@export var value_tween_time: float = 0.4
 
 var value_tween: Tween
 
@@ -16,6 +16,7 @@ func _update_health(_value):
 		value_tween.kill()
 		
 	value_tween = get_tree().create_tween()
-	value_tween.tween_property(self, "value", State.player.current_health, value_tween_time)
+	value_tween.tween_property(self, "value", float(State.player.current_health), value_tween_time)
+	value_tween.play()
 	
 	max_value = State.player.health.total_value()

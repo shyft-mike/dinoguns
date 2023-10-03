@@ -3,15 +3,15 @@ extends Character
 
 enum EnemyState {PERSUING,RETREATING}
 
-@onready var enemy: CharacterBody2D = $Enemy
-@onready var enemy_sprite: AnimatedSprite2D = $Enemy/AnimatedSprite2D
-
 @export var spray_template: PackedScene
 @export var drops: Array[Drop] = []
 
 var current_state: EnemyState = EnemyState.PERSUING
 var last_sighting: Vector2
-var original_drops
+
+# Abilities
+var move: Move = load_ability("move")
+
 
 func _ready():
 	setup()
@@ -20,52 +20,46 @@ func _ready():
 func setup():
 	super.setup()
 	
-	enemy.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
-	enemy_sprite.play()
-	
 	
 func _physics_process(delta):
-	var direction_to_player = enemy.global_position.direction_to(State.player.global_position)
-	var distance_to_player = enemy.global_position.distance_to(State.player.global_position)
+	var direction_to_player = global_position.direction_to(State.player.global_position)
+	var distance_to_player = global_position.distance_to(State.player.global_position)
 	
-	var dot_product = direction_to_player.normalized().dot(State.player.global_position.normalized())
-	
-	if dot_product <= 0:
-		enemy_sprite.flip_h = true
-	else:
-		enemy_sprite.flip_h = false
+	animated_sprite.flip_h = direction_to_player.x >= 0
 	
 	match current_state:
 		Enemy.EnemyState.PERSUING:
 			if distance_to_player > 50:
-				enemy.velocity = direction_to_player * CharacterService.calc_move_speed(self)
+				move.execute(self, direction_to_player)
 			if distance_to_player <= 50:
 				current_state = Enemy.EnemyState.RETREATING
 				last_sighting = State.player.global_position
-				enemy.velocity = -direction_to_player * CharacterService.calc_move_speed(self) * 1.1
-		
+				move.execute(self, -direction_to_player * 1.1)
+				
 		Enemy.EnemyState.RETREATING:
-			enemy_sprite.flip_h = not enemy_sprite.flip_h
-			enemy.velocity = -enemy.global_position.direction_to(last_sighting) * CharacterService.calc_move_speed(self) * 1.1
-			if enemy.global_position.distance_to(last_sighting) > 300:
+			move.execute(self, -global_position.direction_to(last_sighting) * 1.1)
+			if global_position.distance_to(last_sighting) > 300:
 				current_state = Enemy.EnemyState.PERSUING
-		
-	enemy.move_and_slide()
+				
+	if velocity.length() < 0.1:
+		animated_sprite.play("default")
+	else:
+		animated_sprite.play("walk")
 
 
 func take_damage(attack_damage: int):
 	var damage_done = CharacterService.take_damage(self, attack_damage)
 	
-	_flash()
-	_show_damage_popup(damage_done)
-	_spray()
+	flash(Color.RED)
+	show_damage_popup(damage_done)
+	spray()
 	
 	if is_dead:
 		_drop_items()
 		remove()
 
 
-func _spray():
+func spray():
 	if spray_template:
 		var spray = spray_template.instantiate()
 		spray.rotation = rotation
@@ -81,15 +75,10 @@ func _drop_items():
 		while current_drop_rate > 0:
 			if randf() < current_drop_rate:
 				var item_to_drop = _get_drop_item(drop)		
-				item_to_drop.position = enemy.global_position
+				item_to_drop.position = global_position
 				SceneManager.current_scene.items_container.call_deferred("add_child", item_to_drop)
 				item_to_drop.call_deferred("launch")
 			current_drop_rate -= 1.0
-
-#		print_debug("enemy gpos: ", enemy.global_position)
-#		print_debug("enemy pos: ", enemy.position)
-#		print_debug("self gpos: ", self.global_position)
-#		print_debug("self pos: ", self.position)
 		
 
 func _get_drop_item(drop: Drop) -> Item:
@@ -102,18 +91,12 @@ func _get_drop_item(drop: Drop) -> Item:
 			pool_type = Pooling.PoolType.BIG_AMBER
 	
 	return Pooling.get_from_pool(pool_type, ItemFactory.generate_item.bind(drop.item_type))
+		
 	
-
-func _flash():
-	ShaderEffects.flash(enemy_sprite.material, true, Color.RED)
-	await get_tree().create_timer(0.1).timeout
-	ShaderEffects.flash(enemy_sprite.material, false)
-	
-	
-func _show_damage_popup(damage_done: int):
+func show_damage_popup(damage_done: int):
 	var popup = Pooling.get_from_pool(Pooling.PoolType.POPUP, func(): return number_popup_template.instantiate()) as NumberPopup
 	SceneManager.current_scene.popup_container.add_child(popup)
-	popup.damage(str(damage_done), enemy.global_position, 0, 0)
+	popup.damage(str(damage_done), global_position, 0, 0)
 	
 	
 func remove():

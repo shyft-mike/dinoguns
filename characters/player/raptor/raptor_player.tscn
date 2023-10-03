@@ -1,19 +1,16 @@
 [gd_scene load_steps=24 format=3 uid="uid://dpk3cqeebjdmy"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_se8dt"]
-[ext_resource type="Texture2D" uid="uid://1lpx4vnhev6q" path="res://art/characters/RAPTOR_icon_64x64.png" id="2_e3ti7"]
 [ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_rt6h0"]
-[ext_resource type="Shader" path="res://characters/player/raptor/wave.gdshader" id="4_2h2w4"]
+[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="4_o7gal"]
 [ext_resource type="Texture2D" uid="uid://dcmv237jjn8b1" path="res://art/characters/raptor_outline.png" id="4_y8jkf"]
-[ext_resource type="Script" path="res://characters/player/target_point.gd" id="5_f6rv5"]
+[ext_resource type="Script" path="res://characters/abilities/ability.gd" id="6_0tj4g"]
+[ext_resource type="PackedScene" uid="uid://bwvfoqx55fd5a" path="res://characters/abilities/claw_slash/raptor_claw.tscn" id="6_kd8wa"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynra2"]
-resource_local_to_scene = true
-shader = ExtResource("4_2h2w4")
-shader_parameter/strength = 8.0
-shader_parameter/amplitude = 0.684
-shader_parameter/frequency = 3.529
-shader_parameter/speed = 5.125
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7iuvf"]
+shader = ExtResource("4_o7gal")
+shader_parameter/active = false
+shader_parameter/flash_color = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eim8t"]
 atlas = ExtResource("4_y8jkf")
@@ -140,57 +137,47 @@ size = Vector2(51, 43)
 [sub_resource type="CircleShape2D" id="CircleShape2D_chgv8"]
 radius = 200.0
 
-[node name="RaptorPlayer" type="Node2D"]
-script = ExtResource("1_se8dt")
-is_selectable = true
-is_visible = true
-icon = ExtResource("2_e3ti7")
-base_attack = 10
-base_defense = 7
-base_health = 90
-base_move_speed = 11
-base_attack_speed = 15
-base_health_regen = 5
-
-[node name="Player" type="Area2D" parent="."]
+[node name="RaptorPlayer" type="CharacterBody2D"]
 collision_mask = 14
+script = ExtResource("1_se8dt")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Shadow" type="Sprite2D" parent="Player"]
+[node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.4)
 light_mask = 0
 position = Vector2(0, 1)
 scale = Vector2(1.72, 1)
 texture = ExtResource("2_rt6h0")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
-material = SubResource("ShaderMaterial_ynra2")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_7iuvf")
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_yv0xw")
-animation = &"walk_diag_down"
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(-0.5, -15.5)
 shape = SubResource("RectangleShape2D_exsg7")
 
-[node name="PickupField" type="Area2D" parent="Player"]
+[node name="PickupField" type="Area2D" parent="."]
 visible = false
 position = Vector2(0, -14)
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickupField"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupField"]
 shape = SubResource("CircleShape2D_chgv8")
 
-[node name="TargetPoint" type="Node2D" parent="Player"]
-position = Vector2(0, -14)
-script = ExtResource("5_f6rv5")
+[node name="RaptorClaw" parent="." instance=ExtResource("6_kd8wa")]
+visible = false
+scale = Vector2(0.257296, 0.257296)
 
-[node name="Mutations" type="Node" parent="Player"]
+[node name="Mutations" type="Node" parent="."]
 
-[node name="Abilities" type="Node" parent="Player"]
+[node name="Abilities" type="Node" parent="."]
 
-[connection signal="body_entered" from="Player" to="." method="_handle_collision"]
-[connection signal="body_entered" from="Player/PickupField" to="." method="_on_field_body_entered"]
+[node name="ClawSlash" type="Node" parent="Abilities"]
+script = ExtResource("6_0tj4g")
+ACTIVE_TIME = 0.5
+WEAPON = NodePath("../../RaptorClaw")
