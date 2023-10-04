@@ -10,7 +10,7 @@ var current_state: EnemyState = EnemyState.PERSUING
 var last_sighting: Vector2
 
 # Abilities
-var move: Move = load_ability("move")
+var move: Move
 
 
 func _ready():
@@ -20,15 +20,17 @@ func _ready():
 func setup():
 	super.setup()
 	
+	move = load_ability("move")
+	
 	
 func _physics_process(delta):
 	var direction_to_player = global_position.direction_to(State.player.global_position)
 	var distance_to_player = global_position.distance_to(State.player.global_position)
 	
-	animated_sprite.flip_h = direction_to_player.x >= 0
+	animated_sprite.flip_h = direction_to_player.x < 0
 	
 	match current_state:
-		Enemy.EnemyState.PERSUING:
+		EnemyState.PERSUING:
 			if distance_to_player > 50:
 				move.execute(self, direction_to_player)
 			if distance_to_player <= 50:
@@ -36,11 +38,11 @@ func _physics_process(delta):
 				last_sighting = State.player.global_position
 				move.execute(self, -direction_to_player * 1.1)
 				
-		Enemy.EnemyState.RETREATING:
+		EnemyState.RETREATING:
 			move.execute(self, -global_position.direction_to(last_sighting) * 1.1)
 			if global_position.distance_to(last_sighting) > 300:
 				current_state = Enemy.EnemyState.PERSUING
-				
+	
 	if velocity.length() < 0.1:
 		animated_sprite.play("default")
 	else:
@@ -61,12 +63,12 @@ func take_damage(attack_damage: int):
 
 func spray():
 	if spray_template:
-		var spray = spray_template.instantiate()
-		spray.rotation = rotation
+		var spray_instance = spray_template.instantiate()
+		spray_instance.rotation = rotation
 		
-		add_child(spray)
+		add_child(spray_instance)
 		await get_tree().create_timer(0.3).timeout
-		spray.queue_free()
+		spray_instance.queue_free()
 		
 
 func _drop_items():

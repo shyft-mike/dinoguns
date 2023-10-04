@@ -1,9 +1,6 @@
 class_name Player
 extends Character
 
-# Abilities
-var move: Move = load_ability("move")
-
 @onready var pickup_field_collision: CollisionShape2D = $PickupField/CollisionShape2D
 @onready var mutations: Node = $Mutations
 
@@ -17,6 +14,9 @@ var level: int = 0
 var experience: int = 0
 var total_experience: int = 0
 var to_next_level: int = base_experience
+
+# Abilities
+var move: Move
 
 
 func _init():
@@ -38,6 +38,8 @@ func setup():
 	to_next_level = base_experience
 	pickup_field_collision.shape.radius = base_pickup_field_radius
 	
+	move = load_ability("move")
+	
 	Events.player_health_changed.emit(0)
 	Events.experience_received.emit()
 
@@ -46,16 +48,16 @@ func _process_mouse(delta):
 	var mouse_position = get_global_mouse_position()
 	var player_mouse_direction = global_position.direction_to(mouse_position)
 	
-	$Player/AnimatedSprite2D.flip_h = player_mouse_direction.x >= 0
+	animated_sprite.flip_h = player_mouse_direction.x >= 0
 
 
 func _process_input(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 	if direction.length() == 0:
-		$Player/AnimatedSprite2D.play("default")
+		animated_sprite.play("default")
 	else:
-		$Player/AnimatedSprite2D.play("walk_right")
+		animated_sprite.play("walk_right")
 		
 	move.execute(self, direction)
 	

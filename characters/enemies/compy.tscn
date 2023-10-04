@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c886suds3vd12"]
+[gd_scene load_steps=13 format=3 uid="uid://bxrfesvxcn3os"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_1b8bb"]
 [ext_resource type="PackedScene" uid="uid://bl8sykupf1q8n" path="res://effects/spray.tscn" id="2_5xrtr"]
@@ -59,8 +59,15 @@ animations = [{
 [node name="Compy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 23
+motion_mode = 1
 script = ExtResource("1_1b8bb")
 spray_template = ExtResource("2_5xrtr")
+base_attack = 6
+base_defense = 6
+base_health = 50
+base_move_speed = 8
+base_attack_speed = 6
+base_health_regen = 3
 
 [node name="Shadow" parent="." instance=ExtResource("2_y43uf")]
 position = Vector2(0, 12)
@@ -74,3 +81,5 @@ shape = SubResource("RectangleShape2D_2uf3p")
 material = SubResource("ShaderMaterial_ahsmn")
 sprite_frames = SubResource("SpriteFrames_7jf2c")
 animation = &"walk"
+
+[node name="Abilities" type="Node" parent="."]

@@ -26,6 +26,7 @@ func _create_timers():
 	_regen_timer = _create_timer(5, _on_regen_timer_timeout)
 	_clock_timer = _create_timer(0.1, _on_clock_timer_timeout, PROCESS_MODE_ALWAYS)
 
+
 func _create_timer(wait_time: float, timeout_event: Callable, mode: ProcessMode = PROCESS_MODE_INHERIT) -> Timer:
 	var timer = Timer.new()
 	timer.process_mode = mode

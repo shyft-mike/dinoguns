@@ -32,7 +32,6 @@ Pooling="*res://globals/pooling.gd"
 window/size/viewport_width=1600
 window/size/viewport_height=1200
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -73,7 +72,7 @@ attack={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://characters/player/raptor.dialogue", "res://characters/player/raptor/raptor.dialogue")
+locale/translations_pot_files=PackedStringArray("res://characters/player/raptor/raptor.dialogue")
 
 [layer_names]
 
@@ -85,8 +84,8 @@ locale/translations_pot_files=PackedStringArray("res://characters/player/raptor.
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="wall"
 2d_physics/layer_4="item"
-2d_physics/layer_5="projectile"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

@@ -3,7 +3,7 @@ extends Node
 
 enum PoolType { BULLET, POPUP, COMPY, AMBER, BIG_AMBER }
 
-var _pools = {} 
+var _pools = {}
 
 
 func add_to_pool(type: PoolType, instance: Object):

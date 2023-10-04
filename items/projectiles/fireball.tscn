@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bj3k4bvs6u2nv"]
 
-[ext_resource type="Script" path="res://items/projectiles/fireball.gd" id="1_3c6mr"]
+[ext_resource type="Script" path="res://items/projectiles/projectile.gd" id="1_0qqgx"]
 [ext_resource type="Texture2D" uid="uid://d2cf2pyu6cqu2" path="res://art/temp/fire1.png" id="2_bwndg"]
 
 [sub_resource type="Curve" id="Curve_ge2t1"]
@@ -16,9 +16,7 @@ colors = PackedColorArray(0.680099, 0.438896, 0, 1, 0.842543, 0.536669, 0.032066
 [node name="Fireball" type="Area2D"]
 z_index = 2
 collision_layer = 16
-script = ExtResource("1_3c6mr")
-speed = 150.0
-damage = 15
+script = ExtResource("1_0qqgx")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 70

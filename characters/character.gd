@@ -1,5 +1,5 @@
 class_name Character
-extends CharacterBody2D
+extends Area2D
 
 @export var icon: Texture2D
 
@@ -28,6 +28,7 @@ var current_health: int
 var is_dead: bool         ## True if the character is dead.
 var is_damagable: bool    ## True if the character can take damage.
 var is_player: bool
+var velocity: Vector2 = Vector2.ZERO
 
 
 func setup():
@@ -45,7 +46,7 @@ func setup():
 
 
 func load_ability(name: String):
-	var scene = ResourceLoader.load("res://characters/abilities/" + name + "/" + name + ".gd")
+	var scene = ResourceLoader.load("res://characters/abilities/" + name + "/" + name + ".tscn")
 	var scene_instance = scene.instantiate()
 	abilities.add_child(scene_instance)
 	return scene_instance

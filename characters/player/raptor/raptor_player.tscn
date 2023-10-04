@@ -1,11 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dpk3cqeebjdmy"]
+[gd_scene load_steps=22 format=3 uid="uid://dpk3cqeebjdmy"]
 
 [ext_resource type="Script" path="res://characters/player/player.gd" id="1_se8dt"]
 [ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://art/temp/shadow.png" id="2_rt6h0"]
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="4_o7gal"]
 [ext_resource type="Texture2D" uid="uid://dcmv237jjn8b1" path="res://art/characters/raptor_outline.png" id="4_y8jkf"]
-[ext_resource type="Script" path="res://characters/abilities/ability.gd" id="6_0tj4g"]
-[ext_resource type="PackedScene" uid="uid://bwvfoqx55fd5a" path="res://characters/abilities/claw_slash/raptor_claw.tscn" id="6_kd8wa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7iuvf"]
 shader = ExtResource("4_o7gal")
@@ -139,7 +137,14 @@ radius = 200.0
 
 [node name="RaptorPlayer" type="CharacterBody2D"]
 collision_mask = 14
+motion_mode = 1
 script = ExtResource("1_se8dt")
+base_attack = 10
+base_defense = 10
+base_health = 100
+base_move_speed = 10
+base_attack_speed = 10
+base_health_regen = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -157,7 +162,6 @@ sprite_frames = SubResource("SpriteFrames_yv0xw")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.5, -15.5)
 shape = SubResource("RectangleShape2D_exsg7")
 
@@ -169,15 +173,6 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupField"]
 shape = SubResource("CircleShape2D_chgv8")
 
-[node name="RaptorClaw" parent="." instance=ExtResource("6_kd8wa")]
-visible = false
-scale = Vector2(0.257296, 0.257296)
-
 [node name="Mutations" type="Node" parent="."]
 
 [node name="Abilities" type="Node" parent="."]
-
-[node name="ClawSlash" type="Node" parent="Abilities"]
-script = ExtResource("6_0tj4g")
-ACTIVE_TIME = 0.5
-WEAPON = NodePath("../../RaptorClaw")
