@@ -1,9 +1,10 @@
 class_name Character
-extends Area2D
+extends Node2D
 
-@export var icon: Texture2D
 
 @export var number_popup_template: PackedScene = preload("res://interface/number_popup.tscn")
+
+@export var icon: Texture2D
 
 @export_group("Stats")
 @export var base_attack: int
@@ -28,7 +29,8 @@ var current_health: int
 var is_dead: bool         ## True if the character is dead.
 var is_damagable: bool    ## True if the character can take damage.
 var is_player: bool
-var velocity: Vector2 = Vector2.ZERO
+var previous_position: Vector2
+var linear_velocity: Vector2
 
 
 func setup():

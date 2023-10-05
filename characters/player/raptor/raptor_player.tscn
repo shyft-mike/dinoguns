@@ -135,9 +135,8 @@ size = Vector2(51, 43)
 [sub_resource type="CircleShape2D" id="CircleShape2D_chgv8"]
 radius = 200.0
 
-[node name="RaptorPlayer" type="CharacterBody2D"]
+[node name="RaptorPlayer" type="Area2D"]
 collision_mask = 14
-motion_mode = 1
 script = ExtResource("1_se8dt")
 base_attack = 10
 base_defense = 10

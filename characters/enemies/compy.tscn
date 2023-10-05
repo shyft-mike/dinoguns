@@ -6,8 +6,8 @@
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="3_2lw4p"]
 [ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://art/characters/COMPY_sprite_sheet_2.png" id="4_jmmcq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2uf3p"]
-size = Vector2(33, 12)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ma7a6"]
+height = 39.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahsmn"]
 resource_local_to_scene = true
@@ -15,24 +15,38 @@ shader = ExtResource("3_2lw4p")
 shader_parameter/active = false
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_umgi7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_015xo"]
 atlas = ExtResource("4_jmmcq")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ddfkk"]
-atlas = ExtResource("4_jmmcq")
-region = Rect2(0, 0, 48, 48)
+region = Rect2(0, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5elkm"]
 atlas = ExtResource("4_jmmcq")
 region = Rect2(0, 48, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_015xo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddfkk"]
 atlas = ExtResource("4_jmmcq")
-region = Rect2(0, 96, 48, 48)
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umgi7"]
+atlas = ExtResource("4_jmmcq")
+region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7jf2c"]
 animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_015xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5elkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddfkk")
+}],
+"loop": false,
+"name": &"chomp",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_umgi7")
@@ -74,12 +88,13 @@ position = Vector2(0, 12)
 scale = Vector2(1.32, 1)
 
 [node name="MovementCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 13)
-shape = SubResource("RectangleShape2D_2uf3p")
+position = Vector2(0.5, 12.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ma7a6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ahsmn")
 sprite_frames = SubResource("SpriteFrames_7jf2c")
-animation = &"walk"
+animation = &"chomp"
 
 [node name="Abilities" type="Node" parent="."]

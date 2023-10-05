@@ -58,8 +58,7 @@ func _process_input(delta):
 		animated_sprite.play("default")
 	else:
 		animated_sprite.play("walk_right")
-		
-	move.execute(self, direction)
+		move.execute(self, direction, delta)
 	
 
 func _physics_process(delta):

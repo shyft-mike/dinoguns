@@ -1,4 +1,4 @@
 event_name,at_minutes_elapsed,spawn,count,pattern,repeat_rate
-start,0.0,COMPY,50,RANDOM,0.0
+start,0.0,COMPY,5,RANDOM,0.0
 first boss,0.5,MEGA_COMPY,1,RANDOM,0.0
 compy repeater,0.2,COMPY,5,GROUP,0.01

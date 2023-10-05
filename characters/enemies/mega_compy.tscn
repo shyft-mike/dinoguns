@@ -5,8 +5,9 @@
 [ext_resource type="Shader" path="res://shaders/flash.gdshader" id="3_vqf63"]
 [ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://art/characters/COMPY_sprite_sheet_2.png" id="4_p8hmv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwamj"]
-size = Vector2(38.4615, 13.0769)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2jrtf"]
+radius = 9.23077
+height = 41.5385
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahsmn"]
 resource_local_to_scene = true
@@ -18,6 +19,10 @@ shader_parameter/flash_color = Color(1, 0, 0, 1)
 atlas = ExtResource("4_p8hmv")
 region = Rect2(0, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_015xo"]
+atlas = ExtResource("4_p8hmv")
+region = Rect2(0, 96, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddfkk"]
 atlas = ExtResource("4_p8hmv")
 region = Rect2(0, 0, 48, 48)
@@ -25,10 +30,6 @@ region = Rect2(0, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5elkm"]
 atlas = ExtResource("4_p8hmv")
 region = Rect2(0, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_015xo"]
-atlas = ExtResource("4_p8hmv")
-region = Rect2(0, 96, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7jf2c"]
 animations = [{
@@ -38,6 +39,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_015xo")
+}],
+"loop": true,
+"name": &"shoot",
 "speed": 5.0
 }, {
 "frames": [{
@@ -61,6 +70,7 @@ collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_dgv55")
+attack_rate = 4.5
 base_attack = 15
 base_defense = 15
 base_health = 150
@@ -72,19 +82,19 @@ position = Vector2(0, 12.3077)
 scale = Vector2(1.4, 1)
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0.769231, 12.6923)
-shape = SubResource("RectangleShape2D_uwamj")
+position = Vector2(0.769231, 11.5385)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2jrtf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.764706, 0.305882, 0.219608, 1)
 material = SubResource("ShaderMaterial_ahsmn")
 sprite_frames = SubResource("SpriteFrames_7jf2c")
-animation = &"walk"
+animation = &"shoot"
 
 [node name="FireballStartMarker2D" type="Marker2D" parent="."]
 position = Vector2(26.1538, -8.46154)
 
 [node name="FireballTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="Abilities" type="Node" parent="."]

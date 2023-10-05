@@ -1,13 +1,15 @@
 class_name Enemy
 extends Character
 
-enum EnemyState {PERSUING,RETREATING}
+enum EnemyState {PERSUING,RETREATING,STOPPED}
 
 @export var spray_template: PackedScene
 @export var drops: Array[Drop] = []
 
 var current_state: EnemyState = EnemyState.PERSUING
 var last_sighting: Vector2
+
+var remaining_cycles: int = 0
 
 # Abilities
 var move: Move
@@ -24,26 +26,50 @@ func setup():
 	
 	
 func _physics_process(delta):
+	if current_state == EnemyState.STOPPED:
+		return
+	
 	var direction_to_player = global_position.direction_to(State.player.global_position)
-	var distance_to_player = global_position.distance_to(State.player.global_position)
 	
 	animated_sprite.flip_h = direction_to_player.x < 0
 	
-	match current_state:
-		EnemyState.PERSUING:
-			if distance_to_player > 50:
-				move.execute(self, direction_to_player)
-			if distance_to_player <= 50:
-				current_state = Enemy.EnemyState.RETREATING
-				last_sighting = State.player.global_position
-				move.execute(self, -direction_to_player * 1.1)
-				
-		EnemyState.RETREATING:
-			move.execute(self, -global_position.direction_to(last_sighting) * 1.1)
-			if global_position.distance_to(last_sighting) > 300:
-				current_state = Enemy.EnemyState.PERSUING
+	if remaining_cycles == 0:
+		remaining_cycles = randi_range(30, 90)
+		last_sighting = State.player.global_position
 	
-	if velocity.length() < 0.1:
+	var distance_to_player = global_position.distance_to(last_sighting)	
+	
+	if distance_to_player > 50:
+		var new_direction = global_position.direction_to(last_sighting).normalized()
+		new_direction.x += randf_range(-8.0, 8.0) * delta
+		new_direction.y += randf_range(-8.0, 8.0) * delta
+		move.execute(self, new_direction, delta)
+		
+	remaining_cycles -= 1
+	
+		
+#	match current_state:
+#		EnemyState.PERSUING:
+#			var new_direction = direction_to_player
+#			new_direction.x += randf_range(-8.0, 8.0) * delta
+#			new_direction.y += randf_range(-8.0, 8.0) * delta
+#
+#			if distance_to_player > 50:
+#				move.execute(self, new_direction, delta)
+#			if distance_to_player <= 50:
+#				current_state = Enemy.EnemyState.RETREATING
+#				last_sighting = State.player.global_position
+#				move.execute(self, -new_direction, delta)
+#
+#		EnemyState.RETREATING:
+#			var new_direction = -global_position.direction_to(last_sighting)
+#			new_direction.x += randf_range(-8.0, 8.0) * delta
+#			new_direction.y += randf_range(-8.0, 8.0) * delta
+#			move.execute(self, new_direction, delta)
+#			if global_position.distance_to(last_sighting) > 300:
+#				current_state = Enemy.EnemyState.PERSUING
+	
+	if linear_velocity.length() < 0.1:
 		animated_sprite.play("default")
 	else:
 		animated_sprite.play("walk")
@@ -104,3 +130,4 @@ func show_damage_popup(damage_done: int):
 func remove():
 	if is_instance_valid(self) and is_inside_tree():
 		get_parent().remove_child(self)
+
