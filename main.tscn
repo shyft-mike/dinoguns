@@ -1,18 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://do0g7c2prhnb4"]
 
-[ext_resource type="PackedScene" uid="uid://ds700fb06lab8" path="res://screens/start/start.tscn" id="2_tet3q"]
+[ext_resource type="PackedScene" uid="uid://ds700fb06lab8" path="res://ui/screens/start/start.tscn" id="2_tet3q"]
 
 [node name="Main" type="Node"]
 
 [node name="Start" parent="." instance=ExtResource("2_tet3q")]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 1600.0
-offset_bottom = 1152.0
-grow_horizontal = 1
-grow_vertical = 1

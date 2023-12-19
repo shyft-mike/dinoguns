@@ -17,4 +17,4 @@ func process_physics(node, delta):
 #	print_debug("launched item ", node.get_instance_id(), " linear v: ", node.linear_velocity)
 	node.linear_velocity -= (node.friction * node.linear_velocity.normalized())
 	if node.linear_velocity.length() < node.stop_threshold:
-		node.set_state(Item.ItemState.STATIC)
+		node.set_state(ItemUtility.ItemState.STATIC)

@@ -1,10 +1,8 @@
 class_name Item
 extends RigidBody2D
 
-enum ItemState { STATIC, LAUNCHED, SEEKING }
-
-@export var thumbnail_image: Texture2D;
-@export var state := ItemState.STATIC : set = set_state
+@export var thumbnail_image: Texture2D
+@export var state := ItemUtility.ItemState.STATIC : set = set_state
 @export var friction: float = 1.2
 @export var stop_threshold: float = 5.0
 @export var can_seek: bool = true
@@ -48,22 +46,22 @@ func _on_shine_timer_timeout():
 	$AnimatedSprite2D.animation_looped.connect(func(): $AnimatedSprite2D.play("default"))
 
 
-func on_pickup():
-	assert(false, "on_pickup method of class Item not defined")
+func pickup():
+	assert(false, "pickup() not defined")
 
 
-func set_state(value: ItemState):
+func set_state(value: ItemUtility.ItemState):
 	if state == value:
 		return
 	
 	current_state.exit_state(self)
 	
 	match value:
-		ItemState.LAUNCHED:
+		ItemUtility.ItemState.LAUNCHED:
 			current_state = launched_state
-		ItemState.SEEKING:
+		ItemUtility.ItemState.SEEKING:
 			current_state = seeking_state
-		ItemState.STATIC:
+		ItemUtility.ItemState.STATIC:
 			current_state = static_state
 	
 	current_state.enter_state(self)
@@ -71,20 +69,19 @@ func set_state(value: ItemState):
 
 func seek():
 	if can_seek:
-		state = ItemState.SEEKING
+		state = ItemUtility.ItemState.SEEKING
 
 
 func remove():
-	state = ItemState.STATIC
+	state = ItemUtility.ItemState.STATIC
 	if is_instance_valid(self) and is_inside_tree():
 		get_parent().remove_child(self)
 		
 	
 func launch(direction: Vector2 = Vector2.ZERO):
-	state = ItemState.LAUNCHED
+	state = ItemUtility.ItemState.LAUNCHED
 	
 	if direction.length() == 0:
 		direction = Vector2(randi_range(-100, 100),randi_range(-100, 100))
 	
 	linear_velocity = direction
-#	angular_velocity = direction.angle() / friction	

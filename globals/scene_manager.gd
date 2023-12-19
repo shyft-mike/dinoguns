@@ -1,11 +1,12 @@
 extends Node
 
-const CHARACTER_SELECT_SCENE = "res://screens/character_select/character_select.tscn"
-const GAME_OVER_SCENE = "res://screens/game_over/game_over.tscn"
-const LEVEL_UP_SCENE = "res://interface/level_up/level_up.tscn"
+const CHARACTER_SELECT_SCENE = "res://ui/screens/character_select/character_select.tscn"
+const GAME_OVER_SCENE = "res://ui/screens/game_over/game_over.tscn"
+const LEVEL_UP_SCENE = "res://ui/level_up/level_up.tscn"
 const LEVEL_1_SCENE = "res://levels/level_1/level_1.tscn"
 
 var current_scene: Node = null
+
 
 func _ready():
 	var root = get_tree().root

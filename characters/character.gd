@@ -2,7 +2,7 @@ class_name Character
 extends Node2D
 
 
-@export var number_popup_template: PackedScene = preload("res://interface/number_popup.tscn")
+@export var number_popup_template: PackedScene = preload("res://ui/number_popup.tscn")
 
 @export var icon: Texture2D
 
@@ -13,10 +13,12 @@ extends Node2D
 @export var base_move_speed: int
 @export var base_attack_speed: int
 @export var base_health_regen: int
+@export var base_fire_resist: int
 @export var hit_invincibility_time: float = 0.2
 
-@onready var abilities: Node = $Abilities
+@onready var abilities: AbilityManager = $Abilities
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var main_ability_marker: Marker2D = $MainAbilityMarker
 
 var attack: Stat
 var defense: Stat
@@ -24,6 +26,7 @@ var health: Stat
 var move_speed: Stat
 var attack_speed: Stat
 var health_regen: Stat
+var fire_resist: Stat
 
 var current_health: int
 var is_dead: bool         ## True if the character is dead.
@@ -40,6 +43,7 @@ func setup():
 	move_speed = Stat.create("Move Speed", base_move_speed)
 	attack_speed = Stat.create("Attack Speed", base_attack_speed)
 	health_regen = Stat.create("Health Regen", base_health_regen)
+	fire_resist = Stat.create("Fire Resistance", base_fire_resist)
 
 	current_health = health.total_value()
 	
@@ -47,8 +51,8 @@ func setup():
 	is_damagable = true
 
 
-func load_ability(name: String):
-	var scene = ResourceLoader.load("res://characters/abilities/" + name + "/" + name + ".tscn")
+func load_ability(ability_name: String):
+	var scene = ResourceLoader.load("res://abilities/" + ability_name + "/" + ability_name + ".tscn")
 	var scene_instance = scene.instantiate()
 	abilities.add_child(scene_instance)
 	return scene_instance

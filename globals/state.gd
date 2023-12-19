@@ -2,8 +2,8 @@ extends Node
 
 enum GameMode {STORY}
 
-var player: Player = null
-var standard_move_speed: int = 300
+var player: Player
+var standard_move_speed: int = 180
 
 var settings
 var challenges

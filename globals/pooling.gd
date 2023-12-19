@@ -1,7 +1,7 @@
 extends Node
 
 
-enum PoolType { BULLET, POPUP, COMPY, AMBER, BIG_AMBER }
+enum PoolType { BULLET, FIREBALL, POPUP, COMPY, AMBER, BIG_AMBER }
 
 var _pools = {}
 

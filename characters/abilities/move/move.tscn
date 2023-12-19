@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dt8xhfno01514"]
-
-[ext_resource type="Script" path="res://characters/abilities/move/move.gd" id="1_3tfct"]
-
-[node name="Move" type="Node"]
-script = ExtResource("1_3tfct")

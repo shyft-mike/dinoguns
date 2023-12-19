@@ -1,6 +1,8 @@
 class_name Stat
 extends Resource
 
+enum StatType {ATTACK,MOVE_SPEED,HEALTH_REGEN}
+
 @export var name: String
 @export var base_value: int
 var bonus_value: int = 0

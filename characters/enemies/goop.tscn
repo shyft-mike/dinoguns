@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://cpr6kds4upxk8"]
 
 [ext_resource type="Script" path="res://characters/enemies/goop.gd" id="1_as8us"]
-[ext_resource type="Texture2D" uid="uid://bbg63jqcxsra3" path="res://art/characters/goo_sack/Frame 1.png" id="1_cuyb2"]
-[ext_resource type="Texture2D" uid="uid://coou5u3gris3j" path="res://art/characters/goo_sack/Frame 2.png" id="2_bnoof"]
-[ext_resource type="Texture2D" uid="uid://3d3qwxpenlji" path="res://art/characters/goo_sack/Frame 3.png" id="3_ivbgt"]
-[ext_resource type="Texture2D" uid="uid://bpvfgfiali0wh" path="res://art/characters/goo_sack/Frame 4.png" id="4_c2yw5"]
+[ext_resource type="Texture2D" uid="uid://bbg63jqcxsra3" path="res://assets/characters/goo_sack/Frame 1.png" id="1_cuyb2"]
+[ext_resource type="Texture2D" uid="uid://coou5u3gris3j" path="res://assets/characters/goo_sack/Frame 2.png" id="2_bnoof"]
+[ext_resource type="Texture2D" uid="uid://3d3qwxpenlji" path="res://assets/characters/goo_sack/Frame 3.png" id="3_ivbgt"]
+[ext_resource type="Texture2D" uid="uid://bpvfgfiali0wh" path="res://assets/characters/goo_sack/Frame 4.png" id="4_c2yw5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kf1iu"]
 animations = [{

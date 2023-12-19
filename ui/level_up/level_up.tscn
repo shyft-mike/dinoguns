@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://h65n2v3iqoes"]
+
+[ext_resource type="StyleBox" uid="uid://bagfiepcotjx6" path="res://ui/panel_style.tres" id="1_s7dxw"]
+[ext_resource type="Script" path="res://ui/level_up/level_up.gd" id="2_aq58k"]
+[ext_resource type="Script" path="res://ui/level_up/upgrade.gd" id="3_mjupf"]
+[ext_resource type="Texture2D" uid="uid://bfqo8x4aoab0h" path="res://assets/characters/claw.png" id="4_1hchl"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jcuca"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pbo0h"]
+
+[node name="LevelUp" type="PanelContainer"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_s7dxw")
+script = ExtResource("2_aq58k")
+
+[node name="UpgradeItemList" type="ItemList" parent="."]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+allow_search = false
+fixed_icon_size = Vector2i(64, 64)
+
+[node name="Upgrades" type="Node" parent="."]
+
+[node name="Attack1" type="Node" parent="Upgrades"]
+script = ExtResource("3_mjupf")
+title = "Attack +10"
+icon = ExtResource("4_1hchl")
+upgrade_stat_value = 10
+
+[node name="Attack2" type="Node" parent="Upgrades"]
+script = ExtResource("3_mjupf")
+title = "Attack +10 lvl 2"
+icon = ExtResource("4_1hchl")
+required_level = 5
+required_rage = 1
+upgrade_stat_value = 10
+
+[node name="MoveSpeed1" type="Node" parent="Upgrades"]
+script = ExtResource("3_mjupf")
+title = "Move Speed +10"
+icon = SubResource("PlaceholderTexture2D_jcuca")
+upgrade_stat_type = 1
+upgrade_stat_value = 10
+
+[node name="HealthRegen1" type="Node" parent="Upgrades"]
+script = ExtResource("3_mjupf")
+title = "Health Regen +5"
+icon = SubResource("PlaceholderTexture2D_pbo0h")
+power_type = 2
+upgrade_stat_type = 2
+upgrade_stat_value = 5
+
+[connection signal="item_selected" from="UpgradeItemList" to="." method="_on_item_list_item_selected"]

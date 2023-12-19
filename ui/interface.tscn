@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://c65cgqprr57y3"]
+
+[ext_resource type="PackedScene" uid="uid://by7hj3l3vvi1t" path="res://ui/health_bar/health_bar.tscn" id="1_82rhb"]
+[ext_resource type="Script" path="res://ui/interface.gd" id="1_ttrrb"]
+[ext_resource type="PackedScene" uid="uid://qelsp1vqa35w" path="res://ui/experience_bar/experience_bar.tscn" id="2_0lad7"]
+[ext_resource type="PackedScene" uid="uid://eg331gs8vn57" path="res://ui/item_bar/item_bar.tscn" id="2_u38mo"]
+[ext_resource type="Script" path="res://ui/experience_bar/experience_bar.gd" id="3_qqism"]
+[ext_resource type="PackedScene" uid="uid://bo1dtknm0qdq5" path="res://ui/dialog/balloon.tscn" id="6_h7grf"]
+
+[node name="Interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ttrrb")
+
+[node name="ItemBar" parent="." instance=ExtResource("2_u38mo")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -600.0
+offset_top = 19.0
+offset_right = 600.0
+offset_bottom = 83.0
+grow_horizontal = 2
+
+[node name="BottomBar" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -176.0
+offset_right = 1154.0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 4
+
+[node name="HBox" type="HBoxContainer" parent="BottomBar/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HealthBar" parent="BottomBar/VBox/HBox" instance=ExtResource("1_82rhb")]
+layout_mode = 2
+
+[node name="ExperienceBar" parent="BottomBar/VBox/HBox" instance=ExtResource("2_0lad7")]
+layout_mode = 2
+script = ExtResource("3_qqism")
+
+[node name="DialogBalloon" parent="BottomBar/VBox" instance=ExtResource("6_h7grf")]
+custom_minimum_size = Vector2(500, 136)
+layout_mode = 2

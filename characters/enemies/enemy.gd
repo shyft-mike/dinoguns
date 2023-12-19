@@ -3,11 +3,15 @@ extends Character
 
 enum EnemyState {PERSUING,RETREATING,STOPPED}
 
+@onready var hit_area_2d: Area2D = $HitArea2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 @export var spray_template: PackedScene
 @export var drops: Array[Drop] = []
 
 var current_state: EnemyState = EnemyState.PERSUING
 var last_sighting: Vector2
+var flipped: bool = false
 
 var remaining_cycles: int = 0
 
@@ -22,7 +26,7 @@ func _ready():
 func setup():
 	super.setup()
 	
-	move = load_ability("move")
+#	move = load_ability("move")
 	
 	
 func _physics_process(delta):
@@ -31,7 +35,15 @@ func _physics_process(delta):
 	
 	var direction_to_player = global_position.direction_to(State.player.global_position)
 	
-	animated_sprite.flip_h = direction_to_player.x < 0
+	# flip the entire node depending on where they should face
+	# this flips collisions and mount points, etc
+	if direction_to_player.x < 0:
+		if not flipped:
+			scale *= Vector2(-1, 1)
+			flipped = true
+	elif flipped:
+		scale *= Vector2(-1, 1)
+		flipped = false
 	
 	if remaining_cycles == 0:
 		remaining_cycles = randi_range(30, 90)
@@ -43,48 +55,37 @@ func _physics_process(delta):
 		var new_direction = global_position.direction_to(last_sighting).normalized()
 		new_direction.x += randf_range(-8.0, 8.0) * delta
 		new_direction.y += randf_range(-8.0, 8.0) * delta
-		move.execute(self, new_direction, delta)
+		abilities.execute(Ability.AbilityType.MOVE, {direction=new_direction, delta=delta})
 		
 	remaining_cycles -= 1
-	
 		
-#	match current_state:
-#		EnemyState.PERSUING:
-#			var new_direction = direction_to_player
-#			new_direction.x += randf_range(-8.0, 8.0) * delta
-#			new_direction.y += randf_range(-8.0, 8.0) * delta
-#
-#			if distance_to_player > 50:
-#				move.execute(self, new_direction, delta)
-#			if distance_to_player <= 50:
-#				current_state = Enemy.EnemyState.RETREATING
-#				last_sighting = State.player.global_position
-#				move.execute(self, -new_direction, delta)
-#
-#		EnemyState.RETREATING:
-#			var new_direction = -global_position.direction_to(last_sighting)
-#			new_direction.x += randf_range(-8.0, 8.0) * delta
-#			new_direction.y += randf_range(-8.0, 8.0) * delta
-#			move.execute(self, new_direction, delta)
-#			if global_position.distance_to(last_sighting) > 300:
-#				current_state = Enemy.EnemyState.PERSUING
-	
 	if linear_velocity.length() < 0.1:
 		animated_sprite.play("default")
 	else:
 		animated_sprite.play("walk")
 
 
-func take_damage(attack_damage: int):
-	var damage_done = CharacterService.take_damage(self, attack_damage)
+func take_damage(damage: DamageService.Damage):
+	if is_dead:
+		return
+	
+	var damage_done = CharacterService.take_damage(self, damage)
 	
 	flash(Color.RED)
 	show_damage_popup(damage_done)
 	spray()
 	
 	if is_dead:
-		_drop_items()
-		remove()
+		current_state = EnemyState.STOPPED
+		if animation_player:
+			animation_player.play("die")
+		else:
+			die()
+
+
+func die():
+	_drop_items()
+	remove()
 
 
 func spray():
@@ -113,9 +114,9 @@ func _get_drop_item(drop: Drop) -> Item:
 	var pool_type
 	
 	match drop.item_type:
-		ItemFactory.ItemType.AMBER:
+		ItemUtility.ItemType.AMBER:
 			pool_type = Pooling.PoolType.AMBER
-		ItemFactory.ItemType.BIG_AMBER:
+		ItemUtility.ItemType.BIG_AMBER:
 			pool_type = Pooling.PoolType.BIG_AMBER
 	
 	return Pooling.get_from_pool(pool_type, ItemFactory.generate_item.bind(drop.item_type))
@@ -124,10 +125,9 @@ func _get_drop_item(drop: Drop) -> Item:
 func show_damage_popup(damage_done: int):
 	var popup = Pooling.get_from_pool(Pooling.PoolType.POPUP, func(): return number_popup_template.instantiate()) as NumberPopup
 	SceneManager.current_scene.popup_container.add_child(popup)
-	popup.damage(str(damage_done), global_position, 0, 0)
+	popup.damage(str(damage_done), global_position, 20, 0)
 	
 	
 func remove():
 	if is_instance_valid(self) and is_inside_tree():
 		get_parent().remove_child(self)
-

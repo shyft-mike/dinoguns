@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://uwf1mrb2kddk"]
 
 [ext_resource type="Script" path="res://levels/level_1/level_1.gd" id="1_epolj"]
-[ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://interface/interface.tscn" id="2_3t4ql"]
+[ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://ui/interface.tscn" id="2_3t4ql"]
 [ext_resource type="PackedScene" uid="uid://10x2k1pwsqcs" path="res://levels/level_1/Grassfield_scene.tscn" id="3_y4cxh"]
 [ext_resource type="PackedScene" uid="uid://bhvqikhn3onuk" path="res://items/pickups/uzi.tscn" id="4_vr478"]
 
@@ -27,6 +27,8 @@ y_sort_enabled = true
 
 [node name="Uzi" parent="Map/Items" instance=ExtResource("4_vr478")]
 position = Vector2(1534, 127)
+max_contacts_reported = 1
+contact_monitor = true
 
 [node name="Spawns" type="Node2D" parent="Map"]
 z_index = 2

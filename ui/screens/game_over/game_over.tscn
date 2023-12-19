@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhevupyx4t5fm"]
+
+[ext_resource type="StyleBox" uid="uid://bagfiepcotjx6" path="res://ui/panel_style.tres" id="1_8yhur"]
+[ext_resource type="Script" path="res://ui/screens/game_over/game_over.gd" id="1_mto6b"]
+[ext_resource type="Texture2D" uid="uid://cxdou5acbn0n1" path="res://assets/temp/skull.png" id="2_n0urv"]
+
+[node name="GameOver" type="PanelContainer"]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_8yhur")
+script = ExtResource("1_mto6b")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="Skull" type="Sprite2D" parent="Panel"]
+position = Vector2(131, 202)
+scale = Vector2(0.640805, 0.640805)
+texture = ExtResource("2_n0urv")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 31.0
+offset_right = 353.0
+offset_bottom = 83.0
+scale = Vector2(3.36947, 3.23529)
+theme_override_colors/font_color = Color(0.533333, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/line_spacing = -5
+text = "GAME
+OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 242.0
+offset_right = 422.0
+offset_bottom = 273.0
+scale = Vector2(2.07959, 2.07959)
+text = "RESTART"
+
+[connection signal="pressed" from="Panel/RestartButton" to="." method="_on_restart_button_pressed"]

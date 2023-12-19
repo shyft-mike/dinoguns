@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dueftfw23igw3"]
+
+[ext_resource type="Script" path="res://abilities/shoot_fireball/shoot_fireball.gd" id="1_2rcm5"]
+
+[node name="ShootFireball" type="Node"]
+script = ExtResource("1_2rcm5")
+type = 1
