@@ -15,7 +15,6 @@ func _update(_experience = null):
 		value_tween.kill()
 		
 	value_tween = get_tree().create_tween()
-	value_tween.tween_property(self, "value", float(State.player.experience), value_tween_time)
-	value_tween.play()
+	value_tween.tween_property(self, "value", float(State.player.stat_manager.experience), value_tween_time)
 	
-	max_value = State.player.to_next_level
+	max_value = State.player.stat_manager.to_next_level

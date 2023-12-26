@@ -1,13 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://uwf1mrb2kddk"]
+[gd_scene load_steps=4 format=3 uid="uid://bfqbfgq2iqsed"]
 
-[ext_resource type="Script" path="res://levels/level_1/level_1.gd" id="1_epolj"]
+[ext_resource type="Script" path="res://levels/level_1/level_1.gd" id="1_lc3v5"]
 [ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://ui/interface.tscn" id="2_3t4ql"]
 [ext_resource type="PackedScene" uid="uid://10x2k1pwsqcs" path="res://levels/level_1/Grassfield_scene.tscn" id="3_y4cxh"]
-[ext_resource type="PackedScene" uid="uid://bhvqikhn3onuk" path="res://items/pickups/uzi.tscn" id="4_vr478"]
 
 [node name="Level1" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_epolj")
+script = ExtResource("1_lc3v5")
 spawn_pattern_path = "res://levels/level_1/spawn_pattern.csv"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
@@ -24,11 +23,6 @@ metadata/_edit_use_anchors_ = true
 [node name="Items" type="Node2D" parent="Map"]
 z_index = 1
 y_sort_enabled = true
-
-[node name="Uzi" parent="Map/Items" instance=ExtResource("4_vr478")]
-position = Vector2(1534, 127)
-max_contacts_reported = 1
-contact_monitor = true
 
 [node name="Spawns" type="Node2D" parent="Map"]
 z_index = 2

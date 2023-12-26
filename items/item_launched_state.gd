@@ -4,13 +4,13 @@ extends StateMachine
 
 func enter_state(node):
 	(node as RigidBody2D).set_process(true)
-	
-	
+
+
 func exit_state(node):
 	node.linear_velocity = Vector2.ZERO
 	node.angular_velocity = 0
-	
-	
+
+
 func process_physics(node, delta):
 #	print_debug("launched item pos: ", node.position)
 #	print_debug("launched item gpos: ", node.global_position)

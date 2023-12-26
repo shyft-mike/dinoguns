@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfg0fg8t5g2ba"]
-
-[ext_resource type="Script" path="res://abilities/raptor_slash/raptor_slash.gd" id="1_2ccgs"]
-
-[node name="RaptorSlash" type="Node"]
-script = ExtResource("1_2ccgs")

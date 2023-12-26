@@ -13,9 +13,9 @@ var spawn_flow: SpawnFlow
 
 func _ready():
 	Events.time_of_day_changed.connect(_on_time_of_day_changed)
-	
+
 	_parse_spawn_pattern(spawn_pattern_path)
-	
+
 
 func _on_time_of_day_changed(new_color):
 	$DirectionalLight2D.color = new_color
@@ -23,5 +23,5 @@ func _on_time_of_day_changed(new_color):
 
 func _parse_spawn_pattern(spawn_pattern_filename: String):
 	var spawn_pattern_file = FileAccess.open(spawn_pattern_filename, FileAccess.READ)
-	
+
 	spawn_flow = SpawnFlow.new(spawn_pattern_file)

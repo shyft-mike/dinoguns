@@ -2,8 +2,9 @@ extends Node
 
 const CHARACTER_SELECT_SCENE = "res://ui/screens/character_select/character_select.tscn"
 const GAME_OVER_SCENE = "res://ui/screens/game_over/game_over.tscn"
-const LEVEL_UP_SCENE = "res://ui/level_up/level_up.tscn"
+const LEVEL_UP_SCENE = "res://ui/level_up/LevelUp.tscn"
 const LEVEL_1_SCENE = "res://levels/level_1/level_1.tscn"
+const TEST_SCENE = "res://levels/test_level/test_level.tscn"
 
 var current_scene: Node = null
 
@@ -11,7 +12,7 @@ var current_scene: Node = null
 func _ready():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
-	
+
 
 func change_scene(path: String, callback: Callable = Callable()):
 	# This function will usually be called from a signal callback,
@@ -41,6 +42,6 @@ func _deferred_change_scene(path: String, callback: Callable):
 
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().current_scene = current_scene
-	
+
 	if callback:
 		callback.call()

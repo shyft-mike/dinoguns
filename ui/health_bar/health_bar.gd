@@ -10,13 +10,12 @@ func _ready():
 
 
 # Health Bar! Maybe need to separate in the future so that max value only changes when max hp changes.
-# Such as a power up or mutation. 
+# Such as a power up or mutation.
 func _update_health(_value):
 	if value_tween:
 		value_tween.kill()
-		
+
 	value_tween = get_tree().create_tween()
-	value_tween.tween_property(self, "value", float(State.player.current_health), value_tween_time)
-	value_tween.play()
-	
-	max_value = State.player.health.total_value()
+	value_tween.tween_property(self, "value", float(State.player.stat_manager.current_health), value_tween_time)
+
+	max_value = State.player.stat_manager.health.total_value()

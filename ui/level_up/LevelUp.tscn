@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://h65n2v3iqoes"]
+
+[ext_resource type="StyleBox" uid="uid://bagfiepcotjx6" path="res://ui/panel_style.tres" id="1_n38is"]
+[ext_resource type="Script" path="res://ui/level_up/LevelUp.gd" id="2_1m3nj"]
+[ext_resource type="Script" path="res://ui/level_up/Upgrade.gd" id="3_uvycv"]
+[ext_resource type="Texture2D" uid="uid://bfqo8x4aoab0h" path="res://assets/characters/claw.png" id="4_ydpu8"]
+[ext_resource type="Script" path="res://ui/level_up/RicochetUpgrade.gd" id="5_h6ms3"]
+[ext_resource type="Texture2D" uid="uid://dmdfnl8vc3idl" path="res://assets/temp/uzi.png" id="6_yufbb"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jcuca"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pbo0h"]
+
+[node name="LevelUp" type="PanelContainer"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_n38is")
+script = ExtResource("2_1m3nj")
+
+[node name="UpgradeItemList" type="ItemList" parent="."]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+allow_search = false
+fixed_icon_size = Vector2i(64, 64)
+
+[node name="UpgradeContainer" type="Node" parent="."]
+
+[node name="Attack1" type="Node" parent="UpgradeContainer"]
+script = ExtResource("3_uvycv")
+title = "Attack +10"
+icon = ExtResource("4_ydpu8")
+upgrade_stat_type = 1
+upgrade_stat_value = 10
+
+[node name="Attack2" type="Node" parent="UpgradeContainer"]
+script = ExtResource("3_uvycv")
+title = "Attack +10 lvl 2"
+icon = ExtResource("4_ydpu8")
+required_level = 3
+required_rage = 1
+upgrade_stat_type = 1
+upgrade_stat_value = 10
+
+[node name="MoveSpeed1" type="Node" parent="UpgradeContainer"]
+script = ExtResource("3_uvycv")
+title = "Move Speed +10"
+icon = SubResource("PlaceholderTexture2D_jcuca")
+upgrade_stat_type = 2
+upgrade_stat_value = 10
+
+[node name="HealthRegen1" type="Node" parent="UpgradeContainer"]
+script = ExtResource("3_uvycv")
+title = "Health Regen +5"
+icon = SubResource("PlaceholderTexture2D_pbo0h")
+power_type = 2
+upgrade_stat_type = 3
+upgrade_stat_value = 5
+
+[node name="RicochetUpgrade" type="Node" parent="UpgradeContainer"]
+script = ExtResource("5_h6ms3")
+title = "Ricochet Bullets"
+icon = ExtResource("6_yufbb")
+power_type = 2
+
+[connection signal="item_selected" from="UpgradeItemList" to="." method="_on_item_list_item_selected"]

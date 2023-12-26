@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj3k4bvs6u2nv"]
+
+[ext_resource type="Script" path="res://abilities/projectiles/Projectile.gd" id="1_0qqgx"]
+[ext_resource type="Texture2D" uid="uid://d2cf2pyu6cqu2" path="res://assets/temp/fire1.png" id="2_bwndg"]
+
+[sub_resource type="Curve" id="Curve_ge2t1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.335849, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_mk3gv"]
+offsets = PackedFloat32Array(0, 0.136752, 0.337607, 0.619658, 1)
+colors = PackedColorArray(0.680099, 0.438896, 0, 1, 0.842543, 0.536669, 0.0320662, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08jvk"]
+
+[node name="Fireball" type="Area2D"]
+z_index = 2
+collision_layer = 16
+script = ExtResource("1_0qqgx")
+damage_type = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 70
+lifetime = 2.0
+local_coords = true
+texture = ExtResource("2_bwndg")
+direction = Vector2(0, -1)
+spread = 10.0
+gravity = Vector2(0, 0)
+angular_velocity_min = 100.0
+angular_velocity_max = 120.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+angle_max = 360.0
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ge2t1")
+color_ramp = SubResource("Gradient_mk3gv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_08jvk")

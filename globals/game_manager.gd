@@ -1,7 +1,11 @@
 extends Node
 
+var level_up_scene: Node
+
 
 func _ready():
+	level_up_scene = ResourceLoader.load(SceneManager.LEVEL_UP_SCENE).instantiate()
+
 	Events.character_selected.connect(_on_character_selected)
 	Events.player_leveled_up.connect(_on_player_leveled_up)
 
@@ -18,21 +22,20 @@ func game_over():
 	State.player.get_parent().remove_child(State.player)
 	SceneManager.change_scene(SceneManager.GAME_OVER_SCENE)
 
-	
+
 func _on_character_selected(new_player):
 	State.player = new_player
-	State.player.is_player = true
 	start()
 
 
 func _on_player_leveled_up():
-	var level_up_scene = ResourceLoader.load(SceneManager.LEVEL_UP_SCENE).instantiate()
 	SceneManager.current_scene.get_node("UILayer").add_child(level_up_scene)
+	level_up_scene.setup()
 	get_tree().paused = true
-	
+
 
 func _player_start_callback():
 	Pooling.clear()
 	SceneManager.current_scene.spawns_container.add_child(State.player)
 	State.player.setup()
-	
+

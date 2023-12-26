@@ -25,7 +25,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 15.0,
 "texture": ExtResource("2_6peta")
 }, {
 "duration": 1.0,
@@ -58,6 +58,7 @@ animations = [{
 }]
 
 [node name="Amber" type="RigidBody2D"]
+z_index = 1
 collision_layer = 8
 script = ExtResource("1_ekys6")
 can_shine = true
@@ -68,4 +69,5 @@ shape = SubResource("RectangleShape2D_sfi7g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4x7nd")
-frame_progress = 0.925421
+animation = &"shine"
+frame_progress = 0.561832

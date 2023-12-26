@@ -13,13 +13,13 @@ func reset():
 	_regen_timer.queue_free()
 	_clock_timer.queue_free()
 	_create_timers()
-	
-	
+
+
 func start():
 	_event_timer.start()
 	_regen_timer.start()
 	_clock_timer.start()
-	
+
 
 func _create_timers():
 	_event_timer = _create_timer(5, _on_event_timer_timeout)
@@ -37,12 +37,13 @@ func _create_timer(wait_time: float, timeout_event: Callable, mode: ProcessMode 
 
 
 func _on_event_timer_timeout():
-	SpawnManager.spawn(CharacterFactory.CharacterType.MEGA_COMPY)
-	
+	#SpawnManager.spawn(CharacterFactory.CharacterType.MEGA_COMPY)
+	pass
+
 
 func _on_regen_timer_timeout():
-	CharacterService.regen(State.player)
-	
+	State.player.stat_manager.regen()
+
 # TODO: handle this elsewhere
 #var _ticks_per_day = 60
 #var _ticks = 0
