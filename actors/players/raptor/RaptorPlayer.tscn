@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dfg0fg8t5g2ba" path="res://abilities/raptor_slash/RaptorSlash.tscn" id="3_kukac"]
 [ext_resource type="PackedScene" uid="uid://dkf3e0o457sqm" path="res://abilities/uzi/Uzi.tscn" id="4_3be8u"]
 [ext_resource type="Texture2D" uid="uid://dcmv237jjn8b1" path="res://actors/players/raptor/assets/raptor_outline.png" id="4_pqo7d"]
-[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/Shadow.tscn" id="5_ak7ip"]
+[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/shadow.tscn" id="5_ak7ip"]
 [ext_resource type="Shader" path="res://effects/shaders/flash.gdshader" id="5_dsvuk"]
 [ext_resource type="PackedScene" uid="uid://bx66mvjsd131q" path="res://actors/common/HurtBox.tscn" id="5_tv8cj"]
 [ext_resource type="PackedScene" uid="uid://cfnfv0bsvol4p" path="res://actors/common/PickupBox.tscn" id="8_gdx3r"]
