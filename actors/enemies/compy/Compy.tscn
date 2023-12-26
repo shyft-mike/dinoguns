@@ -159,7 +159,11 @@ script = ExtResource("1_nfe26")
 drops = Array[ExtResource("2_s66ut")]([SubResource("Resource_yrm46"), SubResource("Resource_8pr66")])
 stat_manager = SubResource("Resource_lbukh")
 
+[node name="ControllerContainer" type="Node" parent="."]
+
 [node name="HealthBar" type="ProgressBar" parent="."]
+z_index = 10
+y_sort_enabled = true
 offset_left = -16.0
 offset_top = -35.0
 offset_right = 16.0
@@ -168,8 +172,6 @@ theme_override_styles/background = SubResource("StyleBoxFlat_b1f0x")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gvyc4")
 value = 100.0
 show_percentage = false
-
-[node name="ControllerContainer" type="Node" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

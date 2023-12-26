@@ -5,10 +5,16 @@ extends Node2D
 @export var base_damage: int = 10
 @export var piercing: int = 0
 
+@onready var hit_box: HitBox = $HitBox
+
 var attached_modifiers: Array[Modifier] = []
 
 var user: Actor
 var hit_count: int = 0
+
+
+func _ready():
+	hit_box.damager = self
 
 
 func on_collide(collided_actor: Actor) -> DamageService.Damage:
