@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1t63nlupu6fp"]
 
 [ext_resource type="Script" path="res://items/exp/exp_pickup.gd" id="1_ommub"]
-[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="2_t5850"]
+[ext_resource type="Shader" path="res://effects/shaders/shine.gdshader" id="2_t5850"]
 [ext_resource type="Texture2D" uid="uid://dm7l5s8ew8yli" path="res://assets/pickups/bigamber.png" id="3_shb6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfi7g"]
@@ -12,13 +12,16 @@ resource_local_to_scene = true
 shader = ExtResource("2_t5850")
 
 [node name="BigAmber" type="RigidBody2D"]
+z_index = 1
 collision_layer = 8
 script = ExtResource("1_ommub")
 exp_value = 25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.7, 0.7)
 shape = SubResource("RectangleShape2D_sfi7g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_6qt45")
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_shb6y")

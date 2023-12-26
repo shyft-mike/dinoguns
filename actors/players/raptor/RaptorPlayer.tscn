@@ -1,0 +1,128 @@
+[gd_scene load_steps=16 format=3 uid="uid://d3hw2jlpmgo7p"]
+
+[ext_resource type="Script" path="res://actors/players/Player.gd" id="1_k1uh2"]
+[ext_resource type="Script" path="res://actors/players/PlayerStatManager.gd" id="2_7os48"]
+[ext_resource type="PackedScene" uid="uid://dfg0fg8t5g2ba" path="res://abilities/raptor_slash/RaptorSlash.tscn" id="3_kukac"]
+[ext_resource type="PackedScene" uid="uid://dkf3e0o457sqm" path="res://abilities/uzi/Uzi.tscn" id="4_3be8u"]
+[ext_resource type="Texture2D" uid="uid://dcmv237jjn8b1" path="res://actors/players/raptor/assets/raptor_outline.png" id="4_pqo7d"]
+[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/Shadow.tscn" id="5_ak7ip"]
+[ext_resource type="Shader" path="res://effects/shaders/flash.gdshader" id="5_dsvuk"]
+[ext_resource type="PackedScene" uid="uid://bx66mvjsd131q" path="res://actors/common/HurtBox.tscn" id="5_tv8cj"]
+[ext_resource type="PackedScene" uid="uid://cfnfv0bsvol4p" path="res://actors/common/PickupBox.tscn" id="8_gdx3r"]
+
+[sub_resource type="Resource" id="Resource_dcpqo"]
+resource_local_to_scene = true
+script = ExtResource("2_7os48")
+base_experience = 10
+base_attack = 2
+base_defense = 0
+base_health = 100
+base_move_speed = 100
+base_attack_speed = 0
+base_health_regen = 0
+base_fire_resist = 0
+hit_invincibility_time = 0.2
+
+[sub_resource type="Animation" id="Animation_osp4x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vb044"]
+resource_name = "default"
+length = 0.45
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qh6ij"]
+_data = {
+"RESET": SubResource("Animation_osp4x"),
+"walk": SubResource("Animation_vb044")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8dfp"]
+shader = ExtResource("5_dsvuk")
+shader_parameter/active = false
+shader_parameter/flash_color = null
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bcy2"]
+size = Vector2(45, 24)
+
+[node name="RaptorPlayer" type="CharacterBody2D"]
+position = Vector2(0, -17)
+collision_mask = 6
+motion_mode = 1
+script = ExtResource("1_k1uh2")
+stat_manager = SubResource("Resource_dcpqo")
+
+[node name="ControllerContainer" type="Node" parent="."]
+
+[node name="UpgradeContainer" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["game_camera"]]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qh6ij")
+}
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="AbilityContainer" type="Node2D" parent="Body"]
+
+[node name="RaptorSlash" parent="Body/AbilityContainer" instance=ExtResource("3_kukac")]
+
+[node name="Uzi" parent="Body/AbilityContainer" instance=ExtResource("4_3be8u")]
+
+[node name="Shadow" parent="Body" instance=ExtResource("5_ak7ip")]
+position = Vector2(1, 15)
+scale = Vector2(1.40625, 1)
+
+[node name="BodySprite" type="Sprite2D" parent="Body"]
+z_index = 2
+material = SubResource("ShaderMaterial_h8dfp")
+position = Vector2(0, 17)
+texture = ExtResource("4_pqo7d")
+offset = Vector2(0, -17)
+vframes = 3
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="HurtBox" parent="Body" instance=ExtResource("5_tv8cj")]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Body/HurtBox" index="0"]
+position = Vector2(0.5, -3)
+shape = SubResource("RectangleShape2D_2bcy2")
+
+[node name="PickupBox" parent="Body" instance=ExtResource("8_gdx3r")]
+collision_mask = 8
+
+[node name="HandMarker" type="Marker2D" parent="Body"]
+position = Vector2(22, 6)
+
+[node name="PopupMarker" type="Marker2D" parent="Body"]
+position = Vector2(0, -24)
+
+[editable path="Body/HurtBox"]

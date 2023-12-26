@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjp33jjtrooqb"]
+
+[ext_resource type="Script" path="res://abilities/projectiles/Projectile.gd" id="1_q6pb8"]
+[ext_resource type="Texture2D" uid="uid://dbxqjrykaek7q" path="res://assets/projectiles/brass_bullet.png" id="2_xi83c"]
+[ext_resource type="PackedScene" uid="uid://b1cswaij2nl8f" path="res://actors/common/HitBox.tscn" id="3_g1bsn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyagl"]
+size = Vector2(13.5, 6)
+
+[node name="Bullet" type="Node2D" groups=["bullet", "projectile"]]
+script = ExtResource("1_q6pb8")
+base_damage = 2
+piercing = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+texture = ExtResource("2_xi83c")
+flip_h = true
+
+[node name="HitBox" parent="." instance=ExtResource("3_g1bsn")]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(-0.705376, 0.0320644)
+shape = SubResource("RectangleShape2D_qyagl")
+
+[editable path="HitBox"]

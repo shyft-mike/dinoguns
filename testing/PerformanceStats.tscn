@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn0lo5o7t8lq4"]
+
+[ext_resource type="Script" path="res://testing/PerformanceStats.gd" id="1_6xi7n"]
+
+[node name="PerformanceStats" type="VBoxContainer"]
+offset_left = 14.0
+offset_top = 16.0
+offset_right = 54.0
+offset_bottom = 93.0
+theme_override_constants/separation = 3
+script = ExtResource("1_6xi7n")
+
+[node name="FPSLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="DinoStats" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OnScreenLabel" type="Label" parent="DinoStats"]
+layout_mode = 2
+
+[node name="InPoolLabel" type="Label" parent="DinoStats"]
+layout_mode = 2
+
+[node name="TotalLabel" type="Label" parent="DinoStats"]
+layout_mode = 2
+
+[node name="ProjectileStats" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OnScreenLabel" type="Label" parent="ProjectileStats"]
+layout_mode = 2
+
+[node name="InPoolLabel" type="Label" parent="ProjectileStats"]
+layout_mode = 2
+
+[node name="TotalLabel" type="Label" parent="ProjectileStats"]
+layout_mode = 2
