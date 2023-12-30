@@ -43,8 +43,8 @@ func get_from_pool(type: PoolType, instance_func: Callable):
 		instance = instance_func.call()
 		instance.tree_exiting.connect(add_to_pool.bind(type, instance))
 
-	if not "setup" in instance:
-		print_debug("No setup() for instance - ", instance)
+	#if not "setup" in instance:
+		#print_debug("No setup() for instance - ", instance)
 
 	return instance
 

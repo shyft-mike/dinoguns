@@ -36,11 +36,11 @@ func _generate_options_list():
 
 func get_item_bg_color(upgrade: Upgrade):
 	match upgrade.power_type:
-		Upgrade.PowerType.RAGE:
+		Upgrade.PowerType.FURY:
 			return Color.RED
-		Upgrade.PowerType.ADAPTATION:
+		Upgrade.PowerType.MUTABILITY:
 			return Color.YELLOW
-		Upgrade.PowerType.METABOLISM:
+		Upgrade.PowerType.RESILIENCE:
 			return Color.GREEN
-		Upgrade.PowerType.PRIMAL:
+		Upgrade.PowerType.PRIMAL_FORCE:
 			return Color.SKY_BLUE

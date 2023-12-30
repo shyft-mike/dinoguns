@@ -1,0 +1,20 @@
+[remap]
+
+importer="texture_atlas"
+type="Texture2D"
+uid="uid://56p80w8l0egp"
+path="res://.godot/imported/#1 - Transparent Icons.png-28ae8f869babdfa3bc14631d84b8ed1f.res"
+group_file="res://ui/ui_atlas.png"
+valid=true
+[deps]
+
+
+source_file="res://ui/assets/#1 - Transparent Icons.png"
+dest_files=["res://.godot/imported/#1 - Transparent Icons.png-28ae8f869babdfa3bc14631d84b8ed1f.res"]
+
+[params]
+
+atlas_file="res://ui/ui_atlas.png"
+import_mode=0
+crop_to_region=false
+trim_alpha_border_from_region=true

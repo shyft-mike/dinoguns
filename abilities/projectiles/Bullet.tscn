@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjp33jjtrooqb"]
+[gd_scene load_steps=5 format=3 uid="uid://b07cdhuqw0u6q"]
 
 [ext_resource type="Script" path="res://abilities/projectiles/Projectile.gd" id="1_q6pb8"]
 [ext_resource type="Texture2D" uid="uid://dbxqjrykaek7q" path="res://assets/projectiles/brass_bullet.png" id="2_xi83c"]

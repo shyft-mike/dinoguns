@@ -2,7 +2,7 @@ class_name DamageService
 extends RefCounted
 
 
-enum DamageType {PHYSICAL,FIRE,UNSTOPPABLE}
+enum DamageType {PHYSICAL,FIRE,ICE,UNSTOPPABLE}
 
 
 class Damage:
@@ -12,6 +12,10 @@ class Damage:
 	func _init(damage_type: DamageType, base_damage: int):
 		self.damage_type = damage_type
 		self.base_damage = base_damage
+
+
+static func create_fire_damage(damage: int) -> Damage:
+	return Damage.new(DamageType.FIRE, damage)
 
 
 static func calc_damage(stat_manager: ActorStatManager, damage: Damage) -> int:
@@ -28,6 +32,11 @@ static func calc_damage(stat_manager: ActorStatManager, damage: Damage) -> int:
 				stat_manager.fire_resist.total_value(),
 				damage.base_damage
 			)
+		DamageType.ICE:
+			actual_damage = _calc_elemental_damage(
+				stat_manager.ice_resist.total_value(),
+				damage.base_damage
+			)
 		DamageType.UNSTOPPABLE:
 			actual_damage = damage.base_damage
 
@@ -39,5 +48,5 @@ static func _calc_elemental_damage(resistance: int, damage_amount: int) -> int:
 	if randf() <= resistance / 100:
 		return 0
 
-	return damage_amount * resistance
+	return damage_amount - (damage_amount * (resistance / 100))
 

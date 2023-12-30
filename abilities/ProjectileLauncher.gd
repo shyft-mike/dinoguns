@@ -5,6 +5,7 @@ extends Ability
 @onready var range_area: Area2D = $RangeArea
 @onready var range_area_collision: CollisionShape2D = $RangeArea/CollisionShape2D
 
+@export var autofire: bool = false
 @export var thumbnail_texture: Texture2D
 @export var projectile_type: ProjectileFactory.ProjectileType
 @export var bullet_life := 3
@@ -22,16 +23,17 @@ func _ready():
 	range_area_collision.shape.radius = effective_range
 
 
-func _get_target_direction(spawn_position: Vector2):
-	var nodes_in_range = range_area.get_overlapping_bodies()
+func _get_target_direction(spawn_marker: Marker2D):
 	var target_position
 
-	if nodes_in_range.size() > 0:
-		target_position = nodes_in_range[0].global_position
+	if autofire:
+		var nodes_in_range = range_area.get_overlapping_bodies()
+		if nodes_in_range.size() > 0:
+			target_position = nodes_in_range.pick_random().global_position
 	else:
-		target_position = spawn_position + Vector2(100, 0)
+		target_position = spawn_marker.get_global_mouse_position()
 
-	return spawn_position.direction_to(target_position)
+	return spawn_marker.global_position.direction_to(target_position)
 
 
 func _internal_activate(user: Actor, spawn_marker: Marker2D) -> void:
@@ -45,7 +47,7 @@ func _internal_activate(user: Actor, spawn_marker: Marker2D) -> void:
 			await get_tree().create_timer(multishot_delay).timeout
 		shots_fired = 0
 	else:
-		var direction = _get_target_direction(spawn_marker.global_position)
+		var direction = _get_target_direction(spawn_marker)
 		_fire(user, spawn_marker.global_position, direction)
 
 
@@ -53,15 +55,19 @@ func _fire(user: Actor, spawn_position: Vector2, direction: Vector2):
 	shots_fired += 1
 	var projectile = ProjectileFactory.generate(projectile_type)
 
-	for attached_damager_modifier in attached_damager_modifiers:
-		projectile.attached_modifiers.append(attached_damager_modifier)
+	for modifier in attached_modifiers:
+		modifier.modify_damager(projectile)
 
-	get_tree().get_root().add_child(projectile)
+	for modifier in attached_damager_modifiers:
+		projectile.attached_modifiers.append(modifier)
+
 	projectile.position = spawn_position
 	projectile.direction = direction
 	projectile.rotation = direction.angle()
 	projectile.lifetime = bullet_life
 	projectile.user = user
+
+	get_tree().get_root().add_child(projectile)
 
 	if fire_sound:
 		audio_stream_player.play()

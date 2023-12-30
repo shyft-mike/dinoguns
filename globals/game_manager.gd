@@ -19,7 +19,7 @@ func start():
 
 func game_over():
 	get_tree().paused = true
-	State.player.get_parent().remove_child(State.player)
+	State.player.get_parent().call_deferred("remove_child", State.player)
 	SceneManager.change_scene(SceneManager.GAME_OVER_SCENE)
 
 
@@ -29,8 +29,8 @@ func _on_character_selected(new_player):
 
 
 func _on_player_leveled_up():
-	SceneManager.current_scene.get_node("UILayer").add_child(level_up_scene)
-	level_up_scene.setup()
+	SceneManager.current_scene.get_node("UILayer").call_deferred("add_child", level_up_scene)
+	level_up_scene.call_deferred("setup")
 	get_tree().paused = true
 
 

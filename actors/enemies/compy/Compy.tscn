@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b7hfctft3mjv0"]
+[gd_scene load_steps=24 format=3 uid="uid://b7hfctft3mjv0"]
 
 [ext_resource type="Script" path="res://actors/enemies/Enemy.gd" id="1_nfe26"]
 [ext_resource type="Script" path="res://items/drop.gd" id="2_s66ut"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://abilities/Damager.gd" id="4_1log8"]
 [ext_resource type="Shader" path="res://effects/shaders/flash.gdshader" id="4_52e8n"]
 [ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://actors/enemies/compy/assets/COMPY_sprite_sheet_2.png" id="4_kpnpg"]
+[ext_resource type="PackedScene" uid="uid://ddchakhun7gpx" path="res://actors/common/debuffs/DebuffManager.tscn" id="4_v2spa"]
 [ext_resource type="PackedScene" uid="uid://bx66mvjsd131q" path="res://actors/common/HurtBox.tscn" id="5_ntbk7"]
-[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/Shadow.tscn" id="6_qdjcn"]
+[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/shadow.tscn" id="6_qdjcn"]
 [ext_resource type="PackedScene" uid="uid://b1cswaij2nl8f" path="res://actors/common/HitBox.tscn" id="7_cwpay"]
 
 [sub_resource type="Resource" id="Resource_yrm46"]
@@ -29,7 +30,8 @@ base_health = 50
 base_move_speed = 80
 base_attack_speed = 0
 base_health_regen = 0
-base_fire_resist = 0
+base_fire_resist = -10
+base_ice_resist = 0
 hit_invincibility_time = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1f0x"]
@@ -185,6 +187,8 @@ shape = SubResource("CapsuleShape2D_wf5nm")
 
 [node name="Body" type="Node2D" parent="."]
 position = Vector2(0, 10)
+
+[node name="DebuffManager" parent="Body" instance=ExtResource("4_v2spa")]
 
 [node name="BodyDamager" type="Node2D" parent="Body"]
 script = ExtResource("4_1log8")

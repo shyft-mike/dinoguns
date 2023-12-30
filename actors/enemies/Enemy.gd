@@ -18,33 +18,28 @@ func _ready():
 	body_damager.user = self
 
 	_hurt_box.hurt_box_collided.connect(_on_hurt_box_collided)
+	_debuff_manager.damage_ticked.connect(handle_damage)
+	_debuff_manager.debuff_removed.connect(_on_debuff_removed)
 
 
 func setup():
 	super.setup()
 	$HealthBar.value = 100
 	current_state = EnemyState.PERSUING
+	_debuff_manager.reset()
 	_reset_animation()
 
 
 func _reset_animation():
 	# blech, why do i have to do this when i have a "RESET" track?
 	scale = Vector2(1,1)
-	_body_sprite.modulate = Color(1,1,1,1)
+	_body_sprite.modulate = Color.WHITE
 
 
 func _handle_movement():
 	if current_state == EnemyState.STOPPED:
 		return
-
-	velocity = _input_direction * stat_manager.get_move_speed()
-
-	if velocity.length() < 0.1:
-		_animation_player.play("RESET")
-	else:
-		_animation_player.play("walk")
-
-	move_and_slide()
+	super._handle_movement()
 
 
 func _physics_process(_delta):
@@ -61,11 +56,11 @@ func handle_damage(damage: DamageService.Damage):
 
 	var damage_done = stat_manager.take_damage(damage)
 
-	$HealthBar.value = stat_manager.get_health_percent()
-
-	flash(Color.RED)
-	show_damage_popup(damage_done)
-	spray()
+	if damage_done > 0:
+		$HealthBar.value = stat_manager.get_health_percent()
+		flash(Color.RED)
+		show_damage_popup(damage_done, damage.damage_type)
+		spray()
 
 	if stat_manager.is_dead:
 		current_state = EnemyState.STOPPED
@@ -111,18 +106,31 @@ func _get_drop_item(drop: Drop) -> Item:
 		ItemUtility.ItemType.BIG_AMBER:
 			pool_type = Pooling.PoolType.BIG_AMBER
 
-	return Pooling.get_from_pool(pool_type, ItemFactory.generate_item.bind(drop.item_type))
+	return Pooling.get_from_pool(pool_type, ItemFactory.create.bind(drop.item_type))
 
 
-func show_damage_popup(damage_done: int):
+func show_damage_popup(damage_done: int, damage_type: DamageService.DamageType):
 	var popup = Pooling.get_from_pool(Pooling.PoolType.POPUP, func(): return number_popup_template.instantiate()) as NumberPopup
 	SceneManager.current_scene.popup_container.add_child(popup)
-	popup.damage(str(damage_done), _popup_marker.global_position, 20, 0)
+	popup.damage(str(damage_done), _popup_marker.global_position, 20, 0, damage_type)
 
 
 func _on_hurt_box_collided(area: Area2D):
 	if area is HitBox:
+		if area.damager.damage_type == DamageService.DamageType.FIRE:
+			if randi() % 5 == 0:
+				_debuff_manager.is_burning = true
+		if area.damager.damage_type == DamageService.DamageType.ICE:
+			if randi() % 3 == 0:
+				apply_frozen()
+
 		handle_damage(area.damager.on_collide(self))
+
+
+func _on_debuff_removed(debuff: Debuff) -> void:
+	if debuff is IceDebuff:
+		_body_sprite.modulate = Color.WHITE
+		_animation_player.speed_scale = 1
 
 
 func remove():

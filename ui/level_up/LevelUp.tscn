@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://h65n2v3iqoes"]
+[gd_scene load_steps=11 format=3 uid="uid://h65n2v3iqoes"]
 
 [ext_resource type="StyleBox" uid="uid://bagfiepcotjx6" path="res://ui/panel_style.tres" id="1_n38is"]
 [ext_resource type="Script" path="res://ui/level_up/LevelUp.gd" id="2_1m3nj"]
+[ext_resource type="Script" path="res://ui/level_up/IceUpgrade.gd" id="3_cvga6"]
 [ext_resource type="Script" path="res://ui/level_up/Upgrade.gd" id="3_uvycv"]
 [ext_resource type="Texture2D" uid="uid://bfqo8x4aoab0h" path="res://assets/characters/claw.png" id="4_ydpu8"]
 [ext_resource type="Script" path="res://ui/level_up/RicochetUpgrade.gd" id="5_h6ms3"]
 [ext_resource type="Texture2D" uid="uid://dmdfnl8vc3idl" path="res://assets/temp/uzi.png" id="6_yufbb"]
+[ext_resource type="Script" path="res://ui/level_up/FireUpgrade.gd" id="7_ew1b5"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jcuca"]
 
@@ -30,6 +32,7 @@ allow_search = false
 fixed_icon_size = Vector2i(64, 64)
 
 [node name="UpgradeContainer" type="Node" parent="."]
+script = ExtResource("3_cvga6")
 
 [node name="Attack1" type="Node" parent="UpgradeContainer"]
 script = ExtResource("3_uvycv")
@@ -43,7 +46,6 @@ script = ExtResource("3_uvycv")
 title = "Attack +10 lvl 2"
 icon = ExtResource("4_ydpu8")
 required_level = 3
-required_rage = 1
 upgrade_stat_type = 1
 upgrade_stat_value = 10
 
@@ -67,5 +69,15 @@ script = ExtResource("5_h6ms3")
 title = "Ricochet Bullets"
 icon = ExtResource("6_yufbb")
 power_type = 2
+
+[node name="FireUpgrade" type="Node" parent="UpgradeContainer"]
+script = ExtResource("7_ew1b5")
+title = "Fire Bullets"
+power_type = 3
+
+[node name="IceUpgrade" type="Node" parent="UpgradeContainer"]
+script = ExtResource("3_cvga6")
+title = "Ice Bullets"
+power_type = 3
 
 [connection signal="item_selected" from="UpgradeItemList" to="." method="_on_item_list_item_selected"]

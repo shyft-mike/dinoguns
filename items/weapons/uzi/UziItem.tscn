@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhvqikhn3onuk"]
+
+[ext_resource type="Script" path="res://items/weapons/uzi/UziItem.gd" id="1_rwws0"]
+[ext_resource type="Texture2D" uid="uid://dmdfnl8vc3idl" path="res://assets/temp/uzi.png" id="2_gr5bj"]
+[ext_resource type="Shader" path="res://effects/shaders/shine.gdshader" id="3_o3o7r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t84et"]
+resource_local_to_scene = true
+shader = ExtResource("3_o3o7r")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uix36"]
+size = Vector2(33, 33)
+
+[node name="Uzi" type="RigidBody2D"]
+collision_layer = 8
+freeze = true
+script = ExtResource("1_rwws0")
+thumbnail_image = ExtResource("2_gr5bj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_t84et")
+texture = ExtResource("2_gr5bj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_uix36")

@@ -1,0 +1,180 @@
+[gd_scene load_steps=10 format=3 uid="uid://1ql714esnalu"]
+
+[ext_resource type="Script" path="res://ui/NumberPopup.gd" id="1_qmuax"]
+[ext_resource type="Texture2D" uid="uid://bbq86ajbf0tmr" path="res://ui/ui_atlas.png" id="2_gdbte"]
+
+[sub_resource type="Animation" id="Animation_kgiao"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LabelContainer:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LabelContainer:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LabelContainer:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_pidjt"]
+resource_name = "swell"
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LabelContainer:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.149908, 0.298361, 1)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.998152),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"remove"
+}]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LabelContainer:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.7, -0.25, 0, 0.25, 0, 1.7, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.184441, 0.3, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LabelContainer:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.7, -0.25, 0, 0.25, 0, 1.7, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.184441, 0.3, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75qne"]
+_data = {
+"RESET": SubResource("Animation_kgiao"),
+"swell": SubResource("Animation_pidjt")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vkgr"]
+atlas = ExtResource("2_gdbte")
+region = Rect2(291, 0, 32, 32)
+margin = Rect2(0, 2, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3qgn"]
+atlas = ExtResource("2_gdbte")
+region = Rect2(355, 672, 32, 32)
+margin = Rect2(0, 2, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aod8s"]
+atlas = ExtResource("2_gdbte")
+region = Rect2(163, 96, 32, 32)
+margin = Rect2(0, 2, 0, 0)
+
+[sub_resource type="SystemFont" id="SystemFont_pruo5"]
+font_names = PackedStringArray("Impact")
+
+[node name="NumberPopup" type="Node2D"]
+z_index = 10
+script = ExtResource("1_qmuax")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_75qne")
+}
+
+[node name="LabelContainer" type="Node2D" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LabelContainer"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Icons" type="Control" parent="LabelContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="FireDamageIcon" type="TextureRect" parent="LabelContainer/HBoxContainer/Icons"]
+visible = false
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_0vkgr")
+
+[node name="IceDamageIcon" type="TextureRect" parent="LabelContainer/HBoxContainer/Icons"]
+visible = false
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_q3qgn")
+
+[node name="HealIcon" type="TextureRect" parent="LabelContainer/HBoxContainer/Icons"]
+visible = false
+modulate = Color(0.290196, 1, 0.0745098, 1)
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_aod8s")
+
+[node name="Label" type="Label" parent="LabelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = SubResource("SystemFont_pruo5")
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -10,10 +10,10 @@ var total_experience: int = 0
 var to_next_level: int = base_experience
 
 var current_upgrades: Array[Upgrade] = []
-var rage_stat_count: int = 0
-var adaptation_stat_count: int = 0
-var metabolism_stat_count: int = 0
-var primal_stat_count: int = 0
+var fury_stat_count: int = 0
+var mutability_stat_count: int = 0
+var resilience_stat_count: int = 0
+var primal_force_stat_count: int = 0
 
 
 func setup():
@@ -24,10 +24,10 @@ func setup():
 	total_experience = 0
 	to_next_level = base_experience
 	current_upgrades = []
-	rage_stat_count = 0
-	adaptation_stat_count = 0
-	metabolism_stat_count = 0
-	primal_stat_count = 0
+	fury_stat_count = 0
+	mutability_stat_count = 0
+	resilience_stat_count = 0
+	primal_force_stat_count = 0
 
 	Events.player_health_changed.emit(0)
 	Events.experience_received.emit()

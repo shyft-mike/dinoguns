@@ -17,5 +17,8 @@ func _handle_abilities(delta) -> void:
 
 
 func _physics_process(delta) -> void:
+	if actor.stat_manager.is_dead:
+		return
+
 	_handle_input()
 	_handle_abilities(delta)

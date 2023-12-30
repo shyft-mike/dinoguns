@@ -17,6 +17,10 @@ func _ready():
 	hit_box.damager = self
 
 
+func set_damage_type(new_damage_type: DamageService.DamageType) -> void:
+	damage_type = new_damage_type
+
+
 func on_collide(collided_actor: Actor) -> DamageService.Damage:
 	if piercing != 0 and hit_count == piercing:
 		call_deferred("remove")
@@ -31,5 +35,6 @@ func on_collide(collided_actor: Actor) -> DamageService.Damage:
 
 
 func remove():
+	attached_modifiers.clear()
 	if is_instance_valid(self) and is_inside_tree():
 		get_parent().remove_child(self)

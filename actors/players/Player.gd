@@ -22,17 +22,6 @@ func _ready():
 	_hurt_box.hurt_box_collided.connect(_on_hurt_box_collided)
 
 
-func _handle_movement():
-	velocity = _input_direction * stat_manager.get_move_speed()
-
-	if velocity.length() == 0:
-		_animation_player.play("RESET")
-	else:
-		_animation_player.play("walk")
-
-	move_and_slide()
-
-
 func _physics_process(delta):
 	_handle_movement()
 

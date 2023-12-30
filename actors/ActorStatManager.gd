@@ -8,6 +8,7 @@ extends Resource
 @export var base_attack_speed: int
 @export var base_health_regen: int
 @export var base_fire_resist: int
+@export var base_ice_resist: int
 @export var hit_invincibility_time: float = 0.2
 
 var current_health: int
@@ -19,6 +20,7 @@ var move_speed: Stat
 var attack_speed: Stat
 var health_regen: Stat
 var fire_resist: Stat
+var ice_resist: Stat
 
 var is_dead: bool         ## True if the character is dead.
 var is_damagable: bool    ## True if the character can take damage.
@@ -32,6 +34,7 @@ func setup():
 	attack_speed = Stat.create("Attack Speed", base_attack_speed)
 	health_regen = Stat.create("Health Regen", base_health_regen)
 	fire_resist = Stat.create("Fire Resistance", base_fire_resist)
+	ice_resist = Stat.create("Ice Resistance", base_ice_resist)
 
 	current_health = health.total_value()
 
@@ -45,7 +48,9 @@ func get_health_percent() -> float:
 
 
 ## Calculates the character's move speed.
-func get_move_speed() -> float:
+func get_move_speed(actor: Actor) -> float:
+	if actor._debuff_manager.is_frozen:
+		return move_speed.total_value() * 0.5
 	return move_speed.total_value()
 
 

@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdm2pnv7pmfkr"]
+
+[ext_resource type="PackedScene" uid="uid://c6m8f2la6y1kv" path="res://ui/screens/talent_tree/TalentButton.tscn" id="1_ak13k"]
+[ext_resource type="Script" path="res://ui/screens/talent_tree/TalentTree.gd" id="1_w51ww"]
+
+[node name="TalentTree" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w51ww")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TalentButton" parent="." instance=ExtResource("1_ak13k")]
+layout_mode = 2
+offset_left = 503.0
+offset_top = 28.0
+offset_right = 543.0
+offset_bottom = 68.0
+
+[node name="TalentButton2" parent="TalentButton" instance=ExtResource("1_ak13k")]
+layout_mode = 2
+offset_left = -61.0
+offset_top = 72.0
+offset_right = -21.0
+offset_bottom = 112.0
+
+[node name="TalentButton3" parent="TalentButton" instance=ExtResource("1_ak13k")]
+layout_mode = 2
+offset_left = 61.0
+offset_top = 72.0
+offset_right = 101.0
+offset_bottom = 112.0
+
+[node name="TalentButton4" parent="TalentButton/TalentButton3" instance=ExtResource("1_ak13k")]
+layout_mode = 2
+offset_top = 81.0
+offset_right = 40.0
+offset_bottom = 121.0

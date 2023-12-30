@@ -2,7 +2,7 @@ class_name Actor
 extends CharacterBody2D
 
 @export var stat_manager: ActorStatManager
-@export var number_popup_template: PackedScene = preload("res://ui/number_popup.tscn")
+@export var number_popup_template: PackedScene = preload("res://ui/NumberPopup.tscn")
 
 @onready var _controller_container: Node = $ControllerContainer
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -10,13 +10,20 @@ extends CharacterBody2D
 @onready var _body_sprite: Sprite2D = $Body/BodySprite
 @onready var _hurt_box: HurtBox = $Body/HurtBox
 @onready var _popup_marker: Marker2D = $Body/PopupMarker
-
+@onready var _debuff_manager: DebuffManager = $Body/DebuffManager
 
 var _ability_container: Node2D
 var _controller: ActorController
+
 var _facing: Vector2 = Vector2.RIGHT
 var _input_direction: Vector2
 var _flipped: bool = false
+
+
+func setup():
+	stat_manager.setup()
+
+	_ability_container = get_node_or_null("Body/AbilityContainer")
 
 
 func set_controller(controller: ActorController) -> void:
@@ -25,13 +32,6 @@ func set_controller(controller: ActorController) -> void:
 
 	_controller = controller
 	_controller_container.add_child(controller)
-
-
-func setup():
-	stat_manager.setup()
-
-	if has_node("Body/AbilityContainer"):
-		_ability_container = $Body/AbilityContainer
 
 
 func move(direction: Vector2) -> void:
@@ -56,3 +56,25 @@ func flash(color: Color = Color.WHITE):
 	ShaderEffects.flash(_body_sprite.material, true, color)
 	await get_tree().create_timer(0.1).timeout
 	ShaderEffects.flash(_body_sprite.material, false, color)
+
+
+func add_ability(ability: Ability) -> void:
+	if _ability_container:
+		_ability_container.call_deferred("add_child", ability)
+
+
+func apply_frozen() -> void:
+	_debuff_manager.is_frozen = true
+	_body_sprite.modulate = Color.BLUE
+	_animation_player.speed_scale *= 0.5
+
+
+func _handle_movement():
+	velocity = _input_direction * stat_manager.get_move_speed(self)
+
+	if velocity.length() < 0.1:
+		_animation_player.play("RESET")
+	else:
+		_animation_player.play("walk")
+
+	move_and_slide()

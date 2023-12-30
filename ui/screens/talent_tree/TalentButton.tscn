@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6m8f2la6y1kv"]
+
+[ext_resource type="Texture2D" uid="uid://my1pba4xadca" path="res://icon.svg" id="1_y54gj"]
+[ext_resource type="Script" path="res://ui/screens/talent_tree/TalentButton.gd" id="2_pwe2x"]
+
+[node name="TalentButton" type="TextureButton"]
+offset_right = 64.0
+offset_bottom = 64.0
+button_mask = 3
+texture_normal = ExtResource("1_y54gj")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_pwe2x")
+connected_line_color = Color(1, 0.905882, 0, 1)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_right = 4
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "0/3"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = -1
+width = 5.0
+default_color = Color(0.239216, 0.239216, 0.239216, 1)
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddchakhun7gpx"]
+
+[ext_resource type="Script" path="res://actors/common/debuffs/DebuffManager.gd" id="1_icb56"]
+[ext_resource type="PackedScene" uid="uid://bsag0t6lot8ah" path="res://actors/common/debuffs/BurnDebuff.tscn" id="2_xyodj"]
+[ext_resource type="PackedScene" uid="uid://u1f6e85s1gve" path="res://actors/common/debuffs/IceDebuff.tscn" id="3_7hgih"]
+
+[node name="DebuffManager" type="Node2D"]
+script = ExtResource("1_icb56")
+
+[node name="BurnDebuff" parent="." instance=ExtResource("2_xyodj")]
+visible = false
+
+[node name="IceDebuff" parent="." instance=ExtResource("3_7hgih")]
+visible = false
+
+[connection signal="dot_debuff_ticked" from="BurnDebuff" to="." method="_on_burn_debuff_ticked"]
+[connection signal="debuff_removed" from="IceDebuff" to="." method="_on_ice_debuff_removed"]
