@@ -83,23 +83,3 @@ offset_top = 81.0
 offset_right = 40.0
 offset_bottom = 121.0
 talent = SubResource("Resource_cd2bb")
-
-[node name="SaveButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 455.0
-offset_top = 567.0
-offset_right = 502.0
-offset_bottom = 598.0
-text = "SAVE"
-
-[node name="LoadButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 525.0
-offset_top = 568.0
-offset_right = 572.0
-offset_bottom = 599.0
-text = "LOAD
-"
-
-[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="LoadButton" to="." method="_on_load_button_pressed"]

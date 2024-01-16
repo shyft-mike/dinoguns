@@ -1,5 +1,4 @@
-class_name Actor
-extends CharacterBody2D
+class_name Actor extends CharacterBody2D
 
 @export var stat_manager: ActorStatManager
 @export var number_popup_template: PackedScene = preload("res://ui/NumberPopup.tscn")
@@ -23,15 +22,19 @@ var _flipped: bool = false
 func setup():
 	stat_manager.setup()
 
-	_ability_container = get_node_or_null("Body/AbilityContainer")
+	_ability_container = get_node_or_null("AbilityContainer")
 
 
 func set_controller(controller: ActorController) -> void:
-	for child_controller in _controller_container.get_children():
-		child_controller.queue_free()
+	clear_controller()
 
 	_controller = controller
 	_controller_container.add_child(controller)
+
+
+func clear_controller() -> void:
+	for child_controller in _controller_container.get_children():
+		child_controller.queue_free()
 
 
 func move(direction: Vector2) -> void:

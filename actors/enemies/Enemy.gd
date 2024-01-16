@@ -13,6 +13,7 @@ var _frame_count: int = 0
 
 
 func _ready():
+	setup()
 	set_controller(EnemyController.new(self))
 
 	body_damager.user = self
@@ -63,6 +64,7 @@ func handle_damage(damage: DamageService.Damage):
 		spray()
 
 	if stat_manager.is_dead:
+		_debuff_manager.reset()
 		current_state = EnemyState.STOPPED
 		if _animation_player:
 			_animation_player.play("die")

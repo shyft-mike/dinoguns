@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://coak47oha66bd"]
+
+[ext_resource type="Texture2D" uid="uid://d1xyqv76uf5sm" path="res://abilities/assets/shotgun_shell.png" id="1_01wux"]
+[ext_resource type="Script" path="res://items/item.gd" id="1_yntoc"]
+
+[node name="SpentShell" type="RigidBody2D"]
+z_index = 2
+script = ExtResource("1_yntoc")
+can_seek = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.42762, 0.42762)
+texture = ExtResource("1_01wux")

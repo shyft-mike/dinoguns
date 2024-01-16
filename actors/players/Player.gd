@@ -8,6 +8,8 @@ extends Actor
 @onready var hand_marker: Marker2D = $Body/HandMarker
 @onready var _upgrade_container: Node = $UpgradeContainer
 
+var _upgrades: Array[Upgrade] = []
+
 
 func _init():
 	Events.experience_received.connect(_on_experience_received)

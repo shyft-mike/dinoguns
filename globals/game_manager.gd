@@ -1,5 +1,8 @@
 extends Node
 
+enum GameMode {STORY}
+
+# Storing the level up scene so it can be reused
 var level_up_scene: Node
 
 

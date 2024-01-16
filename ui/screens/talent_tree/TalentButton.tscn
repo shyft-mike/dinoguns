@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://my1pba4xadca" path="res://icon.svg" id="1_y54gj"]
 [ext_resource type="Script" path="res://ui/screens/talent_tree/TalentButton.gd" id="2_pwe2x"]
 
-[node name="TalentButton" type="TextureButton"]
+[node name="TalentButton" type="TextureButton" groups=["talent"]]
 offset_right = 64.0
 offset_bottom = 64.0
 button_mask = 3

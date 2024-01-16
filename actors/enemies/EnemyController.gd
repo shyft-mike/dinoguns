@@ -1,9 +1,9 @@
-class_name EnemyController
-extends ActorController
+class_name EnemyController extends ActorController
 
 var _frame_count: int = 0
 var _remaining_cycles: int = 0
 var _last_player_sighting: Vector2
+
 
 func _physics_process(delta):
 	if _frame_count == 0 or _frame_count % 2 == 0:

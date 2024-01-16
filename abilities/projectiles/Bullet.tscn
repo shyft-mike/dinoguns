@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b07cdhuqw0u6q"]
+[gd_scene load_steps=9 format=3 uid="uid://b07cdhuqw0u6q"]
 
 [ext_resource type="Script" path="res://abilities/projectiles/Projectile.gd" id="1_q6pb8"]
 [ext_resource type="Texture2D" uid="uid://dbxqjrykaek7q" path="res://assets/projectiles/brass_bullet.png" id="2_xi83c"]
@@ -7,7 +7,24 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyagl"]
 size = Vector2(13.5, 6)
 
+[sub_resource type="Curve" id="Curve_ftpwb"]
+_data = [Vector2(0.0107143, 0.00510216), 0.0, 0.0, 0, 0, Vector2(0.507143, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_e8bgn"]
+offsets = PackedFloat32Array(0, 0.753968, 1)
+colors = PackedColorArray(0.961365, 0.948957, 7.70092e-07, 1, 1, 0.341176, 0, 1, 1, 0.341176, 0, 0.215686)
+
+[sub_resource type="Curve" id="Curve_11e3q"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.825, 0.876822), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_r4uj2"]
+offsets = PackedFloat32Array(0, 0.642857)
+colors = PackedColorArray(0, 0.533333, 0.792157, 0.368627, 0.811765, 1, 1, 0.678431)
+
 [node name="Bullet" type="Node2D" groups=["bullet", "projectile"]]
+z_index = 10
 script = ExtResource("1_q6pb8")
 base_damage = 2
 piercing = 2
@@ -24,5 +41,39 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(-0.705376, 0.0320644)
 shape = SubResource("RectangleShape2D_qyagl")
+
+[node name="FireEffect" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(5, 0)
+amount = 10
+lifetime = 0.3
+randomness = 1.0
+spread = 50.0
+gravity = Vector2(0, -10)
+initial_velocity_min = 2.0
+initial_velocity_max = 10.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_ftpwb")
+color_ramp = SubResource("Gradient_e8bgn")
+
+[node name="IceEffect" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(5, 0)
+amount = 7
+lifetime = 0.8
+explosiveness = 0.13
+randomness = 0.44
+spread = 75.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_11e3q")
+color_ramp = SubResource("Gradient_r4uj2")
 
 [editable path="HitBox"]

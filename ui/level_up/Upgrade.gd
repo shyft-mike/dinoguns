@@ -17,6 +17,8 @@ enum PowerType { FURY,MUTABILITY,RESILIENCE,PRIMAL_FORCE }
 @export var upgrade_stat_type: Stat.StatType
 @export var upgrade_stat_value: int
 
+@export var depends_on: NodePath
+
 
 func apply(player: Player, options: Object = null):
 	get_parent().remove_child(self)
@@ -45,6 +47,9 @@ func apply(player: Player, options: Object = null):
 
 
 func is_selectable(player: Player):
+	if depends_on and not player._upgrade_container.has_node(depends_on):
+		return false
+
 	if player.stat_manager.level < required_level: return false
 	if player.stat_manager.fury_stat_count < required_fury: return false
 	if player.stat_manager.mutability_stat_count < required_mutability: return false

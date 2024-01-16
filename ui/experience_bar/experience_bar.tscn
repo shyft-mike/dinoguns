@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://ui/experience_bar/experience_bar.gd" id="4_1q2ol"]
 
 [node name="ExperienceBar" type="TextureProgressBar"]
-offset_right = 1.0
-offset_bottom = 1.0
+offset_right = 48.0
+offset_bottom = 616.0
 value = 50.0
 fill_mode = 3
 texture_under = ExtResource("1_ccgfg")

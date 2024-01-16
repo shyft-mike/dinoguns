@@ -1,7 +1,9 @@
 extends PanelContainer
 
 @onready var upgrade_item_list: ItemList = $UpgradeItemList
-@onready var upgrade_container: Node = $UpgradeContainer
+@onready var general_upgrades: Node = $GeneralUpgrades
+@onready var gun_upgrades: Node = $GunUpgrades
+@onready var raptor_upgrades: Node = $RaptorUpgrades
 
 
 func _init():
@@ -26,12 +28,25 @@ func _on_item_list_item_selected(index):
 
 
 func _generate_options_list():
-	var upgrade_options = upgrade_container.get_children() as Array[Upgrade]
+	var upgrade_options = _get_available_upgrades()
 	for option in upgrade_options:
-		if option.is_selectable(State.player):
-			var index = upgrade_item_list.add_item(option.title, option.icon)
-			upgrade_item_list.set_item_metadata(index, option)
-			upgrade_item_list.set_item_custom_bg_color(index, get_item_bg_color(option))
+		var index = upgrade_item_list.add_item(option.title, option.icon)
+		upgrade_item_list.set_item_metadata(index, option)
+		upgrade_item_list.set_item_custom_bg_color(index, get_item_bg_color(option))
+
+
+func _get_available_upgrades() -> Array[Upgrade]:
+	var results: Array[Upgrade] = []
+
+	for upgrade in general_upgrades.get_children() as Array[Upgrade]:
+		if upgrade.is_selectable(State.player):
+			results.append(upgrade)
+
+	for upgrade in gun_upgrades.get_children() as Array[Upgrade]:
+		if upgrade.is_selectable(State.player):
+			results.append(upgrade)
+
+	return results
 
 
 func get_item_bg_color(upgrade: Upgrade):

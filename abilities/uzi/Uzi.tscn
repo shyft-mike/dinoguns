@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkf3e0o457sqm"]
+[gd_scene load_steps=5 format=3 uid="uid://dkf3e0o457sqm"]
 
-[ext_resource type="PackedScene" uid="uid://c3hvaxrk45hpa" path="res://abilities/ProjectileLauncher.tscn" id="1_pl2dy"]
+[ext_resource type="Script" path="res://abilities/ProjectileLauncher.gd" id="1_nkvjt"]
+[ext_resource type="PackedScene" uid="uid://b2pnjid31dv86" path="res://items/SpentCartridge.tscn" id="2_aobyg"]
+[ext_resource type="Texture2D" uid="uid://dmdfnl8vc3idl" path="res://assets/temp/uzi.png" id="2_k2l3i"]
 
-[node name="Uzi" instance=ExtResource("1_pl2dy")]
-interval = 333
+[sub_resource type="CircleShape2D" id="CircleShape2D_65xn3"]
+radius = 500.0
+
+[node name="Uzi" type="Node2D"]
+script = ExtResource("1_nkvjt")
+thumbnail_texture = ExtResource("2_k2l3i")
+cartridge_template = ExtResource("2_aobyg")
+interval = 0.33
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 4
+
+[node name="RangeArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
+shape = SubResource("CircleShape2D_65xn3")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(11, 0)
+
+[node name="ShellSpawn" type="Marker2D" parent="."]
+position = Vector2(5, 0)

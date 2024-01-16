@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2pnjid31dv86"]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_i0g2t"]
+[ext_resource type="Texture2D" uid="uid://dbxqjrykaek7q" path="res://assets/projectiles/brass_bullet.png" id="2_k3b42"]
+
+[node name="SpentCartridge" type="RigidBody2D"]
+z_index = 2
+script = ExtResource("1_i0g2t")
+can_seek = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k3b42")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(6.78007, 0, 6.21993, 5)

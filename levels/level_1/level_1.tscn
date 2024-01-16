@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bfqbfgq2iqsed"]
 
 [ext_resource type="Script" path="res://levels/level_1/level_1.gd" id="1_lc3v5"]
-[ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://ui/interface.tscn" id="2_3t4ql"]
+[ext_resource type="PackedScene" uid="uid://c65cgqprr57y3" path="res://ui/Interface.tscn" id="2_3t4ql"]
 [ext_resource type="PackedScene" uid="uid://10x2k1pwsqcs" path="res://levels/level_1/Grassfield_scene.tscn" id="3_y4cxh"]
 
 [node name="Level1" type="Node2D"]

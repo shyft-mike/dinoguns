@@ -1,9 +1,6 @@
-class_name ActorController
-extends Node
-
+class_name ActorController extends Node
 
 var actor: Actor
-
 var move_command: MoveCommand = MoveCommand.new()
 
 

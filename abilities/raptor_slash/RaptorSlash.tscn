@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://abilities/raptor_slash/RaptorSlash.gd" id="1_2ccgs"]
 
-[node name="RaptorSlash" type="Node"]
+[node name="RaptorSlash" type="Node2D"]
 script = ExtResource("1_2ccgs")

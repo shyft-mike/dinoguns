@@ -1,7 +1,8 @@
 class_name Ability
-extends Node
+extends Node2D
 
-@export var interval: int = 1000
+@export var interval: float = 1.0
+@export var can_rotate: bool = false
 
 # Modifiers that affect the ability itself
 var attached_modifiers: Array[Modifier] = []
@@ -14,11 +15,11 @@ var attached_damager_modifiers: Array[Modifier] = []
 # modifier.
 var attached_damager_callables: Array[Callable] = []
 
-var elapsed: int = 0
+var elapsed: float = 0.0
 var activated: bool = false
 
 
-func activate(_user: Actor, _spawn_marker: Marker2D) -> void:
+func activate(_user: Actor, _spawn_marker: Marker2D = null) -> void:
 	if activated:
 		return
 	else:
@@ -27,7 +28,7 @@ func activate(_user: Actor, _spawn_marker: Marker2D) -> void:
 		on_deactivated()
 
 
-func _internal_activate(_user: Actor, _spawn_marker: Marker2D) -> void:
+func _internal_activate(_user: Actor, _spawn_marker: Marker2D = null) -> void:
 	pass
 
 
@@ -36,6 +37,6 @@ func on_activated() -> void:
 
 
 func on_deactivated() -> void:
-	elapsed = 0
+	elapsed = 0.0
 	activated = false
 

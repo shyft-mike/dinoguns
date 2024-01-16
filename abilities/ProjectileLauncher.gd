@@ -4,9 +4,12 @@ extends Ability
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var range_area: Area2D = $RangeArea
 @onready var range_area_collision: CollisionShape2D = $RangeArea/CollisionShape2D
+@onready var bullet_spawn: Marker2D = $BulletSpawn
+@onready var shell_spawn: Marker2D = $ShellSpawn
 
 @export var autofire: bool = false
 @export var thumbnail_texture: Texture2D
+@export var cartridge_template: PackedScene
 @export var projectile_type: ProjectileFactory.ProjectileType
 @export var bullet_life := 3
 @export var effective_range := 500.0
@@ -36,7 +39,8 @@ func _get_target_direction(spawn_marker: Marker2D):
 	return spawn_marker.global_position.direction_to(target_position)
 
 
-func _internal_activate(user: Actor, spawn_marker: Marker2D) -> void:
+func _internal_activate(user: Actor, spawn_marker: Marker2D = null) -> void:
+	spawn_marker = bullet_spawn
 	if shots_fired == 15:
 		var center_position = spawn_marker.global_position
 		var radius_vector = Vector2(100, 0)
@@ -44,11 +48,13 @@ func _internal_activate(user: Actor, spawn_marker: Marker2D) -> void:
 			var target_position = center_position + radius_vector.rotated(((PI * 2) / 20) * i)
 			var target_direction = spawn_marker.global_position.direction_to(target_position)
 			_fire(user, spawn_marker.global_position, target_direction)
+			_eject_cartridge()
 			await get_tree().create_timer(multishot_delay).timeout
 		shots_fired = 0
 	else:
 		var direction = _get_target_direction(spawn_marker)
 		_fire(user, spawn_marker.global_position, direction)
+		_eject_cartridge()
 
 
 func _fire(user: Actor, spawn_position: Vector2, direction: Vector2):
@@ -71,3 +77,11 @@ func _fire(user: Actor, spawn_position: Vector2, direction: Vector2):
 
 	if fire_sound:
 		audio_stream_player.play()
+
+
+func _eject_cartridge() -> void:
+	if cartridge_template:
+		var cartridge: Item = cartridge_template.instantiate()
+		cartridge.global_position = shell_spawn.global_position
+		SceneManager.current_scene.items_container.call_deferred("add_child", cartridge)
+		cartridge.call_deferred("launch")

@@ -1,10 +1,9 @@
 extends Level
 
 @onready var spawn_timer: Timer = $SpawnTimer
-@onready var dialog_balloon: Balloon = $UILayer/Interface/BottomBar/VBox/DialogBalloon
+#@onready var dialog_balloon: Balloon = $UILayer/Interface/BottomBar/VBox/DialogBalloon
 
 var minutes_elapsed: float
-
 
 func _init():
 	minutes_elapsed = 0.0
@@ -13,7 +12,11 @@ func _init():
 func _ready():
 	super._ready()
 
-	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	var squad = ResourceLoader.load("res://actors/enemies/CompySquad.tscn").instantiate()
+	squad.global_position = SpawnManager._get_random_spawn_location()
+	SceneManager.current_scene.spawns_container.add_child(squad)
+
+	#spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
 	#dialog_balloon.start(ResourceLoader.load("res://characters/player/raptor/raptor.dialogue"), "start")
 
