@@ -1,5 +1,6 @@
-class_name Enemy
-extends Actor
+class_name Enemy extends Actor
+
+signal has_died (actor: Actor)
 
 enum EnemyState {PERSUING,RETREATING,STOPPED}
 
@@ -75,6 +76,7 @@ func handle_damage(damage: DamageService.Damage):
 func die():
 	_drop_items()
 	remove()
+	has_died.emit(self)
 
 
 func spray():

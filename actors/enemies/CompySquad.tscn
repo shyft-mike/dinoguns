@@ -1,95 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw7b1ga00d40b"]
+[gd_scene load_steps=2 format=3 uid="uid://cw7b1ga00d40b"]
 
-[ext_resource type="PackedScene" uid="uid://b7hfctft3mjv0" path="res://actors/enemies/compy/Compy.tscn" id="1_0t2n2"]
 [ext_resource type="Script" path="res://actors/enemies/CompySquad.gd" id="1_txmv3"]
-[ext_resource type="Script" path="res://actors/ActorStatManager.gd" id="2_nh3a6"]
-
-[sub_resource type="Resource" id="Resource_dcedp"]
-resource_local_to_scene = true
-script = ExtResource("2_nh3a6")
-base_attack = 1
-base_defense = 0
-base_health = 50
-base_move_speed = 80
-base_attack_speed = 0
-base_health_regen = 0
-base_fire_resist = -10
-base_ice_resist = 0
-hit_invincibility_time = 0.2
-
-[sub_resource type="Resource" id="Resource_10j3x"]
-resource_local_to_scene = true
-script = ExtResource("2_nh3a6")
-base_attack = 1
-base_defense = 0
-base_health = 50
-base_move_speed = 80
-base_attack_speed = 0
-base_health_regen = 0
-base_fire_resist = -10
-base_ice_resist = 0
-hit_invincibility_time = 0.2
-
-[sub_resource type="Resource" id="Resource_dv5wj"]
-resource_local_to_scene = true
-script = ExtResource("2_nh3a6")
-base_attack = 1
-base_defense = 0
-base_health = 50
-base_move_speed = 80
-base_attack_speed = 0
-base_health_regen = 0
-base_fire_resist = -10
-base_ice_resist = 0
-hit_invincibility_time = 0.2
-
-[sub_resource type="Resource" id="Resource_q28mx"]
-resource_local_to_scene = true
-script = ExtResource("2_nh3a6")
-base_attack = 1
-base_defense = 0
-base_health = 50
-base_move_speed = 80
-base_attack_speed = 0
-base_health_regen = 0
-base_fire_resist = -10
-base_ice_resist = 0
-hit_invincibility_time = 0.2
-
-[sub_resource type="Resource" id="Resource_v22df"]
-resource_local_to_scene = true
-script = ExtResource("2_nh3a6")
-base_attack = 1
-base_defense = 0
-base_health = 50
-base_move_speed = 80
-base_attack_speed = 0
-base_health_regen = 0
-base_fire_resist = -10
-base_ice_resist = 0
-hit_invincibility_time = 0.2
 
 [node name="CompySquad" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_txmv3")
 
-[node name="Compy" parent="." instance=ExtResource("1_0t2n2")]
-y_sort_enabled = true
-position = Vector2(-2, -31)
-stat_manager = SubResource("Resource_dcedp")
+[node name="SpawnPoints" type="Node2D" parent="."]
 
-[node name="Compy2" parent="." instance=ExtResource("1_0t2n2")]
-position = Vector2(-38, -41)
-stat_manager = SubResource("Resource_10j3x")
+[node name="SpawnPoint" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(35, -10)
 
-[node name="Compy3" parent="." instance=ExtResource("1_0t2n2")]
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, -32)
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(0, 12)
-stat_manager = SubResource("Resource_dv5wj")
 
-[node name="Compy4" parent="." instance=ExtResource("1_0t2n2")]
-position = Vector2(34, -10)
-stat_manager = SubResource("Resource_q28mx")
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-39, -48)
 
-[node name="Compy5" parent="." instance=ExtResource("1_0t2n2")]
-position = Vector2(-35, 32)
-stat_manager = SubResource("Resource_v22df")
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-39, 25)
