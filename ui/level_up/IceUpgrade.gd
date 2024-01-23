@@ -1,5 +1,4 @@
-class_name IceUpgrade
-extends Upgrade
+class_name IceUpgrade extends Upgrade
 
 var modifier: IceModifier = IceModifier.new()
 

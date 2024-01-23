@@ -1,5 +1,4 @@
-class_name RicochetUpgrade
-extends Upgrade
+class_name RicochetUpgrade extends Upgrade
 
 var modifier: RicochetModifier = RicochetModifier.new()
 

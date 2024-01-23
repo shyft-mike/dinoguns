@@ -1,6 +1,6 @@
 extends Node
 
-const CHARACTER_SELECT_SCENE = "res://ui/screens/character_select/character_select.tscn"
+const CHARACTER_SELECT_SCENE = "res://ui/screens/character_select/CharacterSelect.tscn"
 const GAME_OVER_SCENE = "res://ui/screens/game_over/game_over.tscn"
 const LEVEL_UP_SCENE = "res://ui/level_up/LevelUp.tscn"
 const LEVEL_1_SCENE = "res://levels/level_1/level_1.tscn"

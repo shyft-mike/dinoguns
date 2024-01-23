@@ -15,8 +15,9 @@ var _ability_container: Node2D
 var _controller: ActorController
 
 var _facing: Vector2 = Vector2.RIGHT
-var _input_direction: Vector2
 var _flipped: bool = false
+
+var _input_direction: Vector2
 
 
 func setup():

@@ -1,10 +1,10 @@
-class_name Player
-extends Actor
+class_name Player extends Actor
 
 @export var icon: Texture2D
 @export var is_selectable: bool
 @export var is_visible: bool
 
+@onready var camera: Camera2D = $Camera2D
 @onready var hand_marker: Marker2D = $Body/HandMarker
 @onready var _upgrade_container: Node = $UpgradeContainer
 

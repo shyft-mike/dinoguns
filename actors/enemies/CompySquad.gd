@@ -45,10 +45,10 @@ func _handle_movement(delta):
 		_remaining_cycles = randi_range(15, 45)
 		_last_player_sighting = State.player.global_position
 
-	var distance_to_player = squad_members[0].global_position.distance_to(_last_player_sighting)
+	var distance_to_player = spawn_points.get_child(0).global_position.distance_to(_last_player_sighting)
 
 	if distance_to_player > 50:
-		var new_direction = squad_members[0].global_position.direction_to(_last_player_sighting)
+		var new_direction = spawn_points.get_child(0).global_position.direction_to(_last_player_sighting)
 		for squad_member in squad_members:
 			move_command.execute(squad_member, MoveCommand.Params.new(new_direction))
 

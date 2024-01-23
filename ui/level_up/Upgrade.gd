@@ -1,5 +1,4 @@
-class_name Upgrade
-extends Node
+class_name Upgrade extends Node
 
 enum PowerType { FURY,MUTABILITY,RESILIENCE,PRIMAL_FORCE }
 
@@ -18,6 +17,13 @@ enum PowerType { FURY,MUTABILITY,RESILIENCE,PRIMAL_FORCE }
 @export var upgrade_stat_value: int
 
 @export var depends_on: NodePath
+
+var _dependent_node: Node
+
+
+func _ready() -> void:
+	if depends_on:
+		_dependent_node = get_node(depends_on)
 
 
 func apply(player: Player, options: Object = null):
@@ -47,7 +53,7 @@ func apply(player: Player, options: Object = null):
 
 
 func is_selectable(player: Player):
-	if depends_on and not player._upgrade_container.has_node(depends_on):
+	if _dependent_node and not _dependent_node in player._upgrade_container.get_children():
 		return false
 
 	if player.stat_manager.level < required_level: return false

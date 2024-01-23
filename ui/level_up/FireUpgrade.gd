@@ -1,5 +1,4 @@
-class_name FireUpgrade
-extends Upgrade
+class_name FireUpgrade extends Upgrade
 
 var modifier: FireModifier = FireModifier.new()
 
