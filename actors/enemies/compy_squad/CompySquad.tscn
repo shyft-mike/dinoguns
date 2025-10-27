@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw7b1ga00d40b"]
+
+[ext_resource type="Script" uid="uid://ds3ww1l84wm5a" path="res://actors/enemies/compy_squad/CompySquad.gd" id="1_txmv3"]
+
+[node name="CompySquad" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_txmv3")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnPoint" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(35, -10)
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, -32)
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 12)
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-39, -48)
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-39, 25)

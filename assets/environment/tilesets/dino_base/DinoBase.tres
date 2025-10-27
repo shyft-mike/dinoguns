@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bigdsynxjo56b"]
+
+[ext_resource type="Texture2D" uid="uid://b4i5c1nlnfiyk" path="res://assets/environment/tilesets/dino_base/lab_floor_1.png" id="1_jn3yo"]
+[ext_resource type="Texture2D" uid="uid://2nb22wrvgkq0" path="res://assets/environment/tilesets/dino_base/lab_wall_1.png" id="2_s5nr4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eroyi"]
+resource_name = "TileFloor"
+texture = ExtResource("1_jn3yo")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fmxv8"]
+resource_name = "Wall"
+texture = ExtResource("2_s5nr4")
+texture_region_size = Vector2i(128, 128)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/modulate = Color(0.9882353, 0.9764706, 0.90588236, 1)
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_eroyi")
+sources/1 = SubResource("TileSetAtlasSource_fmxv8")

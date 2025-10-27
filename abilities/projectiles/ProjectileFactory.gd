@@ -1,5 +1,4 @@
-class_name ProjectileFactory
-extends Node
+class_name ProjectileFactory extends Node
 
 enum ProjectileType {BULLET,FIREBALL}
 

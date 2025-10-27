@@ -60,4 +60,3 @@ func _on_hurt_box_collided(area: Area2D):
 		var damager = area.get_parent() as Damager
 		if damager:
 			handle_damage(damager.on_collide(self))
-

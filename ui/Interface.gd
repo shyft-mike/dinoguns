@@ -16,4 +16,4 @@ func _on_info_button_mouse_entered() -> void:
 
 
 func _on_info_button_mouse_exited() -> void:
-		ShaderEffects.highlight(info_button.material, false)
+	ShaderEffects.highlight(info_button.material, false)

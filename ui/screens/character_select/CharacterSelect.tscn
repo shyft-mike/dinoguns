@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0uf3meu4fu6s"]
 
-[ext_resource type="Script" path="res://ui/screens/character_select/CharacterSelect.gd" id="1_yalse"]
+[ext_resource type="Script" uid="uid://dey1a40ew2tw1" path="res://ui/screens/character_select/CharacterSelect.gd" id="1_yalse"]
 [ext_resource type="Texture2D" uid="uid://chymfjnvhawc3" path="res://assets/temp/shadow.png" id="2_lk6e3"]
 [ext_resource type="Texture2D" uid="uid://dian51qv0ypgu" path="res://assets/lights/spotlight.png" id="2_xkx5e"]
-[ext_resource type="PackedScene" uid="uid://e0iembd1f2h5" path="res://ui/screens/StatsPanel.tscn" id="3_a4y7a"]
+[ext_resource type="PackedScene" uid="uid://e0iembd1f2h5" path="res://ui/screens/character_select/StatsPanel.tscn" id="3_a4y7a"]
 [ext_resource type="Texture2D" uid="uid://dvsiocf4h0via" path="res://assets/temp/arrow_right.png" id="6_7nkhr"]
 
 [node name="CharacterSelect" type="Panel"]
@@ -69,3 +69,13 @@ offset_top = 128.0
 offset_right = 374.0
 offset_bottom = 151.0
 text = "NAME"
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 886.0
+offset_top = 529.0
+offset_right = 949.0
+offset_bottom = 569.0
+text = "SELECT"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

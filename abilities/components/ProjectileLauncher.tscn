@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3hvaxrk45hpa"]
+
+[ext_resource type="Script" uid="uid://duki44u7mdxv4" path="res://abilities/components/ProjectileLauncher.gd" id="1_s1v3m"]
+[ext_resource type="Texture2D" uid="uid://dmdfnl8vc3idl" path="res://assets/temp/uzi.png" id="2_nypkq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65xn3"]
+radius = 500.0
+
+[node name="ProjectileLauncher" type="Node"]
+script = ExtResource("1_s1v3m")
+thumbnail_texture = ExtResource("2_nypkq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 4
+
+[node name="RangeArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
+shape = SubResource("CircleShape2D_65xn3")

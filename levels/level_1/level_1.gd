@@ -12,9 +12,13 @@ func _init():
 func _ready():
 	super._ready()
 
-	var squad = ResourceLoader.load("res://actors/enemies/CompySquad.tscn").instantiate()
+	var squad = ResourceLoader.load("res://actors/enemies/compy_squad/CompySquad.tscn").instantiate()
 	squad.global_position = SpawnManager._get_random_spawn_location()
 	SceneManager.current_scene.spawns_container.add_child(squad)
+
+	var uzi = ResourceLoader.load("res://items/pickups/weapons/uzi/UziItem.tscn").instantiate()
+	SceneManager.current_scene.items_container.add_child(uzi)
+	uzi.global_position = State.player.global_position + Vector2(10, 10)
 
 	#spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
@@ -30,4 +34,3 @@ func _on_spawn_timer_timeout():
 	for event in spawn_events:
 		for i in event.count:
 			SpawnManager.spawn()
-

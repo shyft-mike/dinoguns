@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgqv1phpyxf8h"]
 
-[ext_resource type="Texture2D" uid="uid://dgpbwnd7h5n1e" path="res://assets/characters/portraits/raptor.png" id="1_dirxk"]
+[ext_resource type="Texture2D" uid="uid://dgpbwnd7h5n1e" path="res://assets/actors/raptor/portrait.png" id="1_dirxk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vty8j"]
 bg_color = Color(0, 0, 0, 1)

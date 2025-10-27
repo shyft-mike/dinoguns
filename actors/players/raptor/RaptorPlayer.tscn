@@ -1,27 +1,20 @@
 [gd_scene load_steps=15 format=3 uid="uid://d3hw2jlpmgo7p"]
 
-[ext_resource type="Script" path="res://actors/players/Player.gd" id="1_k1uh2"]
-[ext_resource type="Script" path="res://actors/players/PlayerStatManager.gd" id="2_7os48"]
+[ext_resource type="Script" uid="uid://daegkcrogtsm3" path="res://actors/players/Player.gd" id="1_k1uh2"]
+[ext_resource type="Script" uid="uid://d6ud3a51ips3" path="res://actors/players/PlayerStatManager.gd" id="2_7os48"]
 [ext_resource type="Texture2D" uid="uid://dcmv237jjn8b1" path="res://actors/players/raptor/assets/raptor_outline.png" id="4_pqo7d"]
-[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/shadow.tscn" id="5_ak7ip"]
-[ext_resource type="Shader" path="res://effects/shaders/flash.gdshader" id="5_dsvuk"]
-[ext_resource type="PackedScene" uid="uid://ddchakhun7gpx" path="res://actors/common/debuffs/DebuffManager.tscn" id="5_ldg42"]
+[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/visual/shadows/Shadow.tscn" id="5_ak7ip"]
+[ext_resource type="Shader" uid="uid://ceqp5gjui08pw" path="res://effects/shaders/Flash.gdshader" id="5_dsvuk"]
+[ext_resource type="PackedScene" uid="uid://ddchakhun7gpx" path="res://actors/components/DebuffManager.tscn" id="5_ldg42"]
 [ext_resource type="PackedScene" uid="uid://bx66mvjsd131q" path="res://actors/common/HurtBox.tscn" id="5_tv8cj"]
-[ext_resource type="PackedScene" uid="uid://cfnfv0bsvol4p" path="res://actors/common/PickupBox.tscn" id="8_gdx3r"]
+[ext_resource type="PackedScene" uid="uid://cfnfv0bsvol4p" path="res://items/components/PickupBox.tscn" id="8_gdx3r"]
 
 [sub_resource type="Resource" id="Resource_dcpqo"]
 resource_local_to_scene = true
 script = ExtResource("2_7os48")
-base_experience = 10
 base_attack = 2
-base_defense = 0
 base_health = 100
 base_move_speed = 100
-base_attack_speed = 0
-base_health_regen = 0
-base_fire_resist = 0
-base_ice_resist = 0
-hit_invincibility_time = 0.2
 
 [sub_resource type="Animation" id="Animation_osp4x"]
 length = 0.001
@@ -58,14 +51,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qh6ij"]
 _data = {
-"RESET": SubResource("Animation_osp4x"),
-"walk": SubResource("Animation_vb044")
+&"RESET": SubResource("Animation_osp4x"),
+&"walk": SubResource("Animation_vb044")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h8dfp"]
 shader = ExtResource("5_dsvuk")
 shader_parameter/active = false
-shader_parameter/flash_color = null
+shader_parameter/flash_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bcy2"]
 size = Vector2(45, 24)
@@ -85,7 +78,7 @@ stat_manager = SubResource("Resource_dcpqo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_qh6ij")
+&"": SubResource("AnimationLibrary_qh6ij")
 }
 
 [node name="Body" type="Node2D" parent="."]

@@ -1,19 +1,18 @@
 [gd_scene load_steps=24 format=3 uid="uid://b7hfctft3mjv0"]
 
-[ext_resource type="Script" path="res://actors/enemies/Enemy.gd" id="1_nfe26"]
-[ext_resource type="Script" path="res://items/drop.gd" id="2_s66ut"]
-[ext_resource type="Script" path="res://actors/ActorStatManager.gd" id="2_sliqq"]
-[ext_resource type="Script" path="res://abilities/Damager.gd" id="4_1log8"]
-[ext_resource type="Shader" path="res://effects/shaders/flash.gdshader" id="4_52e8n"]
-[ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://actors/enemies/compy/assets/COMPY_sprite_sheet_2.png" id="4_kpnpg"]
-[ext_resource type="PackedScene" uid="uid://ddchakhun7gpx" path="res://actors/common/debuffs/DebuffManager.tscn" id="4_v2spa"]
+[ext_resource type="Script" uid="uid://bw6qol1g7uufe" path="res://actors/enemies/Enemy.gd" id="1_nfe26"]
+[ext_resource type="Script" uid="uid://dm2tnaa82237a" path="res://items/pickups/Drop.gd" id="2_s66ut"]
+[ext_resource type="Script" uid="uid://cnmwiux1y74f2" path="res://actors/components/ActorStatManager.gd" id="2_sliqq"]
+[ext_resource type="Script" uid="uid://4qquub6cnk38" path="res://abilities/base/Damager.gd" id="4_1log8"]
+[ext_resource type="Shader" uid="uid://ceqp5gjui08pw" path="res://effects/shaders/Flash.gdshader" id="4_52e8n"]
+[ext_resource type="Texture2D" uid="uid://bf7pellrlf7w1" path="res://assets/actors/compy/COMPY_sprite_sheet_2.png" id="4_kpnpg"]
+[ext_resource type="PackedScene" uid="uid://ddchakhun7gpx" path="res://actors/components/DebuffManager.tscn" id="4_v2spa"]
 [ext_resource type="PackedScene" uid="uid://bx66mvjsd131q" path="res://actors/common/HurtBox.tscn" id="5_ntbk7"]
-[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/shadow.tscn" id="6_qdjcn"]
+[ext_resource type="PackedScene" uid="uid://cosw38j73e10j" path="res://effects/visual/shadows/Shadow.tscn" id="6_qdjcn"]
 [ext_resource type="PackedScene" uid="uid://b1cswaij2nl8f" path="res://actors/common/HitBox.tscn" id="7_cwpay"]
 
 [sub_resource type="Resource" id="Resource_yrm46"]
 script = ExtResource("2_s66ut")
-item_type = 0
 drop_rate = 1.2
 
 [sub_resource type="Resource" id="Resource_8pr66"]
@@ -25,14 +24,9 @@ drop_rate = 0.2
 resource_local_to_scene = true
 script = ExtResource("2_sliqq")
 base_attack = 1
-base_defense = 0
 base_health = 50
 base_move_speed = 80
-base_attack_speed = 0
-base_health_regen = 0
 base_fire_resist = -10
-base_ice_resist = 0
-hit_invincibility_time = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1f0x"]
 bg_color = Color(0.827451, 0, 0, 1)
@@ -132,9 +126,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g87cv"]
 _data = {
-"RESET": SubResource("Animation_24o5p"),
-"die": SubResource("Animation_ya30m"),
-"walk": SubResource("Animation_xj8f6")
+&"RESET": SubResource("Animation_24o5p"),
+&"die": SubResource("Animation_ya30m"),
+&"walk": SubResource("Animation_xj8f6")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wf5nm"]
@@ -148,7 +142,7 @@ size = Vector2(33, 27)
 resource_local_to_scene = true
 shader = ExtResource("4_52e8n")
 shader_parameter/active = false
-shader_parameter/flash_color = null
+shader_parameter/flash_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fnc0f"]
 size = Vector2(33, 27)
@@ -177,7 +171,7 @@ show_percentage = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_g87cv")
+&"": SubResource("AnimationLibrary_g87cv")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

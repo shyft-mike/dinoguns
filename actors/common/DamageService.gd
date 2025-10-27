@@ -49,4 +49,3 @@ static func _calc_elemental_damage(resistance: int, damage_amount: int) -> int:
 		return 0
 
 	return damage_amount - (damage_amount * (resistance / 100))
-

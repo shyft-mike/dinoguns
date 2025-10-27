@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnup88p777p4o"]
 
-[ext_resource type="Script" path="res://ui/log/log.gd" id="1_nkite"]
+[ext_resource type="Script" uid="uid://dwqrn60ekerc6" path="res://ui/log/Log.gd" id="1_nkite"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gknmx"]
 

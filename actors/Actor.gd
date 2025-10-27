@@ -1,12 +1,12 @@
 class_name Actor extends CharacterBody2D
 
 @export var stat_manager: ActorStatManager
-@export var number_popup_template: PackedScene = preload("res://ui/NumberPopup.tscn")
+@export var number_popup_template: PackedScene = preload("res://ui/components/popups/NumberPopup.tscn")
 
 @onready var _controller_container: Node = $ControllerContainer
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _body: Node2D = $Body
-@onready var _body_sprite: Sprite2D = $Body/BodySprite
+@onready var _body_sprite = $Body/BodySprite
 @onready var _hurt_box: HurtBox = $Body/HurtBox
 @onready var _popup_marker: Marker2D = $Body/PopupMarker
 @onready var _debuff_manager: DebuffManager = $Body/DebuffManager
@@ -18,7 +18,6 @@ var _facing: Vector2 = Vector2.RIGHT
 var _flipped: bool = false
 
 var _input_direction: Vector2
-
 
 func setup():
 	stat_manager.setup()

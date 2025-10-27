@@ -4,7 +4,7 @@ extends VBoxContainer
 signal title_selected(title: String)
 
 
-const DialogueConstants = preload("res://addons/dialogue_manager/constants.gd")
+const DialogueConstants = preload("../constants.gd")
 
 
 @onready var filter_edit: LineEdit = $FilterEdit
@@ -27,8 +27,8 @@ var filter: String:
 
 func _ready() -> void:
 	apply_theme()
-	
-	filter_edit.placeholder_text = DialogueConstants.translate("titles_list.filter")
+
+	filter_edit.placeholder_text = DialogueConstants.translate(&"titles_list.filter")
 
 
 func select_title(title: String) -> void:
@@ -48,6 +48,8 @@ func apply_filter() -> void:
 func apply_theme() -> void:
 	if is_instance_valid(filter_edit):
 		filter_edit.right_icon = get_theme_icon("Search", "EditorIcons")
+	if is_instance_valid(list):
+		list.add_theme_stylebox_override("panel", get_theme_stylebox("panel", "Panel"))
 
 
 ### Signals

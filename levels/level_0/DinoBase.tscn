@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=4 uid="uid://cpm0nwf67esen"]
+
+[ext_resource type="TileSet" uid="uid://bigdsynxjo56b" path="res://assets/environment/tilesets/dino_base/DinoBase.tres" id="1_d564a"]
+
+[node name="DinoBase" type="Node2D"]
+
+[node name="FloorMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD///v/AAAAAAAAAAAHAPv/AAAAAAAAAAAPAPv/AAAAAAAAAAD3/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAHAAMAAAAAAAAAAAAPAAMAAAAAAAAAAAD3/wsAAAAAAAAAAAD//wsAAAAAAAAAAAAHAAsAAAAAAAAAAAAPAAsAAAAAAAAAAAAXAPv/AAAAAAAAAAAXAAMAAAAAAAAAAAA=")
+tile_set = ExtResource("1_d564a")
+collision_enabled = false
+
+[node name="WallMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD///v/AAAAAAAAAAAHAPv/AAAAAAAAAAAPAPv/AAAAAAAAAAD3/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAHAAMAAAAAAAAAAAAPAAMAAAAAAAAAAAD3/wsAAAAAAAAAAAD//wsAAAAAAAAAAAAHAAsAAAAAAAAAAAAPAAsAAAAAAAAAAAAXAPv/AAAAAAAAAAAXAAMAAAAAAAAAAAD3//P/AQAAAAAAAAD///P/AQAAAAAAAAAHAPP/AQAAAAAAAAAPAPP/AQAAAAAAAQAXAPP/AQAAAAAAAQA=")
+tile_set = ExtResource("1_d564a")

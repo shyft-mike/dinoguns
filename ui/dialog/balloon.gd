@@ -1,14 +1,6 @@
-class_name Balloon
-extends Control
-
-
-const DIALOGUE_PITCHES = {
-	Raptor = 1.0,
-}
-
+class_name Balloon extends Control
 
 @export var response_template: Node
-@export var file_suffix: String = ""
 
 @onready var talk_sound: AudioStreamPlayer = $TalkSound
 @onready var balloon: Panel = $HBox/Balloon
@@ -18,6 +10,9 @@ const DIALOGUE_PITCHES = {
 @onready var dialogue_label := $HBox/Balloon/Margin/VBox/DialogueLabel
 @onready var responses_menu: VBoxContainer = $HBox/Balloon/Margin/VBox/Responses
 
+const DIALOGUE_PITCHES = {
+	Raptor = 1.0,
+}
 
 var raptor_sounds: Array[AudioStreamWAV]
 
@@ -48,7 +43,7 @@ var dialogue_line: DialogueLine:
 
 		character_label.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")
-		character_portrait.texture = load("res://assets/characters/portraits/%s%s.png" % [dialogue_line.character.to_lower(), file_suffix])
+		character_portrait.texture = load("res://assets/characters/%s/portrait.png" % [dialogue_line.character.to_lower()])
 
 		dialogue_label.modulate.a = 0
 		dialogue_label.custom_minimum_size.x = dialogue_label.get_parent().size.x - 1

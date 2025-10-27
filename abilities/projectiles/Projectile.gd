@@ -1,5 +1,4 @@
-class_name Projectile
-extends Damager
+class_name Projectile extends Damager
 
 @export var speed: float = 300.0
 @export var lifetime: float = 3.0
