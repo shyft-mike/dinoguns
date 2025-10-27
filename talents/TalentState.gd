@@ -1,5 +1,4 @@
-class_name TalentState
-extends Resource
+class_name TalentState extends Resource
 
 
 @export var raptor_talent_entry: PlayerTalentEntry = PlayerTalentEntry.new("raptor")

@@ -1,7 +1,6 @@
-class_name RaptorSlash
-extends Ability
+class_name RaptorSlash extends Ability
 
-@export var claw_template: PackedScene = preload("res://abilities/raptor_slash/RaptorClaw.tscn")
+@export var claw_template: PackedScene = preload("res://abilities/instances/raptor_slash/RaptorClaw.tscn")
 
 
 func _internal_activate(user: Actor, spawn_marker: Marker2D = null) -> void:

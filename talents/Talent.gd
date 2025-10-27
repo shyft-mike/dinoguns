@@ -1,5 +1,4 @@
-class_name Talent
-extends Resource
+class_name Talent extends Resource
 
 @export var icon: Texture2D
 @export var tree_type: Upgrade.PowerType

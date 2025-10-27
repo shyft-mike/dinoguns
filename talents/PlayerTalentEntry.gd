@@ -1,5 +1,4 @@
-class_name PlayerTalentEntry
-extends Resource
+class_name PlayerTalentEntry extends Resource
 
 
 @export var player_type: String
